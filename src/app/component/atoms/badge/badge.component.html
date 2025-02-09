@@ -1,0 +1,31 @@
+<div
+  *ngIf="config"
+  [id]="config.id"
+  class="badge-component {{config.customClass}} {{config.type}} dark:bg-[#21333B]"
+  [matTooltip]="config.toolTip ? config.toolTip : ''"
+>
+  <img
+    *ngIf="
+      config.iconPath &&
+      config.iconAlignment &&
+      alignment.LEFT === config.iconAlignment
+    "
+    [ngClass]="{ 'cursor-pointer': config.isIconActionable }"
+    (click)="trigger.emit()"
+    [src]="config.iconPath"
+  />
+  <span class="leading-[7px] dark:text-[white]" [ngClass]="{'pl-[4px] text-[14px] font-medium' : config.content.content == '-'}" *ngIf="config.content.content"
+    >{{ config.content.content }}
+    <span
+      *ngIf="config.content && config.content.value"
+      class="font-medium text-neutral-13 dark:text-[white]"
+      >{{ config.content.value }}</span
+    >
+  </span>
+  <img
+    *ngIf="config.iconPath && config.iconAlignment && alignment.RIGHT === config.iconAlignment"
+    [ngClass]="{'cursor-pointer': config.isIconActionable}"  
+    (click)="trigger.emit(config)"
+    [src]="config.iconPath"
+  />
+</div>

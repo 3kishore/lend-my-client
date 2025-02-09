@@ -1,0 +1,15 @@
+<div class="flex flex-col gap-sm">
+    <ng-container *ngFor="let item of items; let i = index;">
+        <div class="flex flex-row gap-lg cursor-pointer w-fit">
+            <input 
+             type="checkbox" 
+             (change)="onItemChanged(item)"
+             class="w-[24px] h-[24px] customCheckbox"
+             [checked]="item.checked"
+             [attr.data-cy]="'grid-checkbox-filter-' + i"
+             [disabled]="item.disabled"
+            >
+            <label [for]="item.label" class="text-sm leading-[1.71] text-neutral-1 dark:text-[white]">{{ item.label }}</label>
+        </div>
+    </ng-container>
+</div>

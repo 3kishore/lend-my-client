@@ -1,0 +1,61 @@
+<div class="bg-[#E4EAED] dark:bg-[#0F171B] dark:border-b-[#0F171B] h-[75px] flex items-center justify-between shadow-[0_4px_6px_rgba(0, 0, 0, 0.1)] py-[7px] pr-[16px] pl-[20px] border-b-solid border-b-[2px] border-b-[#cad2e5] z-10 sticky top-[0px]">
+    <div class="flex flex-row gap-[8px] items-center">
+        <!-- <img src="../../../../assets/icons/fav_logo.png" alt="Menu" class="w-[20px]"> -->
+        <img *ngIf="!isDarkMode" src="../../../../assets/images/LMC_logo_black_n_bg.png" alt="Menu" class="w-[184px] h-[84px]">
+        <img *ngIf="isDarkMode" src="../../../../assets/images/LMC_logo_white_n_bg.png" alt="Menu" class="w-[184px] h-[84px]">
+        <span class="text-[16px] font-[600] leading-[17px] text-[#090d1b] dark:text-[white]">Sales Console</span>
+    </div>
+    <div class="flex flex-row gap-[8px] items-center">
+        <div class="h-[36px] px-[10px] bg-[#FFFFFF] border-solid border-[1px] border-[#A3AEAF] flex flex-row items-center rounded-[6px] gap-[16px] dark:bg-[#21333B]">
+            <span class="text-[16px] font-[600] leading-[17px] text-[#090d1b] dark:text-white">{{customerName}}</span>
+            <div class="h-[25px] w-[25px] rounded-[25px] bg-[#F4511D] text-center text-[white] pt-[1px] pr-[2px] text-[15px] font-[500]">{{sortName}}</div>
+        </div>
+        <img 
+            src="../../../../assets/icons/app-menu.svg" 
+            alt="" 
+            class="h-[42px] w-[42px] rounded-[42px] hover:bg-[#A3AEAF] cursor-pointer"
+            [matMenuTriggerFor]="menu">
+    </div>
+</div>
+
+<mat-menu #menu="matMenu">
+    <ng-template matMenuContent>
+        <div class="w-[240px] dark:bg-[#2D4048]">
+            <!-- <div class="py-[12px] px-[16px] bg-[#E4EAED] dark:bg-[#2D4048]">
+                <span class="text-[16px] leading-[24px] font-[500] text-[#090d1b] dark:text-white">Anunta Cloud Services</span>
+            </div>
+            <mat-divider class="w-full"></mat-divider>
+            <div class="flex flex-col gap-[12px] py-[12px] px-[16px]">
+                <div class="p-[8px] rounded-[4px] flex flex-row items-center gap-[8px] bg-[#f0f1f5] dark:bg-[#4F6169]">
+                    <img src="../../../../assets/icons/fav_logo.png" alt="" class="w-[20px] h-[20px] mt-[3px]">
+                    <span class="text-[14px] leading-[24px] font-[500] text-[#090d1b] dark:text-white">Desktop Ready</span>
+                </div>
+                <div class="bg-[#f0f1f5] p-[8px] rounded-[4px] flex flex-row items-center gap-[8px] dark:bg-[#4F6169]">
+                    <img src="https://euvantage.mydesktopnow.com/Content/OverAllTheme/assets/images/logo.png" alt="" class="w-[20px] h-[20px] mt-[3px]">
+                    <span class="text-[14px] leading-[24px] font-[500] text-[#090d1b] dark:text-white">Euvantage</span>
+                </div>
+                <div class="bg-[#f0f1f5] p-[8px] rounded-[4px] flex flex-row items-center gap-[8px] dark:bg-[#4F6169]">
+                    <img src="../../../../assets/icons/fav_logo.png" alt="" class="w-[20px] h-[20px] mt-[3px]">
+                    <span class="text-[14px] leading-[24px] font-[500] text-[#090d1b] dark:text-white">Isolation Dashboard</span>
+                </div>
+            </div>
+            <mat-divider class="w-full"></mat-divider> -->
+            <div class="px-[16px] py-[6px]">
+                <div
+                    class="w-full h-[32px] py-[10px] px-[12px] bg-[#e8edfa] flex items-center justify-center rounded-[4px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]"
+                    (click)="logout()"
+                >
+                    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Logout</span>
+                </div>
+            </div>
+            <div class="px-[16px] py-[6px]" *ngIf="userRole === 'sales-executive'">
+                <div
+                    class="w-full h-[32px] py-[10px] px-[12px] bg-[#e8edfa] flex items-center justify-center rounded-[4px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]"
+                    (click)="createUser()"
+                >
+                    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Create User</span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</mat-menu>

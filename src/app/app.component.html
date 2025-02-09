@@ -1,0 +1,8 @@
+<div class="relative">
+  <div class="absolute w-full h-full flex items-center justify-center z-[9999] bg-[#ffffff8c]" *ngIf="showLoader">
+    <div>
+      <mat-spinner class="!w-[60px] !h-[60px]"></mat-spinner>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

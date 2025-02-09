@@ -1,0 +1,80 @@
+<div class="py-[36px]">
+  <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="back()">
+    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">< Back</span>
+  </div>
+  <div class="flex flex-row justify-between items-center">
+    <span class="text-[26px] leading-[26px] font-[500] text-[#090d1b] dark:text-white" *ngIf="customerDetails">
+      {{customerDetails.firstName}} {{customerDetails.lastName}}
+    </span>
+    <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="refresh()">
+      <div class="w-[12px] h-[12px]">
+        <svg viewBox="0 0 36 36" class="dark:stroke-[#2FC0FF] dark:fill-[#2FC0FF] stroke-[#2054ff] fill-[#2054ff]" xmlns="http://www.w3.org/2000/svg"><path d="M22.4,11.65a1.09,1.09,0,0,0,1.09,1.09H34.43V1.81a1.09,1.09,0,1,0-2.19,0V8.95a16.41,16.41,0,1,0,1.47,15.86,1.12,1.12,0,0,0-2.05-.9,14.18,14.18,0,1,1-1.05-13.36H23.5A1.09,1.09,0,0,0,22.4,11.65Z"></path></svg>
+      </div>
+      <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Refresh</span>
+    </div>
+  </div>
+  <div class="flex flex-row gap-[40px] mt-[24px]">
+    <div class="mt-[20px] w-[40%]">
+      <div class="border-[2px] h-[257px] border-solid border-[#e8edfa] p-[30px] rounded-[8px] card1" *ngIf="customerDetailsLoader">
+        <div id="pause-grid-loader" class="flex items-center justify-center">
+          <div id="spinner-grid-loader"></div>
+        </div>
+      </div>
+      <div class="border-[2px] h-[257px] border-solid border-[#e8edfa] p-[30px] rounded-[8px] card1 flex flex-col gap-[15px]" *ngIf="!customerDetailsLoader">
+        <div class="flex flex-row gap-[50px]">
+          <span class="text-[14px] font-[500] text-[#090d1b] min-w-[110px] dark:text-white">Company Name :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white">{{customerDetails.companyName}}</span>
+        </div>
+        <div class="flex flex-row gap-[50px]">
+          <span class="text-[14px] font-[500] text-[#090d1b] min-w-[110px] dark:text-white">First Name :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32 dark:text-white">{{customerDetails.firstName}}</span>
+        </div>
+        <div class="flex flex-row gap-[50px]">
+          <span class="text-[14px] font-[500] text-[#090d1b] min-w-[110px] dark:text-white">Last Name :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white">{{customerDetails.lastName ? customerDetails.lastName : '-'}}</span>
+        </div>
+        <div class="flex flex-row gap-[50px]">
+          <span class="text-[14px] font-[500] text-[#090d1b] min-w-[110px] dark:text-white">Email :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white">{{customerDetails.email}}</span>
+        </div>
+        <div class="flex flex-row gap-[50px]">
+          <span class="text-[14px] font-[500] text-[#090d1b] min-w-[110px] dark:text-white">Phone Number :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white">{{customerDetails.mobileNumber}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-[20px] p-[20px] rounded-[8px] card1 w-[60%] flex flex-col gap-[8px]">
+      <div class="min-w-[500px] relative">
+        <div>
+          <div class="text-md font-semibold pb-[28px] dark:text-white">Level 1:</div>
+          <div class="w-full flex pl-[24px]">
+            <div class="relative flex flex-col gap-md grow" [ngClass]="{'ml-[-3px]': i > 0}" *ngFor="let stage of levelOne; let i=index">
+              <div class="text-sm text-[#090d1b] font-semibold rotate-[-25deg] mb-[22px] dark:text-white">{{stage.label}}</div>
+              <div class="flex relative">
+                <div class="absolute w-[16px] h-[16px] top-[-2px] rounded-full" [ngClass]="stage.isCompleted ? 'bg-green-dark' : 'bg-gray-300'"></div>
+                <div class="w-full rounded-l-full grow h-[12px]" [ngClass]="stage.isCompleted ? 'bg-green-2' : 'bg-[#d1d5db8c]'" *ngIf="(levelOne.length - 1) !== i"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="text-md font-semibold pt-[20px] pb-[22px] dark:text-white">Level 2:</div>
+          <div class="w-full flex pl-[24px]">
+            <div class="relative flex flex-col gap-md grow" [ngClass]="{'ml-[-3px]': i > 0}" *ngFor="let stage of levelTwo; let i=index">
+              <div class="text-sm text-[#090d1b] font-semibold rotate-[-25deg] mb-[22px] dark:text-white">{{stage.label}}</div>
+              <div class="flex relative">
+                <div class="absolute w-[16px] h-[16px] top-[-2px] rounded-full" [ngClass]="stage.isCompleted ? 'bg-green-dark' : 'bg-gray-300'"></div>
+                <div class="w-full rounded-l-full grow h-[12px]" [ngClass]="stage.isCompleted ? 'bg-green-2' : 'bg-[#d1d5db8c]'" *ngIf="(levelTwo.length - 1) !== i"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-[24px]">
+    <app-server-side-grid [config]="gridConfig" [isLoading]="gridLoading" (getFilters)="onGridAction($event)"
+    (getSortValue)="onGridAction($event)" (getPreviousPage)="onGridAction($event)"
+    (getNextPage)="onGridAction($event)" (getPageSize)="onGridAction($event)" (onGridRefresh)="onGridAction($event)"></app-server-side-grid>
+  </div>
+</div>

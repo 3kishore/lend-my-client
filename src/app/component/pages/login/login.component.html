@@ -1,0 +1,76 @@
+<div class="login-container">
+  <div class="login-panel">
+    <div class="login-card">
+      <div class="login-pic">
+        <!-- <img src="assets/icons/login.svg" alt="image"> -->
+        <img src="assets/images/cover.jpg" alt="image">
+      </div>
+      <div class="login-form gap-[35px]">
+        <span class="login-form-title">
+          <span class="login-form-content">
+            <!-- <span><img alt="DesktopReady" style="width: 200px;max-height: 120px;"
+                    src="assets/icons/anunta.png"></span> -->
+            <span><img alt="DesktopReady" style="width: 280px;max-height: 154px;"
+              src="assets/images/LMC_logo_black_n_bg.png"></span>
+          </span>
+        </span>
+        <div class="py-[7px] px-[12px] rounded-[4px] bg-[#FEF1F1] flex flex-row items-center gap-[6px]" *ngIf="invalidCred">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 11.6667C9.794 11.6667 9.59261 11.7278 9.42131 11.8422C9.25 11.9567 9.11649 12.1194 9.03765 12.3097C8.95881 12.5 8.93818 12.7095 8.97837 12.9116C9.01857 13.1136 9.11777 13.2992 9.26345 13.4449C9.40913 13.5906 9.59474 13.6898 9.7968 13.73C9.99887 13.7702 10.2083 13.7496 10.3987 13.6707C10.589 13.5919 10.7517 13.4584 10.8661 13.2871C10.9806 13.1158 11.0417 12.9144 11.0417 12.7083C11.0417 12.4321 10.9319 12.1671 10.7366 11.9718C10.5412 11.7764 10.2763 11.6667 10 11.6667ZM10 10.4167C10.221 10.4167 10.433 10.3289 10.5893 10.1726C10.7456 10.0163 10.8334 9.80435 10.8334 9.58333V7.08333C10.8334 6.86232 10.7456 6.65036 10.5893 6.49408C10.433 6.3378 10.221 6.25 10 6.25C9.77901 6.25 9.56705 6.3378 9.41077 6.49408C9.25449 6.65036 9.16669 6.86232 9.16669 7.08333V9.58333C9.16669 9.80435 9.25449 10.0163 9.41077 10.1726C9.56705 10.3289 9.77901 10.4167 10 10.4167ZM10 1.66667C8.35185 1.66667 6.74068 2.15541 5.37027 3.07109C3.99986 3.98677 2.93176 5.28825 2.30103 6.81097C1.6703 8.33369 1.50527 10.0092 1.82681 11.6258C2.14836 13.2423 2.94203 14.7271 4.10747 15.8926C5.27291 17.058 6.75776 17.8517 8.37427 18.1732C9.99078 18.4948 11.6663 18.3297 13.1891 17.699C14.7118 17.0683 16.0133 16.0002 16.9289 14.6298C17.8446 13.2593 18.3334 11.6482 18.3334 10C18.3309 7.79061 17.4522 5.6724 15.8899 4.11012C14.3276 2.54785 12.2094 1.66909 10 1.66667ZM10 16.6667C8.68148 16.6667 7.39255 16.2757 6.29622 15.5431C5.19989 14.8106 4.34541 13.7694 3.84083 12.5512C3.33624 11.3331 3.20422 9.99261 3.46146 8.6994C3.71869 7.40619 4.35363 6.21831 5.28598 5.28596C6.21833 4.35361 7.40622 3.71867 8.69942 3.46143C9.99263 3.2042 11.3331 3.33622 12.5512 3.8408C13.7694 4.34539 14.8106 5.19987 15.5432 6.2962C16.2757 7.39253 16.6667 8.68146 16.6667 10C16.6645 11.7674 15.9614 13.4618 14.7116 14.7116C13.4619 15.9614 11.7675 16.6645 10 16.6667Z" fill="#981B1B"/>
+          </svg>
+          Incorrect username or password
+        </div>
+        <div [formGroup]="loginForm">
+          <div>
+            <div class="wrap-input100">
+              <input
+                class="input100"
+                formControlName="userId"
+                autocomplete="off"
+                type="text"
+                placeholder="Enter your mobile no or email"
+                (keyup.enter)="loginForm.invalid ? '' : btnSubmit()"
+              />
+              <!-- <span class="symbol-input100">
+                  <i class="fa fa-envelope"></i>
+              </span> -->
+            </div>
+            <div class="text-red-dark text-xs mt-[-6px] mb-[9px]" *ngIf="loginForm.get('userId').touched && loginForm.get('userId').errors">
+              <div *ngIf="loginForm.get('userId').hasError('required')">This field is required</div>
+              <div *ngIf="loginForm.get('userId').hasError('pattern')">Please enter valid email id or phone no.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="wrap-input100">
+                <input
+                  class="input100"
+                  autocomplete="off"
+                  formControlName="password"
+                  type="{{inputType}}"
+                  placeholder="Enter your password"
+                  (keyup.enter)="loginForm.invalid ? '' : btnSubmit()"
+                />
+                <!-- <span class="symbol-input100">
+                    <i class="fa fa-lock"></i>
+                </span> -->
+                <em class="fa fa-eye-slash open-close-eye" id="eyemask" (click)="typeChange('text')" *ngIf="inputType === 'password'"></em>
+                <em class="fa fa-eye open-close-eye" id="eyemask" (click)="typeChange('password')" *ngIf="inputType === 'text'"></em>
+            </div>
+            <div class="text-red-dark text-xs mt-[-6px] mb-[9px]" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors">
+              <div *ngIf="loginForm.get('password').hasError('required')">This field is required</div>
+            </div>
+          </div>
+
+          <div class="login-form-btn-panel">
+            <app-button [button]="loginButton" (buttonClicked)="btnSubmit()"></app-button>
+            <div class="flex justify-center pt-md gap-sm">
+              <!-- <a class="text-sm text-blue-4 cursor-pointer hover:underline" (click)="createUser()">Create User</a> -->
+              <a class="text-sm text-blue-4 cursor-pointer hover:underline" (click)="forgotPassword()">Forgot Password</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

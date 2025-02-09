@@ -1,0 +1,112 @@
+<div class="min-w-[270px] sm:min-w-[550px] sm:p-lg max-h-[80vh] max-w-[90vw]">
+  <div class="flex flex-col justify-between" *ngIf="!isUserCreated">
+    <h2 class="text-lg font-semibold">Create User:</h2>
+    <div>
+      <form class="flex gap-md flex-wrap" [formGroup]="createUser">
+        <div class="flex flex-col gap-sm">
+          <div>
+            <label class="text-sm">First Name: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="firstName"
+              autocomplete="off"
+              type="text"
+              placeholder="Enter your first name"
+              (keyup.enter)="createUser.invalid ? '' : onCreateUser()"
+            />
+            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('firstName').touched && createUser.get('firstName').errors">
+              <div *ngIf="createUser.get('firstName').hasError('required')">First name is required.</div>
+              <div *ngIf="createUser.get('firstName').hasError('minlength')">First name should be atleast 3 character.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-sm">Last Name (Optional): </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="lastName"
+              autocomplete="off"
+              type="text"
+              placeholder="Enter your last name"
+              (keyup.enter)="createUser.invalid ? '' : onCreateUser()"
+            />
+          </div>
+          <div>
+            <label class="text-sm">Phone: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="phoneNo"
+              autocomplete="off"
+              type="text"
+              placeholder="Enter your phone no"
+              (keyup.enter)="createUser.invalid ? '' : onCreateUser()"
+            />
+            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('phoneNo').touched && createUser.get('phoneNo').errors">
+              <div *ngIf="createUser.get('phoneNo').hasError('required')">Phone number is required.</div>
+              <div *ngIf="createUser.get('phoneNo').hasError('pattern')">Invalid mobile number.</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-sm">
+          <div>
+            <label class="text-sm">Email: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="email"
+              autocomplete="off"
+              type="text"
+              placeholder="Enter your email"
+              (keyup.enter)="createUser.invalid ? '' : onCreateUser()"
+            />
+            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('email').touched && createUser.get('email').errors">
+              <div *ngIf="createUser.get('email').hasError('required')">Email is required.</div>
+              <div *ngIf="createUser.get('email').hasError('pattern')">Entered email is not valid.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-sm">Employment Type: </label>
+            <div class="mt-xs">
+              <select matNativeControl name="car" formControlName="employmentType" class="theme-select">
+                <option value="" disabled selected>Select Your Employement Type</option>
+                <option value="Self Employed">Self Employed</option>
+                <option value="Salaried">Salaried</option>
+              </select>
+            </div>
+            <!-- <input class="theme-input mt-xs" formControlName="employmentType" autocomplete="off" type="text" placeholder="Select you employment type" /> -->
+            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('employmentType').touched && createUser.get('employmentType').errors">
+              <div *ngIf="createUser.get('employmentType').hasError('required')">Employement type is required.</div>
+              <!-- <div *ngIf="createUser.get('employmentType').hasError('minlength')">First name should be atleast 3 character.</div> -->
+            </div>
+          </div>
+          <div>
+            <label class="text-sm">Company Name: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="companyName"
+              autocomplete="off" type="text"
+              placeholder="Enter your company name"
+              (keyup.enter)="createUser.invalid ? '' : onCreateUser()"
+            />
+            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('companyName').touched && createUser.get('companyName').errors">
+              <div *ngIf="createUser.get('companyName').hasError('required')">Company name is required.</div>
+              <div *ngIf="createUser.get('companyName').hasError('minlength')">Company name should be atleast 3 character.</div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="banner-danger" *ngIf="isCreationFailed">
+      {{errorMessage}}
+    </div>
+    <div class="flex gap-sm flex-wrap mt-md justify-end pb-sm">
+      <button class="secondary" (click)="onCancel()">Cancel</button>
+      <button class="primary" [disabled]="!createUser.valid" (click)="onCreateUser()">Submit</button>
+    </div>
+  </div>
+  <div class="bg-green-light font-semibold text-green-dark h-72 rounded-lg flex justify-center items-center" *ngIf="isUserCreated">
+    <div class="flex flex-col justify-center items-center">
+      <div>User have been created successfully.</div>
+      <div>User Id: {{userId}}</div>
+      <button class="tertiary" (click)="onCancel()">Click here close the window...</button>
+    </div>
+  </div>
+</div>

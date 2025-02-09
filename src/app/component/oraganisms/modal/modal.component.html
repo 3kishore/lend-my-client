@@ -1,0 +1,29 @@
+<div class="model dark:bg-[#2D4048]">
+  <div class="flex flex-col gap-lg">
+    <div class="py-[12px] px-[16px] bg-[#E4EAED] border-b-solid border-b-[2px] border-b-[#cad2e5] dark:bg-[#2D4048]" *ngIf="modalData.title">
+      <div class="flex gap-[8px] py-[12px] text-[#090d1b] text-[20px] font-[600] dark:text-white" [innerHTML]="modalData.title">
+      </div>
+    </div>
+    <div class="modal-description" *ngIf="modalData.showCloseBtn && modalData.description">
+      {{modalData.description}}
+    </div>
+  </div>
+  <ng-container
+    [ngTemplateOutlet]="modalData.exportForm ? exportForm :
+      modalData.templateRef ? modalData.templateRef : defaultTemplate
+    " [ngTemplateOutletContext]="{data: modalData.data}"></ng-container>
+  <div class="modal-footer">
+    <app-button [button]="cancelButton" (buttonClicked)="close()" *ngIf="modalData.showCloseBtn"></app-button>
+    <app-button [button]="confirmButton" (buttonClicked)="submitExportForm()" cdkFocusInitial></app-button>
+    <app-button [button]="button.button" (buttonClicked)="buttonClick(button)" *ngFor="let button of modalData.buttonList"></app-button>
+  </div>
+</div>
+
+<ng-template #exportForm let-data="data">
+  <!-- <app-dynamic-form [config]="exportFormConfig" (onValueChange)="onFormChange($event)"></app-dynamic-form> -->
+</ng-template>
+<ng-template #defaultTemplate let-data="data">
+  <div>
+    {{data}}
+  </div>
+</ng-template>

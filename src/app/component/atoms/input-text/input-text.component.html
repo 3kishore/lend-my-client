@@ -1,0 +1,19 @@
+<div class="h-full">
+  <ng-container *ngIf="inputConfig.label">
+      <label for="input" class="text-[14px] leading-[20px] text-neutral-4 font-[500]">{{inputConfig.label}}</label>
+  </ng-container>
+  <input 
+    type="text" 
+    [formControl]="inputConfig.formControl" 
+    placeholder="{{inputConfig.placeHolderText}}" 
+    class="txt-input-component border-solid border-[1px] py-md px-sm flex flex-row text-base-1 gap-sm rounded w-full h-full placeholder:text-[14px] placeholder:leading-[20px] placeholder:text-gray-0 border-neutral-7 dark:bg-[#1B2B32] dark:text-[white] focus:border-primary-1 {{inputConfig.customClass}}" 
+    [ngClass]="inputConfig.iconConfig"
+  >
+  <div class="error-msg" *ngIf="inputConfig.formControl && inputConfig.formControl.errors && inputConfig.formControl.touched && inputConfig.errorList">
+    <div *ngFor="let error of inputConfig.errorList">
+      <ng-container *ngIf="inputConfig.formControl.errors?.[error.errorType]">
+        {{error.errorMessage}}
+      </ng-container>
+    </div>
+  </div>
+</div>

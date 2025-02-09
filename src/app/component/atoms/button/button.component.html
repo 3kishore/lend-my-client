@@ -1,0 +1,23 @@
+<button id="{{button.id}}" type="button" [attr.data-cy]="button.id" [attr.aria-label]="button.label" *ngIf="button"
+  class="{{button.type}} {{button.customclass}}" (click)="onClick(button)" [disabled]="button.isDisabled">
+  <ng-container
+    [ngTemplateOutlet]="button.btnTemplate ? button.btnTemplate : (button.type == buttonType.MENU_OPTION) ? menuOptionTemplate : defaultBtnTemplate"
+    [ngTemplateOutletContext]="{data: button}">
+  </ng-container>
+</button>
+
+<ng-template #defaultBtnTemplate let-data="data">
+  <div>
+    <img [src]="data.leftIconPath" *ngIf="data.leftIconPath">
+    {{data.label}}
+    <img [src]="data.rightIconPath" *ngIf="data.rightIconPath">
+  </div>
+</ng-template>
+
+<ng-template #menuOptionTemplate let-data="data">
+  <div class="flex flex-row gap-[12px] py-[9px] px-[12px] rounded-[4px] hover:bg-neutral-8 items-center"
+    [ngClass]="{'bg-neutral-7' : data.isActive}">
+    <img src="{{data.leftIconPath}}" class="h-[20px]">
+    <span class="text-base-4 text-neutral-1">{{data.label}}</span>
+  </div>
+</ng-template>

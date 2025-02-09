@@ -1,0 +1,126 @@
+<div class="pt-xl">
+  <h1 class="text-lg font-semibold dark:text-white">Apply For loan</h1>
+  <div class="pt-lg pl-xl" [formGroup]="applyLoan">
+    <h3 class="text-md pb-md font-semibold dark:text-white">Client Details:</h3>
+    <div class="flex flex-col gap-sm pl-xl">
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">First Name: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="firstName" autocomplete="off" type="text" placeholder="Enter first name" />
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('firstName').touched && applyLoan.get('firstName').errors">
+            <div *ngIf="applyLoan.get('firstName').hasError('required')">First name is required.</div>
+            <div *ngIf="applyLoan.get('firstName').hasError('minlength')">First name should be atleast 2 character.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Middle Name (Optional): </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="middleName" autocomplete="off" type="text" placeholder="Enter middle name" />
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Last Name (Optional): </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="lastName" autocomplete="off" type="text" placeholder="Enter last name" />
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Mobile Number: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="mobileNumber" autocomplete="off" type="text" placeholder="Enter mobile no" />
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('mobileNumber').touched && applyLoan.get('mobileNumber').errors">
+            <div *ngIf="applyLoan.get('mobileNumber').hasError('required')">Mobile number is required.</div>
+            <div *ngIf="applyLoan.get('mobileNumber').hasError('pattern')">Invalid mobile number.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Email: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="email" autocomplete="off" type="text" placeholder="Enter email id" />
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('email').touched && applyLoan.get('email').errors">
+            <div *ngIf="applyLoan.get('email').hasError('required')">Email ID is required.</div>
+            <div *ngIf="applyLoan.get('email').hasError('pattern')">Invalid email id.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-md pt-lg pb-md font-semibold dark:text-white">Loan Details:</h3>
+    <div class="flex flex-col gap-sm pl-xl">
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Loan Type: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <select (change)="onLoanTypeChange()" formControlName="loanType" class="theme-select">
+            <option value="" disabled selected>Select loan type</option>
+            <option [value]="loan.label" *ngFor="let loan of typesOfLoan">{{loan.label}}</option>
+          </select>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('loanType').touched && applyLoan.get('loanType').errors">
+            <div *ngIf="applyLoan.get('loanType').hasError('required')">Loan type is required.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Category: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <select (change)="onCategoryChange()" formControlName="loanFor" class="theme-select">
+            <option value="" disabled selected>Select category</option>
+            <option [value]="category.label" *ngFor="let category of subCategory">{{category.label}}</option>
+          </select>
+          <!-- <input class="theme-input mt-xs" formControlName="loanFor" autocomplete="off" type="text" placeholder="Enter your middle name" /> -->
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('loanFor').touched && applyLoan.get('loanFor').errors">
+            <div *ngIf="applyLoan.get('loanFor').hasError('required')">Loan type is required.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center" *ngIf="isDescriptionRequired">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Loan Description: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="description" autocomplete="off" type="text" placeholder="Enter loan description" />
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('description').touched && applyLoan.get('description').errors">
+            <div *ngIf="applyLoan.get('description').hasError('required')">Loan description is required.</div>
+            <div *ngIf="applyLoan.get('description').hasError('minlength')">Loan description should be atleast 5 characters.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Loan Amount: </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="loanAmount" autocomplete="off" type="text" placeholder="Enter loan amount" />
+          <div class="pt-xs text-red-dark text-xs" *ngIf="applyLoan.get('loanAmount').touched && applyLoan.get('loanAmount').errors">
+            <div *ngIf="applyLoan.get('loanAmount').hasError('required')">Loan amount is requierd</div>
+            <div *ngIf="applyLoan.get('loanAmount').hasError('pattern')">Loan amount should be atleast 1,00,000</div>
+            <div *ngIf="applyLoan.get('loanAmount').hasError('pattern')">Don't use comma in field.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-sm items-center">
+        <label class="text-sm w-[220px] font-semibold dark:text-white">Remarks (Optional): </label>
+        <div class="min-w-[220px] max-w-[500px] grow">
+          <input class="theme-input mt-xs" formControlName="remarks" autocomplete="off" type="text" placeholder="Enter remarks" />
+        </div>
+      </div>
+    </div>
+
+
+    <div class="flex flex-wrap gap-sm items-center" *ngIf="isApplicationFailed">
+      <label class="text-sm w-[220px] font-semibold dark:text-white"></label>
+      <div class="min-w-[220px] max-w-[500px] grow ml-[18px]">
+        <div class="banner-danger w-full">
+          {{message}}
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-sm items-center">
+      <label class="text-sm w-[220px] font-semibold dark:text-white"></label>
+      <div class="min-w-[220px] max-w-[500px] grow ml-[18px]">
+        <div class="flex flex-wrap gap-sm py-xl justify-end">
+          <button class="secondary" (click)="onCancel()">Cancel</button>
+          <button class="primary" (click)="submitApplication()" [disabled]="!applyLoan.valid">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
