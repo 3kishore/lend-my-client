@@ -1,16 +1,28 @@
-<div class="bg-[#E4EAED] dark:bg-[#0F171B] dark:border-b-[#0F171B] h-[75px] flex items-center justify-between shadow-[0_4px_6px_rgba(0, 0, 0, 0.1)] py-[7px] pr-[16px] pl-[20px] border-b-solid border-b-[2px] border-b-[#cad2e5] z-10 sticky top-[0px]">
+<div class="bg-[#E4EAED] dark:bg-[#0F171B] dark:border-b-[#0F171B] h-[75px] flex items-center justify-between shadow-[0_4px_6px_rgba(0, 0, 0, 0.1)] py-[7px] pr-[16px] pl-[20px] border-b-solid border-b-[2px] border-b-[#cad2e5] z-10 sticky top-[0px] sm:px-0">
     <div class="flex flex-row gap-[8px] items-center">
         <!-- <img src="../../../../assets/icons/fav_logo.png" alt="Menu" class="w-[20px]"> -->
-        <img *ngIf="!isDarkMode" src="../../../../assets/images/LMC_logo_black_n_bg.png" alt="Menu" class="w-[184px] h-[84px]">
-        <img *ngIf="isDarkMode" src="../../../../assets/images/LMC_logo_white_n_bg.png" alt="Menu" class="w-[184px] h-[84px]">
-        <span class="text-[16px] font-[600] leading-[17px] text-[#090d1b] dark:text-[white]">Sales Console</span>
+        <img *ngIf="!isDarkMode" src="../../../../assets/images/LMC_logo_black_n_bg.png" alt="Menu" class="md:w-[184px] md:h-[84px] sm:w-[132px] sm:h-[64px]">
+        <img *ngIf="isDarkMode" src="../../../../assets/images/LMC_logo_white_n_bg.png" alt="Menu" class="md:w-[184px] md:h-[84px] sm:w-[132px] sm:h-[64px]">
+        <span class="text-[16px] font-[600] leading-[17px] text-[#090d1b] dark:text-[white] sm:text-transparent sm:hidden lg:visible">Sales Console</span>
     </div>
     <div class="flex flex-row gap-[8px] items-center">
-        <div class="h-[36px] px-[10px] bg-[#FFFFFF] border-solid border-[1px] border-[#A3AEAF] flex flex-row items-center rounded-[6px] gap-[16px] dark:bg-[#21333B]">
+        <!-- screen below 450px view  -->
+        <div
+            *ngIf="currentScreenSize === screenSizes.SMALL"
+            [matMenuTriggerFor]="menu"
+            class="cursor-pointer h-[36px] px-[10px] bg-[#FFFFFF] border-solid border-[1px] border-[#A3AEAF] flex flex-row items-center rounded-[6px] gap-[16px] dark:bg-[#21333B]"
+        >
+            <span class="text-[16px] font-[600] leading-[17px] text-[#090d1b] dark:text-white">{{customerName}}</span>
+            <div class="h-[25px] w-[25px] rounded-[25px] bg-[#F4511D] text-center text-[white] pt-[1px] pr-[2px] text-[15px] font-[500]">{{sortName}}</div>
+        </div>
+
+        <!-- screen above 450px view  -->
+        <div *ngIf="currentScreenSize !== screenSizes.SMALL" class="h-[36px] px-[10px] bg-[#FFFFFF] border-solid border-[1px] border-[#A3AEAF] flex flex-row items-center rounded-[6px] gap-[16px] dark:bg-[#21333B]">
             <span class="text-[16px] font-[600] leading-[17px] text-[#090d1b] dark:text-white">{{customerName}}</span>
             <div class="h-[25px] w-[25px] rounded-[25px] bg-[#F4511D] text-center text-[white] pt-[1px] pr-[2px] text-[15px] font-[500]">{{sortName}}</div>
         </div>
         <img 
+            *ngIf="currentScreenSize !== screenSizes.SMALL"
             src="../../../../assets/icons/app-menu.svg" 
             alt="" 
             class="h-[42px] w-[42px] rounded-[42px] hover:bg-[#A3AEAF] cursor-pointer"
@@ -53,7 +65,7 @@
                     class="w-full h-[32px] py-[10px] px-[12px] bg-[#e8edfa] flex items-center justify-center rounded-[4px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]"
                     (click)="createUser()"
                 >
-                    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Create User</span>
+                    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Create Partner</span>
                 </div>
             </div>
         </div>

@@ -43,6 +43,26 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: APP.ROUTES.MY_SUPPORT_TICKETS,
+        loadComponent: () => import('./component/pages/my-support-ticket/my-support-ticket.component').then(c => c.MySupportTicketComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.CREATE_NEW_SUPPORT_TICKET,
+        loadComponent: () => import('./component/pages/create-support-ticket/create-support-ticket.component').then(c => c.CreateSupportTicketComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.EXECUTIVE_SUPPORT_TICKET,
+        loadComponent: () => import('./component/pages/executive-support/executive-support.component').then(c => c.ExecutiveSupportComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: `${APP.ROUTES.VIEW_TICKET_DETAILS}${APP.ROUTES.PARTNER_ID}${APP.ROUTES.ISSUE_ID}`,
+        loadComponent: () => import('./component/pages/issue-details/issue-details.component').then(c => c.IssueDetailsComponent),
+        canActivate: [AuthGuard]
+      },
+      {
         path: '', redirectTo: APP.ROUTES.LOAN_APPLICATION_STATUS, pathMatch: 'full'
       },
       {

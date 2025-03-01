@@ -14,9 +14,7 @@ import { APP } from "../constants/APP.const";
 export class AppInterceptorServiceDI implements HttpInterceptor {
 
   constructor(
-    private sessionStorageService: SessionStorageService,
     private route: Router,
-    private dataService: AppDataService,
     private commonService: CommonHelperService
   ) {
   }

@@ -23,11 +23,12 @@
             <div class="border-r-solid border-r-[1px] border-neutral-8 w-[40px] h-[33px]"></div>
           </th>
           <ng-container *ngFor="let column of config.columns; let i = index">
-            <th [ngClass]="{'' : (column.field == filterColumnField)}" class="first:sticky first:left-[0px] first:bg-[#fafaf9] dark:first:bg-[#1B2B32]"> 
-              <div class="border-r-[1px] my-[3px] border-neutral-8 min-w-[150px] flex flex-row justify-between py-[8px] pl-[12px]" [ngClass]="{'shadow-tableCol shadow-tableCol2': i==0 && hasHorizontalScroll}">
+            <!-- <th [ngClass]="{'' : (column.field == filterColumnField)}" class="first:sticky first:left-[0px] first:bg-[#fafaf9] dark:first:bg-[#1B2B32]">  -->
+            <th [ngClass]="{'' : (column.field == filterColumnField)}"> 
+              <div class="border-r-[1px] my-[3px] border-neutral-8 sm:min-w-[100px] md:min-w-[165px] flex flex-row justify-between py-[8px] pl-[12px]" [ngClass]="{'shadow-tableCol shadow-tableCol2': i==0 && hasHorizontalScroll}">
                 <div class="w-full flex flex-row gap-[8px] justify-between h-[16px] pr-[12px]">
                   <div class="flex flex-row gap-[12px]">
-                    <span class="text-[13px] text-[#21333b] font-[600] dark:text-[white]">{{column.label}}</span>
+                    <span class="sm:text-[9px] md:text-[13px] text-[#21333b] font-[600] dark:text-[white]">{{column.label}}</span>
                   </div>
                   <div class="flex flex-row gap-[8px] items-end">
                     <div 
@@ -83,7 +84,8 @@
               </div>
             </td>
             <ng-container *ngFor="let column of config.columns; let i = index">
-              <td class="first:bg-neutral-9 first:sticky first:left-[0px]">
+              <!-- <td class="first:bg-neutral-9 first:sticky first:left-[0px]"> -->
+              <td>
                 <div class="h-[40px] min-w-[200px] flex flex-row py-[9px]" [ngClass]="column.customClass" [ngClass]="{'shadow-tableCol shadow-tableCol2': i==0 && hasHorizontalScroll}" style="min-width: max-content">
                   <ng-container
                     [ngTemplateOutlet]="column.subHeadercellTemplate? column.subHeadercellTemplate : defaultCellTemplate"
@@ -91,7 +93,7 @@
                   </ng-container>
                   <ng-template #defaultCellTemplate let-data="data">
                     <div class="flex flex-row px-[12px] min-h-[40px] w-full text-nowrap" [ngClass]="column.customClass">
-                      <div class="text-[13px] leading-[16px] text-[#21333b] text-left">{{(!data && column.filterType != 'NUMBER')? '-' : (column.filterType == 'NUMBER' && data == '' && data != '0')? '-' : data}}</div>
+                      <div class="sm:text-[9px] md:text-[13px] leading-[16px] text-[#21333b] text-left">{{(!data && column.filterType != 'NUMBER')? '-' : (column.filterType == 'NUMBER' && data == '' && data != '0')? '-' : data}}</div>
                     </div>
                   </ng-template>
                 </div>
@@ -123,7 +125,8 @@
                 </div>
               </td>
               <ng-container *ngFor="let column of config.columns; let i = index">
-                <td class="first:sticky first:z-10 first:left-[0px] p-[0px] z-10 bg-white dark:bg-[#1B2B32]">
+                <!-- <td class="first:sticky first:z-10 first:left-[0px] p-[0px] z-10 bg-white dark:bg-[#1B2B32]"> -->
+                <td class="p-[0px] z-10 bg-white dark:bg-[#1B2B32]">
                   <div class="min-h-[42px] flex" [ngClass]="{'shadow-tableCol shadow-tableCol2': i==0 && hasHorizontalScroll}" *ngIf="!column.isContentBadge" style="min-width: max-content;">
                     <div class="flex flex-row items-center w-full {{column.customClass}}">
                       <!-- <img src="../../../../assets/icons/arrow.svg" *ngIf="data.data?.length && column.rowSpecifier" [ngClass]="{'rotate-[180deg]' :data.showSubrow}"> -->
@@ -135,7 +138,7 @@
                       </ng-container>
                       <ng-template #defaultCellTemplate let-data="data">
                         <div class="flex flex-row py-[9px] px-[12px] w-full text-nowrap" [ngClass]="column.customClass">
-                          <div class="text-[13px] leading-[16px] text-[#21333b] text-left dark:text-[white]">{{(!data && column.filterType != 'NUMBER')? '-' : (column.filterType == 'NUMBER' && data == '' && data != '0')? '-' : data}}</div>
+                          <div class="sm:text-[9px] md:text-[13px] leading-[16px] text-[#21333b] text-left dark:text-[white]">{{(!data && column.filterType != 'NUMBER')? '-' : (column.filterType == 'NUMBER' && data == '' && data != '0')? '-' : data}}</div>
                         </div>
                       </ng-template>
                     </div>
@@ -170,7 +173,8 @@
                   </div>
                 </td>
                 <ng-container *ngFor="let column of config.columns">
-                  <td class="first:sticky first:z-10 first:left-[0px] p-[0px] z-10">
+                  <!-- <td class="first:sticky first:z-10 first:left-[0px] p-[0px] z-10"> -->
+                  <td class="p-[0px] z-10">
                     <div class="min-h-[40px] min-w-[200px] flex" *ngIf="!column.isContentBadge" [ngClass]="{'pl-[8px]': column.rowSpecifier}">
                       <div class="flex flex-row items-center w-full" [ngClass]="column.customClass">
                         <div class="w-[20px] h-[20px] flex justify-center items-center" *ngIf="column.rowSpecifier">
@@ -184,7 +188,7 @@
                         </ng-container>
                         <ng-template #defaultCellTemplate let-data="data">
                           <div class="px-[12px] flex w-full" [ngClass]="column.customClass">
-                            <div class="text-[13px] leading-[16px] text-[#21333b] text-left text-nowrap dark:text-[white]">{{(!data && column.filterType != 'NUMBER')? '-' : (column.filterType == 'NUMBER' && data == '' && data != '0')? '-' : data}}</div>
+                            <div class=" sm:text-[9px] md:text-[13px] leading-[16px] text-[#21333b] text-left text-nowrap dark:text-[white]">{{(!data && column.filterType != 'NUMBER')? '-' : (column.filterType == 'NUMBER' && data == '' && data != '0')? '-' : data}}</div>
                           </div>
                         </ng-template>
                         <!-- <span class="text-base-4 leading-[1.71] text-neutral-1 text-left">{{getFieldValue(column.field, subData)}}</span> -->
@@ -222,24 +226,26 @@
       <app-error-state [config]="config.isFiltered? emptyStateWithFilterConfig : emptyStateConfig"></app-error-state>
     </div>
   </ng-container>
-  <div class="h-[42px] w-full flex flex-row justify-end px-[16px] items-center gap-[20px] bg-[#fafaf9] dark:bg-[#1B2B32]">
-    <div class="flex flex-row gap-[8px] px-[4px] py-[2px] items-center" *ngIf="config.total > 10">
-      <span class="h-[16px] text-sm text-neutral-2 text-left dark:text-[white]">{{sourceL10.LABELS.PER_PAGE}}:</span>
-      <div class="flex flex-row items-center cursor-pointer" [matMenuTriggerFor]="pagable"  #p="matMenuTrigger" >
-        <span class="h-[24px] text-base-4 leading-[1.71] font-semibold dark:text-[white]">{{selectedPageSize}}</span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-[270deg]" [ngClass]="{'rotate-[90deg]' : p.menuOpen}"  aria-colspan="fill-primary-1">
-          <path class="dark:stroke-[#2ec0ff]" d="M12.5 5L7.5 10L12.5 15" stroke="#2054FF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+  <div class="w-full flex flex-wrap justify-end px-[16px] items-center bg-[#fafaf9] dark:bg-[#1B2B32] sm:flex-col-reverse md:flex-row md:gap-[20px]">
+    <div class="flex flex-row flex-wrap justify-end px-[16px] items-center sm:gap-[6px] md:gap-[20px] bg-[#fafaf9] dark:bg-[#1B2B32]">
+      <div class="flex flex-row gap-[8px] px-[4px] py-[2px] items-center" *ngIf="config.total > 10">
+        <span class="h-[16px] text-sm text-neutral-2 text-left dark:text-[white]">{{sourceL10.LABELS.PER_PAGE}}:</span>
+        <div class="flex flex-row items-center cursor-pointer" [matMenuTriggerFor]="pagable"  #p="matMenuTrigger" >
+          <span class="h-[24px] text-base-4 leading-[1.71] font-semibold dark:text-[white]">{{selectedPageSize}}</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-[270deg]" [ngClass]="{'rotate-[90deg]' : p.menuOpen}"  aria-colspan="fill-primary-1">
+            <path class="dark:stroke-[#2ec0ff]" d="M12.5 5L7.5 10L12.5 15" stroke="#2054FF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <mat-divider [vertical]="true" class="w-[1px] sm:hidden md:visible h-[16px] border-solid border-neutral-8" *ngIf="config.total > 10 && currentScreenType !== screenSizes.SMALL"></mat-divider>
+      <div class="flex flex-row gap-[8px] p-[4px] items-center">
+        <span class="h-[16px] text-sm text-neutral-2 text-left dark:text-[white]">{{sourceL10.LABELS.TOTAL}}:</span>
+        <span class="h-[24px] text-base-4 leading-[1.71] font-semibold dark:text-[white]">{{config.total}}</span>
       </div>
     </div>
-    <mat-divider [vertical]="true" class="w-[1px] h-[16px] border-solid border-neutral-8" *ngIf="config.total > 10"></mat-divider>
-    <div class="flex flex-row gap-[8px] p-[4px] items-center">
-      <span class="h-[16px] text-sm text-neutral-2 text-left dark:text-[white]">{{sourceL10.LABELS.TOTAL}}:</span>
-      <span class="h-[24px] text-base-4 leading-[1.71] font-semibold dark:text-[white]">{{config.total}}</span>
-    </div>
-    <mat-divider [vertical]="true" class="w-[1px] h-[16px] border-solid border-neutral-8" *ngIf="config.total > 10"></mat-divider>
-    <div class="h-[24px] flex flex-row gap-[8px] items-center" *ngIf="config.total > 10">
-      <div class="flex flex-row gap-[2px] p-[2px]">
+    <mat-divider [vertical]="true" class="w-[1px] h-[16px] border-solid border-neutral-8 sm:hidden md:visible" *ngIf="config.total > 10 && currentScreenType !== screenSizes.SMALL"></mat-divider>
+    <div class="h-[24px] flex flex-row md:gap-[8px] items-center" *ngIf="config.total > 10">
+      <div class="flex flex-row md:gap-[2px] md:p-[2px]">
         <div class="rounded-[3px]" (click)="onPreviousPage(config.pageNumber, actionType.FAST_BACKWARD)">
           <img src="../../../../assets/icons/arrow-double-grey.svg" *ngIf="config.pageNumber > totalPageCount || config.pageNumber == 1">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" *ngIf="config.pageNumber <= totalPageCount && config.pageNumber != 1">
@@ -253,7 +259,7 @@
           <img src="../../../../assets/icons/arrow-grey.svg" class="rotate-[180deg]" *ngIf="config.pageNumber > totalPageCount || config.pageNumber == 1">
         </div>
       </div>
-      <div class="flex flex-row gap-[4px] items-center text-base-4 leading-[1.14] text-left text-neutral-1">
+      <div class="flex flex-row md:gap-[4px] items-center text-base-4 leading-[1.14] text-left text-neutral-1">
         <input 
          type="number" 
          class="w-[30px] h-[24px] py-[12px] px-[3px] border-solid border-[1px] border-neutral-7 rounded-[3px] text-center no-spin dark:bg-[#1B2B32] dark:text-[white]"
@@ -264,7 +270,7 @@
           <span class="dark:text-[white]">/ {{totalPageCount}}</span>
         </div>
       </div>
-      <div class="flex flex-row gap-[2px] p-[2px]">
+      <div class="flex flex-row md:gap-[2px] md:p-[2px]">
         <div class="rounded-[3px]" (click)="onNextPage(config.pageNumber, actionType.NEXT)">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-[270deg] cursor-pointer" *ngIf="config.pageNumber < totalPageCount">
             <path class="dark:stroke-[#2ec0ff]" d="M5 7.5L10 12.5L15 7.5" stroke="#2054ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

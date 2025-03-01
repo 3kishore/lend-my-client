@@ -93,3 +93,21 @@
     z-index: 1;
     margin-bottom: 10px;
 }
+
+
+@media (min-width: 220px) and (max-width: 450px) {
+    .login-pic {
+        width: 100%;
+        position: relative;
+        top: 2px;
+    }
+
+    .login-card {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .input100 {
+        font-size: 12px;
+    }
+}

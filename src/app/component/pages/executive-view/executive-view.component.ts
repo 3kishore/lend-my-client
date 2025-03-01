@@ -69,8 +69,8 @@ export class ExecutiveViewComponent {
     'Details Collected',
     'Cibil Checked',
     'Contacted Bank',
-    'Sanctioned',
-    'Deposited'
+    'Loan Sanctioned',
+    'Amount Deposited'
   ]
 
   sessionObj;

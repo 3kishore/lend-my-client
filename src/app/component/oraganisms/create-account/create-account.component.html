@@ -1,6 +1,6 @@
 <div class="min-w-[270px] sm:min-w-[550px] sm:p-lg max-h-[80vh] max-w-[90vw]">
   <div class="flex flex-col justify-between" *ngIf="!isUserCreated">
-    <h2 class="text-lg font-semibold">Create User:</h2>
+    <h2 class="text-lg font-semibold">Create Partner:</h2>
     <div>
       <form class="flex gap-md flex-wrap" [formGroup]="createUser">
         <div class="flex flex-col gap-sm">
@@ -63,18 +63,19 @@
             </div>
           </div>
           <div>
-            <label class="text-sm">Employment Type: </label>
+            <label class="text-sm">Partner Type: </label>
             <div class="mt-xs">
-              <select matNativeControl name="car" formControlName="employmentType" class="theme-select">
-                <option value="" disabled selected>Select Your Employement Type</option>
-                <option value="Self Employed">Self Employed</option>
-                <option value="Salaried">Salaried</option>
+              <select matNativeControl name="car" formControlName="partnerType" class="theme-select">
+                <option value="" disabled selected>Select Your Partner Type</option>
+                <option [value]="type" *ngFor="let type of partnerTypeList">{{type}}</option>
+                <!-- <option value="Self Employed">Self Employed</option>
+                <option value="Salaried">Salaried</option> -->
               </select>
             </div>
-            <!-- <input class="theme-input mt-xs" formControlName="employmentType" autocomplete="off" type="text" placeholder="Select you employment type" /> -->
-            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('employmentType').touched && createUser.get('employmentType').errors">
-              <div *ngIf="createUser.get('employmentType').hasError('required')">Employement type is required.</div>
-              <!-- <div *ngIf="createUser.get('employmentType').hasError('minlength')">First name should be atleast 3 character.</div> -->
+            <!-- <input class="theme-input mt-xs" formControlName="partnerType" autocomplete="off" type="text" placeholder="Select you employment type" /> -->
+            <div class="pt-xs text-red-dark text-xs" *ngIf="createUser.get('partnerType').touched && createUser.get('partnerType').errors">
+              <div *ngIf="createUser.get('partnerType').hasError('required')">Employement type is required.</div>
+              <!-- <div *ngIf="createUser.get('partnerType').hasError('minlength')">First name should be atleast 3 character.</div> -->
             </div>
           </div>
           <div>

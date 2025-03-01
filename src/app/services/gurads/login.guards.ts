@@ -9,7 +9,6 @@ export const LoginGuard: CanActivateFn = (
 ) => {
     const router = inject(Router);
     const sessionObj = inject(CommonHelperService).getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
-    console.log(sessionObj)
     if(!sessionObj || !sessionObj.token) {
         return true;
     } else {

@@ -65,9 +65,9 @@ export class MyCommissionsConfigService {
       total: 0,
       pageNumber: 1,
       isFiltered: false,
-      uniqueFieldOfData: 'orderId',
+      // uniqueFieldOfData: 'orderId',
       isSelectable: false,
-      expandableRows: true
+      // expandableRows: true
     }
     return gridConfig;
   }

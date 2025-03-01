@@ -66,4 +66,39 @@ export class AccountService {
       catchError(err => err)
     )
   }
+
+  getMySupportTicket(payload: any): Observable<any> {
+    return this.http.post(API.GET_MY_SUPPORT_TICKETS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  createSupportTicket(payload: any): Observable<any> {
+    return this.http.post(API.CREATE_SUPPORT_TICKET(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getPartnerSupportTickets(): Observable<any> {
+    return this.http.post(API.GET_MY_PARTNER_SUPPORT_TICKETS(), {}).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  updateMyIssueDetails(payload: any): Observable<any> {
+    return this.http.post(API.UPDATE_ISSUE_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getIssueDetails(payload: any): Observable<any> {
+    return this.http.post(API.GET_ISSUE_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
 }

@@ -19,6 +19,7 @@ import { InputTextComponent } from "../../atoms/input-text/input-text.component"
 import { APP } from "../../../utils/constants/APP.const";
 import { IFormInputText } from "../../atoms/input-text/input-text.interface";
 import { ISOLATION_DASHBOARD_ENGLISH_SOURCE } from "../../../utils/translate/source.l10n";
+import { CommonHelperService } from "../../../utils/helpers/common-helper.service";
 
 @Component({
   standalone: true,
@@ -144,6 +145,12 @@ export class ServerSideGridComponent implements OnChanges, OnInit, OnDestroy {
 
   intervalShadow: any;
 
+  currentScreenType = APP.SCREENS_SIZE.SMALL;
+
+  screenSizes = APP.SCREENS_SIZE;
+
+  constructor(private commonService: CommonHelperService) { }
+
   getFieldValue(field: any, data: any) {
     return data[field];
   }
@@ -172,6 +179,11 @@ export class ServerSideGridComponent implements OnChanges, OnInit, OnDestroy {
       const div = this.scrollableDiv.nativeElement;
       this.hasHorizontalScroll = div?.scrollWidth > div?.clientWidth;
     }, 1000);
+    this.commonService.screens.subscribe({
+      next: (resp) => {
+        this.currentScreenType = resp.screenType;
+      }
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {

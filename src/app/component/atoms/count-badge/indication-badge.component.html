@@ -1,0 +1,4 @@
+<div class="count-badge" ngClass="{{config.type}}" *ngIf="config">
+  <div class="flex items-center">{{config.label}}</div>
+  <div class="count-indicator" *ngIf="config.count">{{config.count}}</div>
+</div>

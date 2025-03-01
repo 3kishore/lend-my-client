@@ -39,6 +39,16 @@ export class CreateAccountComponent {
 
   userId = '';
 
+  partnerTypeList = [
+    'Auditor',
+    'Tax Consultant',
+    'Engineer',
+    'Builder',
+    'Land Promoter',
+    'Real Estate Broker',
+    'Others'
+  ]
+
   constructor(
     private fb: FormBuilder,
     private accService: AccountService,
@@ -50,7 +60,7 @@ export class CreateAccountComponent {
       lastName: [''],
       phoneNo: ['', Validators.compose([Validators.required, Validators.pattern(/^\d{10}$/)])],
       email: ['', Validators.compose([Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)])],
-      employmentType: ['', Validators.compose([Validators.required])],
+      partnerType: ['', Validators.compose([Validators.required])],
       companyName: ['', Validators.compose([Validators.required])]
     })
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);

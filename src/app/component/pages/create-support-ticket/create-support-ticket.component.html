@@ -1,0 +1,70 @@
+<div class="py-[36px]">
+  <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="back()">
+    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">< Back</span>
+  </div>
+  <div class="flex flex-wrap justify-between sm:items-start md:items-center gap-[12px] sm:flex-col md:flex-row">
+    <span class="text-[26px] w-fit leading-[26px] font-[500] text-[#090d1b] dark:text-white">
+      Create Support Ticket
+    </span>
+  </div>
+  <div class="flex flex-col gap-sm sm:pl-[8px] md:pl-xl mt-[18px]" [formGroup]="supportForm">
+    <div class="flex flex-wrap gap-sm items-center mt-[16px]">
+      <label class="text-sm w-[220px] font-semibold dark:text-white">Regarding: </label>
+      <div class="md:min-w-[220px] md:max-w-[500px] md:grow w-full grow">
+        <input class="theme-input" formControlName="regarding" autocomplete="off" type="text" placeholder="Enter regarding" />
+        <div class="pt-xs text-red-dark text-xs" *ngIf="supportForm.get('regarding').touched && supportForm.get('regarding').errors">
+          <div *ngIf="supportForm.get('regarding').hasError('required')">Regarding is required.</div>
+          <div *ngIf="supportForm.get('regarding').hasError('minlength')">Regarding should contain atleast 5 character.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-sm items-center">
+      <label class="text-sm w-[220px] font-semibold dark:text-white">Issue Category: </label>
+      <div class="md:min-w-[220px] md:max-w-[500px] md:grow w-full grow">
+        <select formControlName="category" class="theme-select">
+          <option value="" disabled selected>Select issue category</option>
+          <option [value]="issues" *ngFor="let issues of issueList">{{issues}}</option>
+        </select>
+        <div class="pt-xs text-red-dark text-xs" *ngIf="supportForm.get('category').touched && supportForm.get('category').errors">
+          <div *ngIf="supportForm.get('category').hasError('required')">Issue category is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-sm items-center">
+      <label class="text-sm w-[220px] font-semibold dark:text-white">Description: </label>
+      <div class="md:min-w-[220px] md:max-w-[500px] md:grow w-full grow">
+        <!-- <input class="theme-input" formControlName="description" autocomplete="off" type="text" placeholder="Enter description" /> -->
+        <textarea class="theme-text-area" formControlName="description" placeholder="Enter issue description"></textarea>
+        <div class="pt-xs text-red-dark text-xs" *ngIf="supportForm.get('description').touched && supportForm.get('description').errors">
+          <div *ngIf="supportForm.get('description').hasError('required')">Description is required.</div>
+          <div *ngIf="supportForm.get('description').hasError('minlength')">Description should contain atleast 30 character.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-sm items-center" *ngIf="ticketCreationFailed">
+      <label class="text-sm w-[220px] font-semibold dark:text-white"></label>
+      <div class="md:min-w-[220px] md:max-w-[500px] md:grow w-full grow ml-[18px]">
+        <div class="banner-danger w-full">
+          {{message}}
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-sm items-center" *ngIf="ticketCreationSuccess">
+      <label class="text-sm w-[220px] font-semibold dark:text-white"></label>
+      <div class="md:min-w-[220px] md:max-w-[500px] md:grow w-full grow ml-[18px]">
+        <div class="banner-success w-full">
+          Your ticket has been created successfully kindly click the above back button to view your created ticket. <span class="tertiary" (click)="back()">click here to track issue status...</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-md justify-end pr-sm">
+      <button class="secondary" (click)="back()">Cancel</button>
+      <button class="primary" [disabled]="!supportForm.valid" (click)="submit()">Submit</button>
+    </div>
+
+  </div>
+</div>

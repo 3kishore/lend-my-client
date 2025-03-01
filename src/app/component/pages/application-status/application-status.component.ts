@@ -72,7 +72,6 @@ export class ApplicationStatusComponent {
 
   ngOnInit(): void {
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
-    console.log(this.sessionObj)
     this.gridConfig = this.configService.initializeGidConfig(this.customerNameTemplate);
     this.gridActionData = {
       filters: [],

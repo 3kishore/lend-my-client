@@ -6,4 +6,6 @@ export interface IEmpty {
   title: string;
   descriptions: Array<string>;
   subTitle?: string;
+  hasRetryBtn?: boolean;
+  btnAction?: Function;
 }

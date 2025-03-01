@@ -22,6 +22,26 @@ export const API = {
   CHANGE_PASSWORD: () => {
     return `${API.GET_BASE_URL()}account/reset-password`;
   },
+  GET_MY_SUPPORT_TICKETS: () => {
+    return `${API.GET_BASE_URL()}account/get-my-support-tickets`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  CREATE_SUPPORT_TICKET: () => {
+    return `${API.GET_BASE_URL()}account/create-new-support-ticket`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_MY_PARTNER_SUPPORT_TICKETS: () => {
+    return `${API.GET_BASE_URL()}account/my-partner-support-tickets`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  UPDATE_ISSUE_DETAILS: () => {
+    return `${API.GET_BASE_URL()}account/update-ticket-status`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_ISSUE_DETAILS: () => {
+    return `${API.GET_BASE_URL()}account/get-ticket-details`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
   LOGOUT: () => {
     return `${API.GET_BASE_URL()}posts`
   },

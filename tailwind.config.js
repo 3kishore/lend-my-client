@@ -14,6 +14,11 @@ module.exports = {
       'xl': ['24px', { lineHeight: '32px' }],
       '2xl': ['32px', { lineHeight: '40px' }]
     },
+    screens: {
+      'sm': '250px',
+      'md': '450px',
+      'lg': '900px'
+    },
     spacing: {
       0: '0',
       'xs': '4px',

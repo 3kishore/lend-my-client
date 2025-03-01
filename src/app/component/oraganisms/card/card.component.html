@@ -1,0 +1,27 @@
+
+<div class="card dark:shadow-[0 4px 10px rgb(247 245 245 / 15%)] shadow-[0 4px 10px rgba(0, 0, 0, 0.15)]" *ngIf="config">
+  <div class="card-header flex justify-between items-center">
+    <div class="dark:text-white">{{config.heading}}</div>
+    <div class="text-sm dark:text-white" *ngIf="config.headingNote">{{config.headingNote}}</div>
+  </div>
+  <div class="card-block">
+    <ng-container *ngFor="let block of config.block">
+      <div class="card-title dark:text-white" *ngIf="block.heading">{{block.heading}}</div>
+      <div class="card-text dark:text-white">
+        {{block.description}}
+      </div>
+    </ng-container>
+  </div>
+  <div class="card-footer" *ngIf="config.actionTemplate || config.action">
+    <ng-container
+      [ngTemplateOutlet]="config.actionTemplate ? config.actionTemplate : defaultActionTemplate"
+      [ngTemplateOutletContext]="{data: config}"
+    ></ng-container>
+    
+  </div>
+</div>
+<ng-template #defaultActionTemplate>
+  <ng-container *ngIf="config.action">
+    <button class="card-btn" *ngFor="let action of config.action" (click)="action.action ? action.action() : ''">{{action.label}}</button>
+  </ng-container>
+</ng-template>

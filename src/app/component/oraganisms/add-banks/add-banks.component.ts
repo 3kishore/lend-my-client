@@ -50,10 +50,9 @@ export class AddBankComponent implements OnInit {
     this.addBank = this.fb.group({
       bank: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       amountOffered: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      interestRate: ['', Validators.compose([Validators.required, Validators.maxLength(2)])]
+      interestRate: ['', Validators.compose([Validators.required, Validators.maxLength(10)])]
     })
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
-
     this.banks = this.data.banks || [];
     console.log(this.data)
   }

@@ -3,21 +3,14 @@
   <div>
     <mat-sidenav-container autosize>
       <mat-sidenav #sidenav fixedInViewport="true" mode="side" opened="true" [ngClass]="{'w-[50px]' : !isExpanded}">
-        <div class="min-w-[240px]">
-          <div class="py-[11px] px-[16px] flex" [ngClass]="{'justify-end' : isExpanded}">
+        <div class="sm:min-w-[180px] lg:min-w-[240px]">
+          <div *ngIf="!isPanelClickLocked" class="py-[11px] px-[16px] flex" [ngClass]="{'justify-end' : isExpanded}">
             <div class="w-[16px] h-[16px] cursor-pointer" (click)="isExpanded = !isExpanded" [ngClass]="{'rotate-[270deg]' : isExpanded, 'rotate-[90deg]' : !isExpanded}">
               <svg class="dark:fill-white" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M29,19.41a1,1,0,0,1-.71-.29L18,8.83,7.71,19.12a1,1,0,0,1-1.41-1.41L18,6,29.71,17.71A1,1,0,0,1,29,19.41Z"></path><path d="M29,30.41a1,1,0,0,1-.71-.29L18,19.83,7.71,30.12a1,1,0,0,1-1.41-1.41L18,17,29.71,28.71A1,1,0,0,1,29,30.41Z"></path></svg>
             </div>
           </div>
           <mat-divider class="w-full"></mat-divider>
-          <div class="py-[10px] px-[16px] flex mt-[14px] gap-[12px] cursor-pointer" (click)="routeToMyLoanStatus()"
-            [ngClass]="{'bg-[#FFFFFF] border-l-solid border-l-[#0079AD] border-l-[3px] dark:bg-[#1B2B32]': selectedMenu === routes.LOAN_APPLICATION_STATUS}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
-              <path fill="none" stroke="#333333" class="dark:!stroke-white" stroke-width="2" d="M1.7507,16.0022 C3.3517,20.0982 7.3367,23.0002 11.9997,23.0002 C18.0747,23.0002 22.9997,18.0752 22.9997,12.0002 M22.2497,7.9982 C20.6487,3.9012 16.6627,1.0002 11.9997,1.0002 C5.9247,1.0002 0.9997,5.9252 0.9997,12.0002 M8.9997,16.0002 L0.9997,16.0002 L0.9997,24.0002 M22.9997,0.0002 L22.9997,8.0002 L14.9997,8.0002"/>
-            </svg>
-            <span class="text-[#1B2B32] text-[14px] font-[600] leading-[16px] flex items-center dark:text-white">Loan Status</span>
-          </div>
-          <div class="py-[10px] px-[16px] flex gap-[14px] cursor-pointer" (click)="routeToApplyLoan()"
+          <div class="py-[10px] mt-[14px] px-[16px] flex gap-[14px] cursor-pointer" (click)="routeToApplyLoan()"
             [ngClass]="{'bg-[#FFFFFF] border-l-solid border-l-[#0079AD] border-l-[3px] dark:bg-[#1B2B32]': selectedMenu === routes.APPLY_LOAN}">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="32px" width="32px" version="1.1" id="Layer_1" viewBox="0 0 300.16 300.16" xml:space="preserve">
               <g>
@@ -34,9 +27,17 @@
             
             <span class="text-[#1B2B32] text-[14px] font-[600] leading-[16px] flex items-center dark:text-white">Get Loan</span>
           </div>
+          <div class="py-[10px] px-[16px] flex gap-[12px] cursor-pointer" (click)="routeToMyLoanStatus()"
+            [ngClass]="{'bg-[#FFFFFF] border-l-solid border-l-[#0079AD] border-l-[3px] dark:bg-[#1B2B32]': selectedMenu === routes.LOAN_APPLICATION_STATUS}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
+              <path fill="none" stroke="#333333" class="dark:!stroke-white" stroke-width="2" d="M1.7507,16.0022 C3.3517,20.0982 7.3367,23.0002 11.9997,23.0002 C18.0747,23.0002 22.9997,18.0752 22.9997,12.0002 M22.2497,7.9982 C20.6487,3.9012 16.6627,1.0002 11.9997,1.0002 C5.9247,1.0002 0.9997,5.9252 0.9997,12.0002 M8.9997,16.0002 L0.9997,16.0002 L0.9997,24.0002 M22.9997,0.0002 L22.9997,8.0002 L14.9997,8.0002"/>
+            </svg>
+            <span class="text-[#1B2B32] text-[14px] font-[600] leading-[16px] flex items-center dark:text-white">Loan Status</span>
+          </div>
 
 
           <div class="py-[10px] px-[16px] flex gap-[14px] cursor-pointer" (click)="routeToMyCommissions()"
+            *ngIf="userRole !== 'sales-executive'"
             [ngClass]="{'bg-[#FFFFFF] border-l-solid border-l-[#0079AD] border-l-[3px] dark:bg-[#1B2B32]': selectedMenu === routes.MY_COMMISSIONS}">
             <svg style="fill:#333333;" class="dark:!fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 75.376 75.376" xml:space="preserve">
               <g>
@@ -53,19 +54,40 @@
             <svg style="fill:#333333;" class="dark:!fill-white icon" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 1024 1024" version="1.1"><path d="M300 462.4h424.8v48H300v-48zM300 673.6H560v48H300v-48z" fill=""/><path d="M818.4 981.6H205.6c-12.8 0-24.8-2.4-36.8-7.2-11.2-4.8-21.6-11.2-29.6-20-8.8-8.8-15.2-18.4-20-29.6-4.8-12-7.2-24-7.2-36.8V250.4c0-12.8 2.4-24.8 7.2-36.8 4.8-11.2 11.2-21.6 20-29.6 8.8-8.8 18.4-15.2 29.6-20 12-4.8 24-7.2 36.8-7.2h92.8v47.2H205.6c-25.6 0-47.2 20.8-47.2 47.2v637.6c0 25.6 20.8 47.2 47.2 47.2h612c25.6 0 47.2-20.8 47.2-47.2V250.4c0-25.6-20.8-47.2-47.2-47.2H725.6v-47.2h92.8c12.8 0 24.8 2.4 36.8 7.2 11.2 4.8 21.6 11.2 29.6 20 8.8 8.8 15.2 18.4 20 29.6 4.8 12 7.2 24 7.2 36.8v637.6c0 12.8-2.4 24.8-7.2 36.8-4.8 11.2-11.2 21.6-20 29.6-8.8 8.8-18.4 15.2-29.6 20-12 5.6-24 8-36.8 8z" fill=""/><path d="M747.2 297.6H276.8V144c0-32.8 26.4-59.2 59.2-59.2h60.8c21.6-43.2 66.4-71.2 116-71.2 49.6 0 94.4 28 116 71.2h60.8c32.8 0 59.2 26.4 59.2 59.2l-1.6 153.6z m-423.2-47.2h376.8V144c0-6.4-5.6-12-12-12H595.2l-5.6-16c-11.2-32.8-42.4-55.2-77.6-55.2-35.2 0-66.4 22.4-77.6 55.2l-5.6 16H335.2c-6.4 0-12 5.6-12 12v106.4z" fill=""/></svg>
             <span class="text-[#1B2B32] text-[14px] font-[600] leading-[16px] flex items-center dark:text-white">Orders</span>
           </div>
+
+          <div class="py-[10px] px-[16px] flex gap-[14px] cursor-pointer" (click)="routeToMySupportTicket()"
+            *ngIf="userRole !== 'sales-executive'"
+            [ngClass]="{'bg-[#FFFFFF] border-l-solid border-l-[#0079AD] border-l-[3px] dark:bg-[#1B2B32]': selectedMenu === routes.MY_SUPPORT_TICKETS}"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#333333" class="dark:!fill-white" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 363.815 363.815" xml:space="preserve">
+              <path d="M317.504,156.35c0.385-1.329,0.401-2.729,0.401-4.181v-15.546c0-36.782-13.888-71.165-39.472-96.812  C252.826,14.139,218.574,0,181.805,0c-36.77,0-70.871,14.139-96.479,39.811C59.743,65.458,45.905,99.84,45.905,136.623v15.546  c0,1.453,0.016,2.852,0.401,4.181C22.862,158.208,4.13,183.206,4.13,213.675c0,30.607,18.743,55.701,42.335,57.359  c6.307,8.499,16.481,13.663,27.314,13.663c18.832,0,34.127-15.331,34.127-34.175v-73.694c0-18.258-14-33.218-32-34.131v-6.074  C75.905,76.834,122.24,30,181.906,30c59.665,0,105.999,46.834,105.999,106.623v6.074c-18,0.916-32,15.875-32,34.131v73.694  c0,12.325,6.556,23.144,16.36,29.157c-11.172,16.436-26.875,29.44-45.461,37.375c-5.086-5.667-12.461-9.24-20.657-9.24h-38.484  c-15.306,0-27.758,12.452-27.758,27.758v0.484c0,15.306,12.452,27.758,27.758,27.758h38.484c11.261,0,20.97-6.744,25.319-16.402  c18.377-6.683,35.165-17.281,49.297-31.378c10.526-10.499,19.109-22.47,25.577-35.473c4.312-2.328,8.113-5.558,11.059-9.527  c23.591-1.662,42.285-26.754,42.285-57.359C359.684,183.204,340.952,158.206,317.504,156.35z"/>
+            </svg>
+            <span class="text-[#1B2B32] text-[14px] font-[600] leading-[16px] flex items-center dark:text-white">Support Ticket</span>
+          </div>
+
+          <div class="py-[10px] px-[16px] flex gap-[14px] cursor-pointer" (click)="routeToExecutiveSupportTicket()"
+            *ngIf="userRole === 'sales-executive'"
+            [ngClass]="{'bg-[#FFFFFF] border-l-solid border-l-[#0079AD] border-l-[3px] dark:bg-[#1B2B32]': selectedMenu === routes.EXECUTIVE_SUPPORT_TICKET}"
+          >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#333333" class="dark:!fill-white" width="42px" height="42px" viewBox="0 -4 40 40" version="1.1">
+            <title>ticket</title>
+            <path d="M39.5 23h0.5v1c-0.299 0-0.628 0-1 0-1.104 0-2 0.896-2 2 0 0.366 0 0.705 0 1h-34c0-0.295 0-0.634 0-1 0-1.104-0.896-2-2-2-0.319 0-0.666 0-1 0v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1h0.5c0.276 0 0.5-0.224 0.5-0.5s-0.224-0.5-0.5-0.5h-0.5v-1c0.299 0 0.628 0 1 0 1.104 0 2-0.896 2-2 0-0.366 0-0.705 0-1h34c0 0.295 0 0.634 0 1 0 1.104 0.896 2 2 2 0.372 0 0.701 0 1 0v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5h0.5v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5h0.5v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5h0.5v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5h0.5v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5h0.5v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5h0.5v1h-0.5c-0.276 0-0.5 0.224-0.5 0.5s0.224 0.5 0.5 0.5zM36 11c0-1.104-0.896-2-2-2h-28c-1.104 0-2 0.896-2 2v11c0 1.104 0.896 2 2 2h28c1.104 0 2-0.896 2-2v-11zM34 23h-28c-0.553 0-1-0.448-1-1v-11c0-0.553 0.447-1 1-1h28c0.552 0 1 0.447 1 1v11c0 0.552-0.448 1-1 1zM11.387 13.988h-3.973v0.59h1.652v4.422h0.664v-4.422h1.656v-0.59zM12.768 13.988h-0.664v5.012h0.664v-5.012zM14.759 15.49c0.104-0.312 0.287-0.56 0.546-0.744 0.258-0.185 0.58-0.277 0.965-0.277 0.335 0 0.613 0.083 0.834 0.25 0.222 0.166 0.39 0.432 0.506 0.797l0.652-0.154c-0.134-0.462-0.372-0.821-0.714-1.076s-0.764-0.383-1.265-0.383c-0.442 0-0.847 0.101-1.215 0.303s-0.651 0.497-0.852 0.886c-0.199 0.389-0.299 0.844-0.299 1.365 0 0.479 0.089 0.927 0.266 1.344s0.434 0.736 0.771 0.956c0.339 0.22 0.778 0.33 1.318 0.33 0.521 0 0.963-0.143 1.324-0.429s0.611-0.701 0.75-1.246l-0.664-0.168c-0.091 0.422-0.266 0.74-0.522 0.955-0.258 0.214-0.571 0.321-0.943 0.321-0.305 0-0.589-0.079-0.851-0.236s-0.455-0.395-0.579-0.713-0.187-0.69-0.187-1.117c0.002-0.332 0.054-0.653 0.159-0.964zM23.363 13.988h-0.898l-2.488 2.48v-2.48h-0.664v5.012h0.664v-1.738l0.822-0.795 1.783 2.533h0.875l-2.195-2.98 2.101-2.032zM27.938 18.41h-3.074v-1.707h2.77v-0.59h-2.77v-1.535h2.957v-0.59h-3.621v5.012h3.738v-0.59zM32.625 13.988h-3.973v0.59h1.652v4.422h0.664v-4.422h1.656v-0.59z"/>
+            </svg>
+            <span class="text-[#1B2B32] text-[14px] font-[600] leading-[16px] flex items-center dark:text-white">Support Ticket</span>
+          </div>
           
         </div>
       </mat-sidenav>
 
       <mat-sidenav-content class="dark:bg-[#1B2B32]">
         <div class="content-container">
-          <div class="h-[40px] border-solid border-b border-b-[#CAD4D7] pl-[50px] pr-[50px] flex justify-end">
+          <div class="h-[40px] border-solid border-b border-b-[#CAD4D7] md:pl-[24px] md:pr-[24px] lg:pl-[50px] lg:pr-[50px] sm:p-[0] flex justify-end">
             <div class="flex flex-row items-center gap-[8px]">
               <div class="h-[20px] w-[20px]">
                 <svg viewBox="0 0 36 36" *ngIf="isDarkMode" style="fill: white;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18,6.42a1,1,0,0,0,1-1V1.91a1,1,0,0,0-2,0V5.42A1,1,0,0,0,18,6.42Z"></path><path d="M18,29.58a1,1,0,0,0-1,1v3.51a1,1,0,0,0,2,0V30.58A1,1,0,0,0,18,29.58Z"></path><path d="M8.4,9.81A1,1,0,0,0,9.81,8.4L7.33,5.92A1,1,0,0,0,5.92,7.33Z"></path><path d="M27.6,26.19a1,1,0,0,0-1.41,1.41l2.48,2.48a1,1,0,0,0,1.41-1.41Z"></path><path d="M6.42,18a1,1,0,0,0-1-1H1.91a1,1,0,0,0,0,2H5.42A1,1,0,0,0,6.42,18Z"></path><path d="M34.09,17H30.58a1,1,0,0,0,0,2h3.51a1,1,0,0,0,0-2Z"></path><path d="M8.4,26.19,5.92,28.67a1,1,0,0,0,1.41,1.41L9.81,27.6A1,1,0,0,0,8.4,26.19Z"></path><path d="M27.6,9.81l2.48-2.48a1,1,0,0,0-1.41-1.41L26.19,8.4A1,1,0,0,0,27.6,9.81Z"></path><circle cx="18" cy="18" r="10"></circle></svg>
                 <svg viewBox="0 0 36 36" *ngIf="!isDarkMode" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18,6.31a1,1,0,0,0,1-1V1.91a1,1,0,0,0-2,0v3.4A1,1,0,0,0,18,6.31Z"></path><path d="M18,29.69a1,1,0,0,0-1,1v3.4a1,1,0,0,0,2,0v-3.4A1,1,0,0,0,18,29.69Z"></path><path d="M8.32,9.74A1,1,0,0,0,9,10a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L7.33,5.92A1,1,0,0,0,5.92,7.33Z"></path><path d="M27.68,26.26a1,1,0,1,0-1.42,1.42l2.41,2.4a1,1,0,0,0,.71.3,1,1,0,0,0,.7-.3,1,1,0,0,0,0-1.41Z"></path><path d="M6.31,18a1,1,0,0,0-1-1H1.91a1,1,0,0,0,0,2h3.4A1,1,0,0,0,6.31,18Z"></path><path d="M34.09,17h-3.4a1,1,0,1,0,0,2h3.4a1,1,0,0,0,0-2Z"></path><path d="M8.32,26.26l-2.4,2.41a1,1,0,0,0,.7,1.71,1,1,0,0,0,.71-.3l2.41-2.4a1,1,0,1,0-1.42-1.42Z"></path><path d="M27,10a1,1,0,0,0,.71-.29l2.4-2.41a1,1,0,0,0,0-1.41,1,1,0,0,0-1.41,0l-2.41,2.4a1,1,0,0,0,0,1.42A1,1,0,0,0,27,10Z"></path><path d="M18.13,7.75a10.13,10.13,0,1,0,10,10.13A10.08,10.08,0,0,0,18.13,7.75Zm0,18.25a8.13,8.13,0,1,1,8-8.12A8.08,8.08,0,0,1,18.13,26Z"></path></svg>
               </div>
-              <span class="dark:text-white">Dark mode {{isDarkMode? 'on' : 'off'}}</span>
+              <div class="dark:text-white">Dark mode {{isDarkMode? 'on' : 'off'}}</div>
               <div class="w-[32px] h-[16px] rounded-[9px] bg-[#4F6169] p-[2px] flex items-center cursor-pointer" 
                 (click)="themeChange(isDarkMode? 'light' : 'dark')"
                 [ngClass]="{'justify-end bg-[#5AA220]' : isDarkMode}">
@@ -73,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="px-[50px]">
+          <div class="md:px-[24px] lg:px-[50px] sm:px-[8px]">
             <router-outlet></router-outlet>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, HostListener, inject, Input, OnInit } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from "@angular/material/menu";
 import { AppHeaderConfigService } from './app-header-config.service';
@@ -31,6 +31,10 @@ export class AppHeaderComponent implements OnInit{
 
   userRole = '';
 
+  currentScreenSize = APP.SCREENS_SIZE.SMALL;
+
+  screenSizes = APP.SCREENS_SIZE;
+
   constructor(
     private configService: AppHeaderConfigService,
     private sessionStorage: SessionStorageService,
@@ -43,10 +47,14 @@ export class AppHeaderComponent implements OnInit{
   ngOnInit(): void {
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
     this.userRole = this.sessionObj.userDetail.role;
-    console.log('this.customerName', this.customerName)
     if(this.customerName) {
       this.sortName = this.customerName[0];
     }
+    this.commonService.screens.subscribe({
+      next: (resp) => {
+        this.currentScreenSize = resp.screenType;
+      }
+    })
   }
 
   logout() {

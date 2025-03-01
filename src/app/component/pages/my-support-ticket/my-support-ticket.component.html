@@ -1,0 +1,54 @@
+<div class="py-[36px]" *ngIf="!error && !noDataExists">
+  <div class="flex flex-wrap sm:flex-col md:flex-row gap-[12px] justify-between items-center">
+    <span class="text-[26px] leading-[26px] font-[500] text-[#090d1b] dark:text-white">Support Tickets</span>
+    <div class="flex flex-wrap gap-sm">
+      <div
+        class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]"
+        (click)="getMySupportTickets()"
+      >
+        <div class="w-[12px] h-[12px]">
+          <svg viewBox="0 0 36 36" class="dark:stroke-[#2FC0FF] dark:fill-[#2FC0FF] stroke-[#2054ff] fill-[#2054ff]" xmlns="http://www.w3.org/2000/svg"><path d="M22.4,11.65a1.09,1.09,0,0,0,1.09,1.09H34.43V1.81a1.09,1.09,0,1,0-2.19,0V8.95a16.41,16.41,0,1,0,1.47,15.86,1.12,1.12,0,0,0-2.05-.9,14.18,14.18,0,1,1-1.05-13.36H23.5A1.09,1.09,0,0,0,22.4,11.65Z"></path></svg>
+        </div>
+        <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Refresh</span>
+      </div>
+      <button class="primary h-8 p-[10px]" (click)="raiseNewSupportTicket()">
+        Raise Ticket
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="tickets">
+      <div class="open-tickets py-[16px]" *ngIf="openTickets.length">
+        <span class="text-[20px] leading-[26px] font-[600] text-[#090d1b] dark:text-white">Open Issues</span>
+        <div class="flex flex-wrap gap-sm">
+          <app-card *ngFor="let ticket of openTickets" [config]="ticket"></app-card>
+        </div>
+      </div>
+    </div>
+    <div class="tickets">
+      <div class="open-tickets py-[16px]" *ngIf="resolvedTickets.length">
+        <span class="text-[20px] leading-[26px] font-[600] text-[#090d1b] dark:text-white">Resolved Issues</span>
+        <div class="flex flex-wrap gap-sm">
+          <app-card *ngFor="let ticket of resolvedTickets" [config]="ticket"></app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full h-[350px] mt-[16px] flex justify-center items-center bg-[#dee2e6bd] dark:bg-[#dee2e62e]" *ngIf="isLoading">
+    <mat-spinner class="!w-[32px] !h-[32px]"></mat-spinner>
+  </div>
+</div>
+<div class="pt-[16px] flex justify-end" *ngIf="errorConfig && noDataExists">
+  <button class="primary h-8 p-[10px]" (click)="raiseNewSupportTicket()">
+    Raise Ticket
+  </button>
+</div>
+<div *ngIf="errorConfig && (error || noDataExists)">
+  <app-error-state [config]="errorConfig"></app-error-state>
+</div>
+
+<ng-template let-data="data" #ticketActionTemplate>
+  <div class="w-full flex justify-end">
+    <app-indication-badge [config]="getIndicationBadgeConfig(data.action[0].label)"></app-indication-badge>
+  </div>
+</ng-template>

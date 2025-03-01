@@ -64,7 +64,7 @@ export class ClientDetailsComponent {
       tooltip: 'Pending'
     },
     {
-      label: "Contacted The Client",
+      label: "Contacted Client",
       isCompleted: false,
       tooltip: 'Pending'
     },
@@ -85,11 +85,11 @@ export class ClientDetailsComponent {
       isCompleted: false
     },
     {
-      label: "Sanctioned",
+      label: "Loan Sanctioned",
       isCompleted: false
     },
     {
-      label: "Deposited",
+      label: "Amount Deposited",
       isCompleted: false
     }
   ]
@@ -140,6 +140,7 @@ export class ClientDetailsComponent {
       this.configService.getCustomerDetails(payload).subscribe({
         next: (resp) => {
           this.customerDetails = resp.content;
+          // let loanStatus
           const loanStatus = resp.content.loanStatus?.toLowerCase();
           const levelOneIndex = this.levelOne.findIndex(x => x.label.toLowerCase() === loanStatus);
           const levelTwoIndex = this.levelTwo.findIndex(x => x.label.toLowerCase() === loanStatus);

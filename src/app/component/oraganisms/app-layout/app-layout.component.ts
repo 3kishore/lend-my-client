@@ -40,15 +40,22 @@ export class AppLayoutComponent implements OnInit {
 
   userRole = '';
 
+  isPanelClickLocked = false;
+
   ngOnInit(): void {
     this.selectedMenu = window.location.pathname.split('/')[1];
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
     this.userRole = this.sessionObj.userDetail.role;
-    console.log(this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true));
-    this.customerName =  `${this.sessionObj.userDetail.firstName} ${this.sessionObj.userDetail.lastName}`;
+    this.customerName =  this.sessionObj.userDetail.firstName;
     setTimeout(() => {
       this.themeChange(this.sessionStorageService.getItem('theme'));
     }, 100);
+    this.commonService.screens.subscribe({
+      next: (resp) => {
+        this.isPanelClickLocked = (resp.screenType === APP.SCREENS_SIZE.SMALL) || (resp.screenSize < 750);
+        this.isExpanded = !((resp.screenType === APP.SCREENS_SIZE.SMALL) || (resp.screenSize < 750));
+      }
+    })
   }
 
   routeToMyLoanStatus() {
@@ -69,6 +76,16 @@ export class AppLayoutComponent implements OnInit {
   routeToExecutiveView() {
     this.selectedMenu = APP.ROUTES.EXECUTIVE_VIEW;
     this.router.navigate([APP.ROUTES.EXECUTIVE_VIEW]);
+  }
+
+  routeToMySupportTicket() {
+    this.selectedMenu = APP.ROUTES.MY_SUPPORT_TICKETS;
+    this.router.navigate([APP.ROUTES.MY_SUPPORT_TICKETS]);
+  }
+
+  routeToExecutiveSupportTicket() {
+    this.selectedMenu = APP.ROUTES.EXECUTIVE_SUPPORT_TICKET;
+    this.router.navigate([APP.ROUTES.EXECUTIVE_SUPPORT_TICKET]);
   }
 
   themeChange(theme: string) {

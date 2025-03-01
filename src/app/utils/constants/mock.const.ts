@@ -409,5 +409,135 @@ export const MOCK_DATA = {
       }
     ],
     totalElement: 20
+  },
+  SUPPORT_TICKETS: {
+    content: [
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'open'
+      },
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'inprogress'
+      },
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'resolved'
+      },
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'resolved'
+      },
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'resolved'
+      },
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'resolved'
+      },
+      {
+        date: '12-01-2025',
+        title: 'My payout issue',
+        category: `Funding`,
+        description: `Wasn't reflected in my accounts`,
+        status: 'resolved'
+      }
+    ],
+    status: true,
+    message: 'Success',
+    // content: []
+  },
+  UPDATE_MY_ISSUE_STATUS: {
+    status: true,
+    message: 'Success'
+  },
+  GET_MY_PARTNER_SUPPORt_TICKETS: {
+    status: true,
+    message: 'Success',
+    content: [
+      {
+        regarding: 'Payout',
+        category: 'Payout for longtime is not happend properly',
+        description: `No one obeying i have to listen everyone voice why do i have listern some else's voice for every time.`,
+        partnerName: 'Sadagopan Ramesh',
+        partnerMoileNo: '9087654321',
+        partnerEmailId: 'sadagopan.ramesh@softmailoutlook.com',
+        partnerId: 'KU-OYRV098-LK90-89JFVHH',
+        date: '12/4/2025',
+        issueStatus: 'pending',
+        issueId: 'KU-OYRV098-LK90-89JFVHH'
+      },
+      {
+        regarding: 'Payout',
+        category: 'Payout for longtime is not happend properly',
+        description: `No one obeying i have to listen everyone voice why do i have listern some else's voice for every time.`,
+        partnerName: 'Sadagopan Ramesh',
+        partnerMoileNo: '9087654321',
+        partnerEmailId: 'sadagopan.ramesh@softmailoutlook.com',
+        partnerId: 'KU-OYRV098-LK90-89JFVHH',
+        date: '12/4/2025',
+        issueStatus: 'pending',
+        issueId: 'KU-OYRV098-LK90-89JFVHH'
+      },
+      {
+        regarding: 'Payout',
+        category: 'Payout for longtime is not happend properly',
+        description: `No one obeying i have to listen everyone voice why do i have listern some else's voice for every time.`,
+        partnerName: 'Sadagopan Ramesh',
+        partnerMoileNo: '9087654321',
+        partnerEmailId: 'sadagopan.ramesh@softmailoutlook.com',
+        partnerId: 'KU-OYRV098-LK90-89JFVHH',
+        date: '12/4/2025',
+        issueStatus: 'pending',
+        issueId: 'KU-OYRV098-LK90-89JFVHH'
+      },
+      {
+        regarding: 'Payout',
+        category: 'Payout for longtime is not happend properly',
+        description: `No one obeying i have to listen everyone voice why do i have listern some else's voice for every time.`,
+        partnerName: 'Sadagopan Ramesh',
+        partnerMoileNo: '9087654321',
+        partnerEmailId: 'sadagopan.ramesh@softmailoutlook.com',
+        partnerId: 'KU-OYRV098-LK90-89JFVHH',
+        date: '12/4/2025',
+        issueStatus: 'resolved',
+        issueId: 'KU-OYRV098-LK90-89JFVHH'
+      },
+    ]
+  },
+  GET_ISSUE_DETAILS: {
+    status: true,
+    message: 'Success',
+    content: {
+      regarding: 'Payout',
+      category: 'Payout for longtime is not happend properly',
+      description: `No one obeying i have to listen everyone voice why do i have listern some else's voice for every time.`,
+      partnerName: 'Sadagopan Ramesh',
+      partnerMoileNo: '9087654321',
+      partnerEmailId: 'sadagopan.ramesh@softmailoutlook.com',
+      partnerId: 'KU-OYRV098-LK90-89JFVHH',
+      date: '12/4/2025',
+      issueStatus: 'pending',
+      issueId: 'KU-OYRV098-LK90-89JFVHH'
+    }
   }
 }

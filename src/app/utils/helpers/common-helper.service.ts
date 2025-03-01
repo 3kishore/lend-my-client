@@ -2,12 +2,16 @@ import { Injectable } from "@angular/core";
 // import { merge } from "lodash";
 import { IServerSideGridRefreshEvent } from "../../component/oraganisms/server-side-grid/IServerSideGridRefreshEvent";
 import { EGridFilterType } from "../../component/oraganisms/server-side-grid/serversidegrid.enum";
+import { BehaviorSubject } from "rxjs";
+import { APP } from "../constants/APP.const";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class CommonHelperService {
+
+  screens = new BehaviorSubject({screenSize: 250, screenType: APP.SCREENS_SIZE.SMALL});
 
     getGridPayload(gridActionData: IServerSideGridRefreshEvent, OverAllSearch: any, params: any) {
       let filters: any = [];

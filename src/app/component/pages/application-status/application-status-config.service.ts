@@ -20,15 +20,6 @@ export class ApplicationStatusConfigService {
     let gridConfig: IServerSideGrid = {
       columns: [
         {
-          label: 'Request ID',
-          field: 'requestId',
-          hideFilter: false,
-          filterField: 'requestId',
-          filterType: EGridFilterType.STRING,
-          rowSpecifier: true,
-          subRowField: 'requestId'
-        },
-        {
           label: 'Client Name',
           field: 'clientName',
           hideFilter: false,
@@ -40,7 +31,7 @@ export class ApplicationStatusConfigService {
           subRowcellTemplate: cusTemplate
         },
         {
-          label: 'Requested Amount',
+          label: 'Amount',
           field: 'loanAmount',
           filterField: 'loanAmount',
           filterType: EGridFilterType.NUMBER,
@@ -57,7 +48,16 @@ export class ApplicationStatusConfigService {
           filterType: EGridFilterType.STRING
         },
         {
-          label: 'Request Date',
+          label: 'Request ID',
+          field: 'requestId',
+          hideFilter: false,
+          filterField: 'requestId',
+          filterType: EGridFilterType.STRING,
+          rowSpecifier: true,
+          subRowField: 'requestId'
+        },
+        {
+          label: 'Date',
           field: 'requestTime',
           hideFilter: true,
           isSortable: true,

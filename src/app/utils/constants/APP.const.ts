@@ -11,7 +11,13 @@ export const APP = {
     CLIENT_DETAIL: 'client-detail',
     CLIENT_ID: '/:clientId',
     MY_COMMISSIONS: 'my-commissions',
-    EXECUTIVE_VIEW: 'executive-view'
+    EXECUTIVE_VIEW: 'executive-view',
+    MY_SUPPORT_TICKETS: 'my-support-ticket',
+    CREATE_NEW_SUPPORT_TICKET: 'create-new-support-ticket',
+    EXECUTIVE_SUPPORT_TICKET: 'executive-support-ticket',
+    VIEW_TICKET_DETAILS: 'view-ticket-details',
+    PARTNER_ID: '/:partnerId',
+    ISSUE_ID: '/:issueId'
   },
   NUMERIC_fILTER_OPTIONS: [
     {
@@ -82,5 +88,20 @@ export const APP = {
   },
   SESSION_ITEM_KEYS: {
     SESSION: 'session'
+  },
+  SCREENS_SIZE: {
+    SMALL: 'small',
+    MEDIUM: 'medium',
+    LARGE: 'large',
+    EXTRA_LARGE: 'extra large'
+  },
+  MESSAGE: {
+    SUPPORT_TICKET_API_ERROR_MSG: 'Something went wrong while we refreshing your support ticket.',
+    KINDLY_RETRY_SOMETIME_LATER: 'Kindly retry sometime later.',
+    NO_DATA_FOUND_FOR_YOUR_USER: 'No data found for your user id.'
+  },
+  TITLE: {
+    ERROR_OCCURED: 'Error Occured',
+    NO_DATA: 'No Data'
   }
 }
