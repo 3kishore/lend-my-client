@@ -81,36 +81,8 @@ export class MyCommissionsComponent {
     this.component$.add(
       this.configService.getMyCommissionsList(this.gridActionData, {}, {}, payload).subscribe({
         next: (resp: any) =>  {
-          // this.gridConfig.data = resp.content;
-          // this.gridConfig.total = resp.totalElement;
-
-          this.gridConfig.data = [
-            {
-              paymentId: 'paymentIdpaymentIdpaymentId',
-              dateOfPayment: 'paymentIdpaymentId',
-              tds: 'paymentIdpaymentId',
-              netPay: 'paymentIdpaymentId'
-            },
-            {
-              paymentId: 'paymentIdpaymentIdpaymentId',
-              dateOfPayment: 'paymentIdpaymentId',
-              tds: 'paymentIdpaymentId',
-              netPay: 'paymentIdpaymentId'
-            },
-            {
-              paymentId: 'paymentIdpaymentIdpaymentId',
-              dateOfPayment: 'paymentIdpaymentId',
-              tds: 'paymentIdpaymentId',
-              netPay: 'paymentIdpaymentId'
-            },
-            {
-              paymentId: 'paymentIdpaymentIdpaymentId',
-              dateOfPayment: 'paymentIdpaymentId',
-              tds: 'paymentIdpaymentId',
-              netPay: 'paymentIdpaymentId'
-            },
-          ]
-          this.gridConfig.total = 30
+          this.gridConfig.data = resp.content;
+          this.gridConfig.total = resp.totalElement;
           setTimeout(() => {
             this.gridLoading = false;
           }, 100);
