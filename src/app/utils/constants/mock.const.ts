@@ -539,5 +539,393 @@ export const MOCK_DATA = {
       issueStatus: 'pending',
       issueId: 'KU-OYRV098-LK90-89JFVHH'
     }
+  },
+  GET_BANKERS_LIST: {
+    "status": true,
+    "message": "success",
+    "content": [
+      {
+        "firstName":"kishore",
+        "lastName":"",
+        "phoneNo":"8190805490",
+        "email":"gokulkishore393@gmail.com",
+        "bankName":"HDFC Bank",
+        "branch":"perambur",
+        "employeeId":"101359",
+        "zone":"chennai north",
+        "designation":"Zonal Head",
+        "officialEmail":"kishore@hdfc.com",
+        "referenceId":"3232e28a-118e-5e04-b21a-00320e9a968e",
+        "referenceEmail":"executive@gmail.com",
+        "refererName":"kishore k",
+        "assignedLoans": 20,
+        "desposedLoans": 15,
+        "inprogressLoans": 5,
+        "rejectedLoans": 3,
+        "bankerId": "BK-103003"
+      },
+      {
+        "firstName":"kishore",
+        "lastName":"",
+        "phoneNo":"8190805490",
+        "email":"gokulkishore393@gmail.com",
+        "bankName":"HDFC Bank",
+        "branch":"perambur",
+        "employeeId":"101359",
+        "zone":"chennai north",
+        "designation":"Zonal Head",
+        "officialEmail":"kishore@hdfc.com",
+        "referenceId":"3232e28a-118e-5e04-b21a-00320e9a968e",
+        "referenceEmail":"executive@gmail.com",
+        "refererName":"kishore k",
+        "assignedLoans": 20,
+        "desposedLoans": 15,
+        "inprogressLoans": 5,
+        "rejectedLoans": 3,
+        "bankerId": "BK-103003"
+      },
+      {
+        "firstName":"kishore",
+        "lastName":"",
+        "phoneNo":"8190805490",
+        "email":"gokulkishore393@gmail.com",
+        "bankName":"HDFC Bank",
+        "branch":"perambur",
+        "employeeId":"101359",
+        "zone":"chennai north",
+        "designation":"Zonal Head",
+        "officialEmail":"kishore@hdfc.com",
+        "referenceId":"3232e28a-118e-5e04-b21a-00320e9a968e",
+        "referenceEmail":"executive@gmail.com",
+        "refererName":"kishore k",
+        "assignedLoans": 20,
+        "desposedLoans": 15,
+        "inprogressLoans": 5,
+        "rejectedLoans": 3,
+        "bankerId": "BK-103003"
+      },
+      {
+        "firstName":"kishore",
+        "lastName":"",
+        "phoneNo":"8190805490",
+        "email":"gokulkishore393@gmail.com",
+        "bankName":"HDFC Bank",
+        "branch":"perambur",
+        "employeeId":"101359",
+        "zone":"chennai north",
+        "designation":"Zonal Head",
+        "officialEmail":"kishore@hdfc.com",
+        "referenceId":"3232e28a-118e-5e04-b21a-00320e9a968e",
+        "referenceEmail":"executive@gmail.com",
+        "refererName":"kishore k",
+        "assignedLoans": 20,
+        "desposedLoans": 15,
+        "inprogressLoans": 5,
+        "rejectedLoans": 3,
+        "bankerId": "BK-103003"
+      }
+    ],
+    totalElement: 10
+  },
+  BANKER_DETAILS: {
+    "status": true,
+    "message": "success",
+    "content": {
+      "firstName":"kishore",
+      "lastName":"",
+      "phoneNo":"8190805490",
+      "email":"gokulkishore393@gmail.com",
+      "bankName":"HDFC Bank",
+      "branch":"perambur",
+      "employeeId":"101359",
+      "zone":"chennai north",
+      "designation":"Zonal Head",
+      "officialEmail":"kishore@hdfc.com",
+      "referenceId":"3232e28a-118e-5e04-b21a-00320e9a968e",
+      "referenceEmail":"executive@gmail.com",
+      "refererName":"kishore k",
+      "assignedLoans": 20,
+      "desposedLoans": 15,
+      "inprogressLoans": 5,
+      "rejectedLoans": 3,
+      "bankerId": "BK-103003"
+    }
+  },
+  GET_ASSIGNED_CUSTOMER_OF_BANKER: {
+    "status": true,
+    "message": "success",
+    "content": [
+      {
+        "customerName": "Srinivasan",
+        "loanAmount": "10000000",
+        "offeredAmount": "9000000",
+        "rateOfInterest": "8.89",
+        "loanStatus": "Completed"
+      },
+      {
+        "customerName": "Srinivasan",
+        "loanAmount": "10000000",
+        "offeredAmount": "9000000",
+        "rateOfInterest": "8.89",
+        "loanStatus": "Completed"
+      },
+      {
+        "customerName": "Srinivasan",
+        "loanAmount": "10000000",
+        "offeredAmount": "9000000",
+        "rateOfInterest": "8.89",
+        "loanStatus": "Completed"
+      },
+      {
+        "customerName": "Srinivasan",
+        "loanAmount": "10000000",
+        "offeredAmount": "9000000",
+        "rateOfInterest": "8.89",
+        "loanStatus": "Completed"
+      }
+    ],
+    totalElement: 10
+  },
+  GET_REQUEST_DETAILS: {
+    "content": {
+      "description": "",
+      "email": "jfvghd2thjnjk@kg.mkb",
+      "executiveEmail": "porulsusendran03@gmail.com",
+      "executiveId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+      "executiveName": "",
+      "firstName": "kishore",
+      "lastName": "hkjhkj",
+      "loanAmount": "100000",
+      "loanFor": "Secured",
+      "loanStatus": "Deposited",
+      "loanType": "Business Loan",
+      "middleName": "lkhkh",
+      "mobileNumber": "9087654321",
+      "partnerName": "kishore k",
+      "referenceEmail": "gokulkishore393@gmail.com",
+      "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+      "remarks": "",
+      "requestId": "75d9dc10-41c2-5401-b425-d23d936d5fce",
+      "requestTime": "2025-02-05 23:16:53",
+      "banks": [
+        {
+          "bankerName": "Nalla kannu",
+          "bankerId": "BK-103003",
+          "status": "Client Contacted",
+          "amountOffered": "10000",
+          "bank": "HDFC Bank",
+          "interestRate": "12.5"
+        },
+        {
+          "bankerName": "Nalla kannu",
+          "bankerId": "BK-103003",
+          "status": "Client Contacted",
+          "amountOffered": "10000",
+          "bank": "Yes Bank",
+          "interestRate": "12"
+        },
+        {
+          "bankerName": "Nalla kannu",
+          "bankerId": "BK-103003",
+          "status": "Client Contacted",
+          "amountOffered": "10000",
+          "bank": "HDFC Bank",
+          "interestRate": "11"
+        },
+        {
+          "bankerName": "Nalla kannu",
+          "bankerId": "BK-103003",
+          "status": "Client Contacted",
+          "amountOffered": "10000",
+          "bank": "HDFC Bank",
+          "interestRate": "10"
+        }
+      ],
+    },
+    "message": "Success",
+    "status": true
+  },
+  GET_MY_LEADS_LIST: {
+    "status": true,
+    "message": "success",
+    "content": []
+  },
+  GET_MY_LEADS_DETAILS: {
+    "content": {
+      "description": "",
+      "email": "jfvghd2thjnjk@kg.mkb",
+      "executiveEmail": "porulsusendran03@gmail.com",
+      "executiveId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+      "executiveName": "",
+      "firstName": "kishore",
+      "lastName": "hkjhkj",
+      "loanAmount": "100000",
+      "loanFor": "Secured",
+      "loanStatus": "Deposited",
+      "loanType": "Business Loan",
+      "middleName": "lkhkh",
+      "mobileNumber": "9087654321",
+      "partnerName": "kishore k",
+      "referenceEmail": "gokulkishore393@gmail.com",
+      "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+      "remarks": "",
+      "requestId": "75d9dc10-41c2-5401-b425-d23d936d5fce",
+      "requestTime": "2025-02-05 23:16:53",
+      "bankerDetail": {
+        'loanId': 'APPL-1007756',
+        'bankerId': 'BK-10038968',
+        'bankerName': 'Nalla Kannu',
+        'bankName': 'HDFC',
+        'clientName': 'Kishore',
+        'requestedLoanAmount': '10000',
+        'loanType': 'Personal',
+        'rateOfInterest': '10',
+        'amountOffered': '1099778',
+        'loanStatus': 'desposed',
+        'isDetailsCollected': true
+      }
+    },
+    "message": "Success",
+    "status": true
+  },
+  GET_BANKERS: {
+    content: [
+      {
+          "assignedLoans": 5,
+          "bankName": "IOB",
+          "bankerId": "BK-1003659",
+          "branch": "kishore",
+          "completedLoans": 2,
+          "designation": "Regional Head",
+          "email": "muragan@gmail.com",
+          "employeeId": "101359",
+          "firstName": "Murugan",
+          "inprogressLoans": 2,
+          "lastName": "",
+          "officialEmail": "muragan@gmail.com",
+          "phoneNo": "8190706543",
+          "referenceEmail": "executive@gmail.com",
+          "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+          "refererName": "kishore k",
+          "rejectedLoans": 1,
+          "zone": "Chennai South"
+      },
+      {
+          "assignedLoans": 0,
+          "bankName": "Kotak Mahindra",
+          "bankerId": "BK-1003660",
+          "branch": "perambur",
+          "completedLoans": 0,
+          "designation": "Regional Head",
+          "email": "vijay@gmail.com",
+          "employeeId": "908765",
+          "firstName": "Vijay",
+          "inprogressLoans": 0,
+          "lastName": "",
+          "officialEmail": "vijay@gmail.com",
+          "phoneNo": "9087654321",
+          "referenceEmail": "executive@gmail.com",
+          "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+          "refererName": "kishore k",
+          "rejectedLoans": 0,
+          "zone": "Chennai Central"
+      },
+      {
+          "assignedLoans": 0,
+          "bankName": "Kotak Mahindra",
+          "bankerId": "BK-1003661",
+          "branch": "Perambur",
+          "completedLoans": 0,
+          "designation": "Area Head",
+          "email": "vinayak@gmail.com",
+          "employeeId": "8975",
+          "firstName": "Vinayak",
+          "inprogressLoans": 0,
+          "lastName": "SP",
+          "officialEmail": "vinayak@gmail.com",
+          "phoneNo": "8764290876",
+          "referenceEmail": "executive@gmail.com",
+          "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+          "refererName": "kishore k",
+          "rejectedLoans": 0,
+          "zone": "Chennai Central"
+      },
+      {
+          "assignedLoans": 0,
+          "bankName": "Kotak Mahindra",
+          "bankerId": "BK-1003662",
+          "branch": "sharma nagar",
+          "completedLoans": 0,
+          "designation": "Regional Head",
+          "email": "peter@gmail.com",
+          "employeeId": "101567",
+          "firstName": "Peter",
+          "inprogressLoans": 0,
+          "lastName": "Parker",
+          "officialEmail": "peter@gmail.com",
+          "phoneNo": "7890623564",
+          "referenceEmail": "executive@gmail.com",
+          "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+          "refererName": "kishore k",
+          "rejectedLoans": 0,
+          "zone": "Chennai North"
+      },
+      {
+          "assignedLoans": 0,
+          "bankName": "Kotak Mahindra",
+          "bankerId": "BK-1003663",
+          "branch": "vyasarpadi",
+          "completedLoans": 0,
+          "designation": "Zonal Head",
+          "email": "andrewtate@gmail.com",
+          "employeeId": "101689",
+          "firstName": "Andrew",
+          "inprogressLoans": 0,
+          "lastName": "tate",
+          "officialEmail": "andrewtate@gmail.com",
+          "phoneNo": "7896487654",
+          "referenceEmail": "executive@gmail.com",
+          "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+          "refererName": "kishore k",
+          "rejectedLoans": 0,
+          "zone": "Chennai North"
+      },
+      {
+          "assignedLoans": 0,
+          "bankName": "IOB",
+          "bankerId": "BK-1003664",
+          "branch": "nandhanam",
+          "completedLoans": 0,
+          "designation": "Zonal Head",
+          "email": "stalin@vidiyal.com",
+          "employeeId": "101579",
+          "firstName": "Stalin",
+          "inprogressLoans": 0,
+          "lastName": "Vidiyal",
+          "officialEmail": "stalin@vidiyal.com",
+          "phoneNo": "9087612345",
+          "referenceEmail": "executive@gmail.com",
+          "referenceId": "3232e28a-118e-5e04-b21a-00320e9a968e",
+          "refererName": "kishore k",
+          "rejectedLoans": 0,
+          "zone": "Chennai South"
+      }
+    ]
+  },
+  GET_BANKING_PARTNERS: {
+    content: [
+      {
+          "bankId": "kotak-mahindra",
+          "bankName": "Kotak Mahindra"
+      },
+      {
+          "bankId": "hdfc",
+          "bankName": "HDFC"
+      },
+      {
+          "bankId": "iob",
+          "bankName": "IOB"
+      }
+    ]
   }
 }

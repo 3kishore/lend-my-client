@@ -600,3 +600,46 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #697496;
   }
 }
+.alert {
+  padding: 12px 20px;
+  border: solid 1px;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+  &.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  &.alert-danger{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+  &.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+  }
+  &.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+  }
+}
+.danger-snackbar {
+  border-radius: 4px;
+  .mdc-snackbar__surface {
+    background-color: #df3a3a !important;
+    color: #fff !important;
+    border-radius: 4px;
+  }
+}
+.success-snackbar {
+  border-radius: 4px;
+  .mdc-snackbar__surface {
+    background-color: #29ab7f !important;
+    color: #fff !important;
+    border-radius: 4px;
+  }
+}

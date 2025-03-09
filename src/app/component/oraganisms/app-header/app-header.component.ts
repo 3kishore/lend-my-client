@@ -9,6 +9,7 @@ import { CreateAccountComponent } from '../create-account/create-account.compone
 import { MatDialog } from '@angular/material/dialog';
 import { APP } from '../../../utils/constants/APP.const';
 import { CommonHelperService } from '../../../utils/helpers/common-helper.service';
+import { OnboardBankerComponent } from '../../pages/onboard-banker/onboard-banker.component';
 
 @Component({
   standalone: true,
@@ -63,7 +64,11 @@ export class AppHeaderComponent implements OnInit{
   }
 
   createUser(): void {
-    this.dialog.open(CreateAccountComponent);
+    this.dialog.open(CreateAccountComponent, {hasBackdrop: false});
+  }
+
+  createBanker(): void {
+    this.dialog.open(OnboardBankerComponent, {hasBackdrop: false});
   }
 
 }

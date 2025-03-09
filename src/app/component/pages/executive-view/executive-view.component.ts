@@ -35,14 +35,11 @@ export class ExecutiveViewComponent {
   @ViewChild('actionTemplate', { static: true })
   public actionTemplate: TemplateRef<any>;
 
-  @ViewChild('updateBankDetailsTemplate', { static: true })
-  public updateBankDetailsTemplate: TemplateRef<any>;
+  // @ViewChild('updateBankDetailsTemplate', { static: true })
+  // public updateBankDetailsTemplate: TemplateRef<any>;
 
-  @ViewChild('popupApproveTemplate', { static: true })
-  public popupApproveTemplate: TemplateRef<any>;
-
-  @ViewChild('popupRejectTemplate', { static: true })
-  public popupRejectTemplate: TemplateRef<any>;
+  @ViewChild('requestIdTemplate', { static: true })
+  public requestIdTemplate: TemplateRef<any>;
 
   matDialogRef: MatDialogRef<ModalComponent>;
 
@@ -65,12 +62,9 @@ export class ExecutiveViewComponent {
   actionList = [
     'Application Viewed',
     'Executive Assigned',
-    'Contacted The Client',
+    'Contacted Client',
     'Details Collected',
-    'Cibil Checked',
-    'Contacted Bank',
-    'Loan Sanctioned',
-    'Amount Deposited'
+    'Cibil Checked'
   ]
 
   sessionObj;
@@ -86,7 +80,7 @@ export class ExecutiveViewComponent {
   }
 
   ngOnInit(): void {
-    this.gridConfig = this.configService.initializeGidConfig(this.actionTemplate, this.updateBankDetailsTemplate);
+    this.gridConfig = this.configService.initializeGidConfig(this.requestIdTemplate, this.actionTemplate);
     this.gridActionData = {
       filters: [],
       sort: {
@@ -168,47 +162,4 @@ export class ExecutiveViewComponent {
     this.router.navigate([APP.ROUTES.APPLY_LOAN]);
   }
 
-  openModal(orderId: any, isApprove?: boolean) {
-    const poupData = {
-      buttonList: [],
-      data: orderId,
-      restrictOutSieClick: true,
-      showCloseBtn: true,
-      closeBtnLabel: 'Cancel',
-      title: `<img src="../../../../assets/icons/${isApprove? 'success.svg' : 'failed.svg'}">
-      <span>${isApprove? 'Approve' : 'Reject'}</span>`,
-      exportForm: false,
-      templateRef: isApprove? this.popupApproveTemplate : this.popupRejectTemplate
-    } 
-    this.matDialogRef = this.matDialog.open(ModalComponent, {
-      data: poupData,
-      maxWidth: 732,
-      height: '338px',
-      position: {
-        top: '64px'
-      }
-    });
-    this.matDialogRef.afterClosed().subscribe({
-      next: (resp: any) => {
-        if(resp) {
-          this.dataService.updateAppLoader(true);
-          let param = {
-            subscriptionId: orderId,
-            action: isApprove? 'accepted' : 'rejected'
-          }
-          this.configService.changeApplicationStatus(param).subscribe({
-            next: (resp) => {
-              setTimeout(() => {
-                this.dataService.updateAppLoader(false);
-                this.getAllLoanRequests();
-              }, 100);
-            },
-            error: (err) => {
-              console.log(err);
-            }
-          })
-        }
-      }
-    })
-  }
 }

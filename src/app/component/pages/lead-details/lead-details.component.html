@@ -1,0 +1,224 @@
+<div class="py-[36px]">
+  <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="back()">
+    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">< Back</span>
+  </div>
+  <div class="flex flex-wrap justify-between sm:items-start md:items-center gap-[12px] sm:flex-col md:flex-row">
+    <span class="text-[26px] w-fit leading-[26px] font-[500] text-[#090d1b] dark:text-white">
+      Client Detail
+    </span>
+    <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="refresh()">
+      <div class="w-[12px] h-[12px]">
+        <svg viewBox="0 0 36 36" class="dark:stroke-[#2FC0FF] dark:fill-[#2FC0FF] stroke-[#2054ff] fill-[#2054ff]" xmlns="http://www.w3.org/2000/svg"><path d="M22.4,11.65a1.09,1.09,0,0,0,1.09,1.09H34.43V1.81a1.09,1.09,0,1,0-2.19,0V8.95a16.41,16.41,0,1,0,1.47,15.86,1.12,1.12,0,0,0-2.05-.9,14.18,14.18,0,1,1-1.05-13.36H23.5A1.09,1.09,0,0,0,22.4,11.65Z"></path></svg>
+      </div>
+      <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Refresh</span>
+    </div>
+  </div>
+  <div class="flex flex-col flex-wrap md:mt-[24px]">
+    <div class="md:mt-[20px] lg:min-w-[420px]">
+      <div class="border-[2px] h-full w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1" *ngIf="customerDetailsLoader">
+        <div id="pause-grid-loader" class="flex items-center justify-center">
+          <div id="spinner-grid-loader"></div>
+        </div>
+      </div>
+      <div class="border-[2px] w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1 flex flex-row flex-wrap sm:gap[6px] md:gap-sm" *ngIf="!customerDetailsLoader && customerDetails">
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Customer Name :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{customerDetails.firstName}} {{customerDetails.lastName}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Email :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{customerDetails.email}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Phone Number :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{customerDetails.mobileNumber}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Loan Type :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{customerDetails.loanType}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Loan Category :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{customerDetails.loanFor}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Loan description :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{!customerDetails.description ? 'NA' : customerDetails.description}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Loan Amount :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{customerDetails.loanAmount}}</span>
+        </div>
+
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Remarks :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{!customerDetails.remarks ? 'NA' : customerDetails.remarks}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-lg">
+    <h1 class="text-md font-bold">Update Loan Details:</h1>
+    <div class="flex flex-col gap-sm" [formGroup]="loanDetails">
+      <div class="flex gap-sm">
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Maximum Loan Amount Offered: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="maxLoanAmount"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('maxLoanAmount').touched && loanDetails.get('maxLoanAmount').errors">
+            <div *ngIf="loanDetails.get('maxLoanAmount').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('maxLoanAmount').hasError('pattern')">Number range should be 1000 to 999999999</div>
+          </div>
+        </div>
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Rate Of Interest: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="rateOfInterest"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('rateOfInterest').touched && loanDetails.get('rateOfInterest').errors">
+            <div *ngIf="loanDetails.get('rateOfInterest').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('rateOfInterest').hasError('pattern')">Number range should be 1 to 99</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-sm">
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Maximum Loan Tenure: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="maxLoanTenure"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('maxLoanTenure').touched && loanDetails.get('maxLoanTenure').errors">
+            <div *ngIf="loanDetails.get('maxLoanTenure').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('maxLoanTenure').hasError('pattern')">Number range should be 1 to 999</div>
+          </div>
+        </div>
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">EMI per month: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="emiPerMonth"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('emiPerMonth').touched && loanDetails.get('emiPerMonth').errors">
+            <div *ngIf="loanDetails.get('emiPerMonth').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('emiPerMonth').hasError('pattern')">Number range should be 99 to 9999999</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-sm">
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Maximum FOIR: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="maxFoir"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('maxFoir').touched && loanDetails.get('maxFoir').errors">
+            <div *ngIf="loanDetails.get('maxFoir').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('maxFoir').hasError('pattern')">Number range should be 99 to 9999999</div>
+          </div>
+        </div>
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Processing Fee: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="processingFee"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('processingFee').touched && loanDetails.get('processingFee').errors">
+            <div *ngIf="loanDetails.get('processingFee').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('processingFee').hasError('pattern')">Number range should be 1 to 999999</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-sm">
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Other Charges: </label>
+            <input
+              class="theme-input mt-xs"
+              formControlName="otherCharges"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            />
+          </div>
+          <div class="pt-xs text-red-dark text-xs" *ngIf="loanDetails.get('otherCharges').touched && loanDetails.get('otherCharges').errors">
+            <div *ngIf="loanDetails.get('otherCharges').hasError('required')">This field is required</div>
+            <div *ngIf="loanDetails.get('otherCharges').hasError('pattern')">Number range should be 99 to 999999</div>
+          </div>
+        </div>
+        <div class="w-[50%]">
+          <div>
+            <label class="text-sm">Proposal to the client: </label>
+            <textarea
+              class="theme-text-area"
+              formControlName="advantage"
+              placeholder="Enter your proposal to the client"
+            ></textarea>
+            <!-- <input
+              class="theme-input mt-xs"
+              formControlName="advantage"
+              autocomplete="off"
+              type="text"
+              placeholder=""
+            /> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end mt-md">
+      <app-button [button]="updateLoanDetailsBtn" (buttonClicked)="updateLoanDetails()"></app-button>
+    </div>
+  </div>
+</div>
+
+<ng-template #alertContentTemplate>
+  <div class="alert alert-danger flex flex-col gap-md h-[230px]">
+    <div class="text-md font-bold">Errors</div>
+    <div class="flex flex-col">
+      <div *ngIf="loanDetails.get('maxLoanAmount').hasError('required')">Amount is required</div>
+      <div *ngIf="loanDetails.get('maxLoanAmount').hasError('minlength')">Amount should be atleast 1000</div>
+    </div>
+    <div *ngIf="loanDetails.get('rateOfInterest').hasError('required')">Rate of interest is required</div>
+  </div>
+</ng-template>
+<ng-template #alertActionTemplate>
+  <div class="flex justify-end">
+    <app-button [button]="closeBtnConfig" (buttonClicked)="closeDialog()"></app-button>
+  </div>
+</ng-template>

@@ -11,13 +11,19 @@ export const APP = {
     CLIENT_DETAIL: 'client-detail',
     CLIENT_ID: '/:clientId',
     MY_COMMISSIONS: 'my-commissions',
-    EXECUTIVE_VIEW: 'executive-view',
+    ORDER: 'order',
     MY_SUPPORT_TICKETS: 'my-support-ticket',
     CREATE_NEW_SUPPORT_TICKET: 'create-new-support-ticket',
     EXECUTIVE_SUPPORT_TICKET: 'executive-support-ticket',
     VIEW_TICKET_DETAILS: 'view-ticket-details',
     PARTNER_ID: '/:partnerId',
-    ISSUE_ID: '/:issueId'
+    ISSUE_ID: '/:issueId',
+    BANKERS: 'bankers',
+    BANKER_ID: '/:bankerId',
+    MY_LEADS: 'my-leads',
+    COMPLETED_LOANS: 'completed-loans',
+    REJECTED_LOANS: 'rejected-loans',
+    LOAN_ID: '/:loanId'
   },
   NUMERIC_fILTER_OPTIONS: [
     {

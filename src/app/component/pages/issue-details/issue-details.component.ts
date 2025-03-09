@@ -50,6 +50,6 @@ export class IssueDetailsComponent {
   }
 
   back() {
-      this.router.navigate([APP.ROUTES.EXECUTIVE_SUPPORT_TICKET]);
-    }
+    this.router.navigate([APP.ROUTES.EXECUTIVE_SUPPORT_TICKET]);
+  }
 }

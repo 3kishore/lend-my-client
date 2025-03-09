@@ -1,0 +1,173 @@
+<div class="min-w-[270px] sm:min-w-[550px] sm:p-lg max-h-[80vh] max-w-[90vw]">
+    <div class="flex flex-col justify-between" *ngIf="!isUserCreated">
+      <h2 class="text-lg font-semibold">Create Banker:</h2>
+      <div>
+        <form class="flex gap-md flex-wrap" [formGroup]="createBanker">
+          <div class="flex flex-col gap-sm">
+            <div>
+              <label class="text-sm">First Name: </label>
+              <input
+                class="theme-input mt-xs"
+                formControlName="firstName"
+                autocomplete="off"
+                type="text"
+                placeholder="Enter your first name"
+                (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+              />
+              <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('firstName').touched && createBanker.get('firstName').errors">
+                <div *ngIf="createBanker.get('firstName').hasError('required')">First name is required.</div>
+                <div *ngIf="createBanker.get('firstName').hasError('minlength')">First name should be atleast 3 character.</div>
+              </div>
+            </div>
+            <div>
+              <label class="text-sm">Last Name (Optional): </label>
+              <input
+                class="theme-input mt-xs"
+                formControlName="lastName"
+                autocomplete="off"
+                type="text"
+                placeholder="Enter your last name"
+                (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+              />
+            </div>
+            <div>
+              <label class="text-sm">Personal Phone No: </label>
+              <input
+                class="theme-input mt-xs"
+                formControlName="phoneNo"
+                autocomplete="off"
+                type="text"
+                placeholder="Enter your phone no"
+                (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+              />
+              <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('phoneNo').touched && createBanker.get('phoneNo').errors">
+                <div *ngIf="createBanker.get('phoneNo').hasError('required')">Phone number is required.</div>
+                <div *ngIf="createBanker.get('phoneNo').hasError('pattern')">Invalid mobile number.</div>
+              </div>
+            </div>
+            <div>
+                <label class="text-sm">Personal Email: </label>
+                <input
+                  class="theme-input mt-xs"
+                  formControlName="email"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="Enter your email"
+                  (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+                />
+                <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('email').touched && createBanker.get('email').errors">
+                  <div *ngIf="createBanker.get('email').hasError('required')">Email is required.</div>
+                  <div *ngIf="createBanker.get('email').hasError('pattern')">Entered email is not valid.</div>
+                </div>
+            </div>
+            <div>
+                <label class="text-sm">Bank Name: </label>
+                <!-- <input
+                  class="theme-input mt-xs"
+                  formControlName="bankName"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="Enter your bank name"
+                  (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+                /> -->
+                <div class="mt-xs">
+                  <select matNativeControl formControlName="bankName" class="theme-select">
+                    <option value="" disabled selected>Select your bank</option>
+                    <option [value]="type.bankName" *ngFor="let type of banksList">{{type.bankName}}</option>
+                  </select>
+                </div>
+                <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('bankName').touched && createBanker.get('bankName').errors">
+                  <div *ngIf="createBanker.get('bankName').hasError('required')">Bank name is required.</div>
+                  <div *ngIf="createBanker.get('bankName').hasError('minlength')">Bank name should be atleast 3 character.</div>
+                </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-sm">
+            <div>
+                <label class="text-sm">Branch Name: </label>
+                <input
+                  class="theme-input mt-xs"
+                  formControlName="branch"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="Enter your branch name"
+                  (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+                />
+                <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('branch').touched && createBanker.get('branch').errors">
+                  <div *ngIf="createBanker.get('branch').hasError('required')">Branch name is required.</div>
+                  <div *ngIf="createBanker.get('branch').hasError('minlength')">Branch name should be atleast 3 character.</div>
+                </div>
+            </div>
+            <div>
+                <label class="text-sm">Employee ID: </label>
+                <input
+                  class="theme-input mt-xs"
+                  formControlName="employeeId"
+                  autocomplete="off"
+                  type="text"
+                  placeholder="Enter your employee id"
+                  (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+                />
+                <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('employeeId').touched && createBanker.get('employeeId').errors">
+                  <div *ngIf="createBanker.get('employeeId').hasError('required')">Employee ID is required.</div>
+                  <div *ngIf="createBanker.get('employeeId').hasError('minlength')">Employee ID should be atleast 3 character.</div>
+                </div>
+            </div>
+            <div>
+              <label class="text-sm">Zone: </label>
+              <div class="mt-xs">
+                <select matNativeControl name="car" formControlName="zone" class="theme-select">
+                  <option value="" disabled selected>Select Your zone</option>
+                  <option [value]="type.label" *ngFor="let type of zoneList">{{type.label}}</option>
+                </select>
+              </div>
+              <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('zone').touched && createBanker.get('zone').errors">
+                <div *ngIf="createBanker.get('zone').hasError('required')">Zone is required.</div>
+              </div>
+            </div>
+            <div>
+                <label class="text-sm">Designation: </label>
+                <div class="mt-xs">
+                  <select matNativeControl name="car" formControlName="designation" class="theme-select">
+                    <option value="" disabled selected>Select Your designation</option>
+                    <option [value]="type" *ngFor="let type of bankerType">{{type}}</option>
+                  </select>
+                </div>
+                <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('designation').touched && createBanker.get('designation').errors">
+                  <div *ngIf="createBanker.get('designation').hasError('required')">Designation is required.</div>
+                </div>
+            </div>
+            <div>
+              <label class="text-sm">Official Email: </label>
+              <input
+                class="theme-input mt-xs"
+                formControlName="officialEmail"
+                autocomplete="off" type="text"
+                placeholder="Enter your official email"
+                (keyup.enter)="createBanker.invalid ? '' : onCreateBanker()"
+              />
+              <div class="pt-xs text-red-dark text-xs" *ngIf="createBanker.get('officialEmail').touched && createBanker.get('officialEmail').errors">
+                <div *ngIf="createBanker.get('officialEmail').hasError('required')">Official email is required.</div>
+                <div *ngIf="createBanker.get('officialEmail').hasError('pattern')">Entered email is not valid.</div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="banner-danger" *ngIf="isCreationFailed">
+        {{errorMessage}}
+      </div>
+      <div class="flex gap-sm flex-wrap mt-md justify-end pb-sm">
+        <button class="secondary" (click)="onCancel()">Cancel</button>
+        <button class="primary" [disabled]="!createBanker.valid" (click)="onCreateBanker()">Submit</button>
+      </div>
+    </div>
+    <div class="bg-green-light font-semibold text-green-dark h-72 rounded-lg flex justify-center items-center" *ngIf="isUserCreated">
+      <div class="flex flex-col justify-center items-center">
+        <div>User have been created successfully.</div>
+        <div>User Id: {{bankerId}}</div>
+        <button class="tertiary" (click)="onCancel()">Click here close the window...</button>
+      </div>
+    </div>
+</div>
+  

@@ -40,8 +40,78 @@ export class AccountService {
     );
   }
 
+  getOrderDetails(payload: any): Observable<any> {
+    return this.http.post(API.GET_ORDER_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  updateLoanDetails(payload: any): Observable<any> {
+    return this.http.post(API.UPDATE_LOAN_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  assignBanker(payload: any): Observable<any> {
+    return this.http.post(API.ASSIGN_BANKER(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  getAssignedBankers(payload: any): Observable<any> {
+    return this.http.post(API.GET_ASSIGNED_BANKERS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
   createUser(payload: any): Observable<any> {
     return this.http.post(API.CREATE_USER(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  createBanker(payload: any): Observable<any> {
+    return this.http.post(API.CREATE_BANKER(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getBankingPartners(): Observable<any> {
+    return this.http.post(API.GET_BANKING_PARTNERS(), {}).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getBankingPartnersAndPartners(): Observable<any> {
+    return this.http.post(API.GET_BANKING_PARTNERS_AND_BANKERS(), {}).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getBankingPartnersAndBanker(): Observable<any> {
+    return this.http.post(API.GET_BANKING_PARTNERS(), {}).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getBankersList(): Observable<any> {
+    return this.http.post(API.GET_BANKERS_LIST(), {}).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  assignBankers(payload: any): Observable<any> {
+    return this.http.post(API.GET_BANKERS_LIST(), payload).pipe(
       map(resp => resp),
       catchError(err => err)
     )
@@ -97,6 +167,20 @@ export class AccountService {
 
   getIssueDetails(payload: any): Observable<any> {
     return this.http.post(API.GET_ISSUE_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getBankerDetails(payload: any): Observable<any> {
+    return this.http.post(API.GET_BANKER_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getAssignedCustomerOfBanker(payload: any): Observable<any> {
+    return this.http.post(API.GET_ASSIGNED_CUSTOMER_OF_BANKER(), payload).pipe(
       map(resp => resp),
       catchError(err => err)
     )

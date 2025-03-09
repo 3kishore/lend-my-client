@@ -39,6 +39,34 @@ export class LoanApplicationsService {
     );
   }
 
+  getMyLeads(payload: any) {
+    return this.http.post(API.GET_MY_LEADS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  getLoanDetails(payload: any) {
+    return this.http.post(API.GET_LOAN_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  getCompletedLoan(payload: any) {
+    return this.http.post(API.GET_COMPLETED_LOANS(), payload).pipe(
+      map(resp => MOCK_DATA.GET_MY_LEADS_LIST),
+      catchError(err => err)
+    );
+  }
+
+  getRejectedLoan(payload: any) {
+    return this.http.post(API.GET_REJECTED_LOANS(), payload).pipe(
+      map(resp => MOCK_DATA.GET_MY_LEADS_LIST),
+      catchError(err => err)
+    );
+  }
+
   updateLoanStatus(payload: any) {
     return this.http.post(API.UPDATE_LOAN_STATUS(), payload).pipe(
       map(resp => resp),

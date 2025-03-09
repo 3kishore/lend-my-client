@@ -75,7 +75,11 @@ export class LoginComponent {
         next: (resp) => {
           if(resp.status) {
             this.commonHelperService.storeItemToSession(APP.SESSION_ITEM_KEYS.SESSION, resp.content, true);
-            this.router.navigate([APP.ROUTES.LOAN_APPLICATION_STATUS]);
+            if(resp.content?.userDetail?.role === 'banker') {
+              this.router.navigate([APP.ROUTES.MY_LEADS]);
+            } else {
+              this.router.navigate([APP.ROUTES.LOAN_APPLICATION_STATUS]);
+            }
             setTimeout(() => {
               this.dataService.updateAppLoader(false);
             }, 150);

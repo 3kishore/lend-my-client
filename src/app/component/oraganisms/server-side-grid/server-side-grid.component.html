@@ -25,7 +25,7 @@
           <ng-container *ngFor="let column of config.columns; let i = index">
             <!-- <th [ngClass]="{'' : (column.field == filterColumnField)}" class="first:sticky first:left-[0px] first:bg-[#fafaf9] dark:first:bg-[#1B2B32]">  -->
             <th [ngClass]="{'' : (column.field == filterColumnField)}"> 
-              <div class="border-r-[1px] my-[3px] border-neutral-8 sm:min-w-[100px] md:min-w-[165px] flex flex-row justify-between py-[8px] pl-[12px]" [ngClass]="{'shadow-tableCol shadow-tableCol2': i==0 && hasHorizontalScroll}">
+              <div class="border-r-[1px] my-[3px] border-neutral-8 sm:min-w-[100px] md:min-w-[190px] flex flex-row justify-between py-[8px] pl-[12px]" [ngClass]="{'shadow-tableCol shadow-tableCol2': i==0 && hasHorizontalScroll}">
                 <div class="w-full flex flex-row gap-[8px] justify-between h-[16px] pr-[12px]">
                   <div class="flex flex-row gap-[12px]">
                     <span class="sm:text-[9px] md:text-[13px] text-[#21333b] font-[600] dark:text-[white]">{{column.label}}</span>

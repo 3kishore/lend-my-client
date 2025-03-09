@@ -38,8 +38,13 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: APP.ROUTES.EXECUTIVE_VIEW,
+        path: APP.ROUTES.ORDER,
         loadComponent: () => import('./component/pages/executive-view/executive-view.component').then(c => c.ExecutiveViewComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: `${APP.ROUTES.ORDER}${APP.ROUTES.REQUEST_ID}${APP.ROUTES.PARTNER_ID}`,
+        loadComponent: () => import('./component/pages/order-detail/order-detail.component').then(c => c.OrderDetailComponent),
         canActivate: [AuthGuard]
       },
       {
@@ -60,6 +65,41 @@ export const routes: Routes = [
       {
         path: `${APP.ROUTES.VIEW_TICKET_DETAILS}${APP.ROUTES.PARTNER_ID}${APP.ROUTES.ISSUE_ID}`,
         loadComponent: () => import('./component/pages/issue-details/issue-details.component').then(c => c.IssueDetailsComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.MY_LEADS,
+        loadComponent: () => import('./component/pages/banker-leads/banker-leads.component').then(c => c.BankerLeadsComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.COMPLETED_LOANS,
+        loadComponent: () => import('./component/pages/completed-loans/completed-loans.component').then(c => c.CompletedLoansComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.REJECTED_LOANS,
+        loadComponent: () => import('./component/pages/rejected-loans/rejected-loans.component').then(c => c.RejectedLoansComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.MY_LEADS,
+        loadComponent: () => import('./component/pages/banker-leads/banker-leads.component').then(c => c.BankerLeadsComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: `${APP.ROUTES.MY_LEADS}${APP.ROUTES.LOAN_ID}`,
+        loadComponent: () => import('./component/pages/lead-details/lead-details.component').then(c => c.LeadDetailsComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: APP.ROUTES.BANKERS,
+        loadComponent: () => import('./component/pages/bankers/bankers.component').then(c => c.BankersComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: `${APP.ROUTES.BANKERS}${APP.ROUTES.BANKER_ID}`,
+        loadComponent: () => import('./component/pages/bankers-detail/bankers-detail.component').then(c => c.BankersDetailComponent),
         canActivate: [AuthGuard]
       },
       {

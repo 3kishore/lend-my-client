@@ -17,32 +17,6 @@
   
 <ng-template #actionTemplate let-data="data">
   <app-button [button]="manageConfig" class="ml-[12px]" [matMenuTriggerFor]="menu"></app-button>
-  <!-- <span *ngIf="(!data.action) || (data.action && data.loanStatus != 'Pending')" class="text-[13px] leading-[16px] text-[#21333b] dark:text-[white] text-left text-nowra ml-[12px]">NA</span> -->
-  <!-- <mat-menu #menu="matMenu">
-    <ng-template matMenuContent>
-        <div class="flex flex-col gap-[8px] p-[14px] dark:bg-[#1B2B32]">
-          <div class="flex flex-row gap-[4px]" (click)="openModal(data.orderId, true)">
-            <div class="badge-action-component px-[12px] approve text-[white]">
-              {{'Approve'}}
-
-              Application Viewed
-              Executive Assigned
-              Contacted The Client
-              Details Collected
-              Cibil Checked
-              Contacted Bank
-              Sanctioned
-              Deposited
-            </div>
-          </div>
-          <div class="flex flex-row gap-[4px]" (click)="openModal(data.orderId, false)">
-            <div class="badge-action-component px-[12px] reject">
-              {{'Reject'}}
-            </div>
-          </div>
-        </div>
-    </ng-template>
-  </mat-menu> -->
 
   <mat-menu #menu="matMenu">
     <ng-template matMenuContent>
@@ -59,22 +33,13 @@
   </mat-menu>
 </ng-template>
 
-<ng-template #updateBankDetailsTemplate let-data="data">
+<!-- <ng-template #updateBankDetailsTemplate let-data="data">
   <button class="secondary" (click)="updateBankDetails(data)">Update Bank</button>
-</ng-template>
+</ng-template> -->
 
-<ng-template #popupApproveTemplate let-data="data">
-  <div class="m-[10px] max-w-[400px] dark:bg-[#2D4048]">
-    <div class="bg-[#edfcfd] border-solid border-[2px] border-[#d0f9f1] rounded-[6px] p-[12px] text-[15px] font-[500] leading-[24px] text-[#495d6e] dark:text-white dark:bg-[#2D4048]">
-      Please confirm to approve order {{data}}
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #popupRejectTemplate let-data="data">
-  <div class="m-[10px] max-w-[400px] dark:bg-[#2D4048]">
-    <div class="bg-[#fcdfdf] border-solid border-[2px] border-[#fcdfdf] rounded-[6px] p-[12px] text-[15px] font-[500] leading-[24px] text-[#495d6e] dark:text-white dark:bg-[#2D4048]">
-      Please confirm to reject order {{data}}
-    </div>
-  </div>
+<ng-template #requestIdTemplate let-data="data">
+  <a
+    class="sm:text-[9px] md:text-[13px] w-[100%] h-[100%] flex px-[12px] flex-col justify-center text-base-4 text-blue-4 cursor-pointer hover:bg-neutral-8 dark:hover:bg-[#4F6169] dark:text-[#2ec0ff]"
+    [routerLink]="['/order/' + data.requestId + '/' + data.referenceId]"
+  >{{data.requestId}}</a>
 </ng-template>

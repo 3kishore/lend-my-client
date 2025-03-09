@@ -74,8 +74,8 @@ export class AppLayoutComponent implements OnInit {
   }
 
   routeToExecutiveView() {
-    this.selectedMenu = APP.ROUTES.EXECUTIVE_VIEW;
-    this.router.navigate([APP.ROUTES.EXECUTIVE_VIEW]);
+    this.selectedMenu = APP.ROUTES.ORDER;
+    this.router.navigate([APP.ROUTES.ORDER]);
   }
 
   routeToMySupportTicket() {
@@ -83,9 +83,29 @@ export class AppLayoutComponent implements OnInit {
     this.router.navigate([APP.ROUTES.MY_SUPPORT_TICKETS]);
   }
 
+  routeToMyLeads() {
+    this.selectedMenu = APP.ROUTES.MY_LEADS;
+    this.router.navigate([APP.ROUTES.MY_LEADS]);
+  }
+
+  routeToMyCompletedLoans() {
+    this.selectedMenu = APP.ROUTES.COMPLETED_LOANS;
+    this.router.navigate([APP.ROUTES.COMPLETED_LOANS]);
+  }
+
+  routeToMyRejectedLoans() {
+    this.selectedMenu = APP.ROUTES.REJECTED_LOANS;
+    this.router.navigate([APP.ROUTES.REJECTED_LOANS]);
+  }
+
   routeToExecutiveSupportTicket() {
     this.selectedMenu = APP.ROUTES.EXECUTIVE_SUPPORT_TICKET;
     this.router.navigate([APP.ROUTES.EXECUTIVE_SUPPORT_TICKET]);
+  }
+
+  routeToBankersPage() {
+    this.selectedMenu = APP.ROUTES.BANKERS;
+    this.router.navigate([APP.ROUTES.BANKERS]);
   }
 
   themeChange(theme: string) {

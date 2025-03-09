@@ -13,6 +13,26 @@ export const API = {
   CREATE_USER: () => {
     return `${API.GET_BASE_URL()}account/create-agent`
   },
+  CREATE_BANKER: () => {
+    return `${API.GET_BASE_URL()}account/create-banker`
+  },
+  GET_BANKERS_LIST: () => {
+    return `${API.GET_BASE_URL()}account/get-bankers`
+  },
+  GET_BANKING_PARTNERS: () => {
+    return `${API.GET_BASE_URL()}account/get-banking-partners`
+  },
+  GET_BANKING_PARTNERS_AND_BANKERS: () => {
+    return `${API.GET_BASE_URL()}account/get-banking-partners-and-bankers`
+  },
+  ASSIGN_BANKER: () => {
+    return `${API.GET_BASE_URL()}user/assign-banker`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_ASSIGNED_BANKERS: () => {
+    return `${API.GET_BASE_URL()}user/get-assigned-bankers`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
   RESET_PASSWORD_REQUEST: () => {
     return `${API.GET_BASE_URL()}account/request-to-password-reset`
   },
@@ -42,6 +62,14 @@ export const API = {
     return `${API.GET_BASE_URL()}account/get-ticket-details`;
     // return 'https://jsonplaceholder.typicode.com/posts';
   },
+  GET_BANKER_DETAILS: () => {
+    return `${API.GET_BASE_URL()}account/get-banker-details`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_ASSIGNED_CUSTOMER_OF_BANKER: () => {
+    return `${API.GET_BASE_URL()}user/get-assigned-customer-of-banker`;
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
   LOGOUT: () => {
     return `${API.GET_BASE_URL()}posts`
   },
@@ -50,6 +78,22 @@ export const API = {
   },
   GET_ALL_LOAN_REQUESTS: () => {
     return `${API.GET_BASE_URL()}user/get-all-loan-requests`
+  },
+  GET_MY_LEADS: () => {
+    return `${API.GET_BASE_URL()}user/get-my-leads`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_COMPLETED_LOANS: () => {
+    // return `${API.GET_BASE_URL()}user/get-completed-loans`
+    return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_REJECTED_LOANS: () => {
+    // return `${API.GET_BASE_URL()}user/get-rejected-loans`
+    return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_LOAN_DETAILS: () => {
+    return `${API.GET_BASE_URL()}user/get-loan-details`
+    // return 'https://jsonplaceholder.typicode.com/posts';
   },
   UPDATE_LOAN_STATUS: () => {
     return `${API.GET_BASE_URL()}user/update-loan-status`
@@ -62,6 +106,12 @@ export const API = {
   },
   GET_CUSTOMER_DETAILS: () => {
     return `${API.GET_BASE_URL()}user/get-client-details`
+  },
+  GET_ORDER_DETAILS: () => {
+    return `${API.GET_BASE_URL()}user/get-order-details`
+  },
+  UPDATE_LOAN_DETAILS: () => {
+    return `${API.GET_BASE_URL()}user/update-loan-details`
   },
   CHANGE_APPLICATIONS_STATUS: () => {
     return `${API.GET_BASE_URL()}posts`

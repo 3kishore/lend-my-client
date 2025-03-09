@@ -68,6 +68,14 @@
                     <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Create Partner</span>
                 </div>
             </div>
+            <div class="px-[16px] py-[6px]" *ngIf="userRole === 'sales-executive'">
+                <div
+                    class="w-full h-[32px] py-[10px] px-[12px] bg-[#e8edfa] flex items-center justify-center rounded-[4px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]"
+                    (click)="createBanker()"
+                >
+                    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Create Banker</span>
+                </div>
+            </div>
         </div>
     </ng-template>
 </mat-menu>

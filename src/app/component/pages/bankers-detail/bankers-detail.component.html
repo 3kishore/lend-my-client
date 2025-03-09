@@ -1,0 +1,107 @@
+<div class="py-[36px]">
+  <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="back()">
+    <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">< Back</span>
+  </div>
+  <div class="flex flex-row justify-between gap-sm flex-wrap items-center">
+    <span class="text-[26px] leading-[26px] font-[500] text-[#090d1b] dark:text-white">Banker Detail</span>
+    <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="refresh()">
+      <div class="w-[12px] h-[12px]">
+        <svg viewBox="0 0 36 36" class="dark:stroke-[#2FC0FF] dark:fill-[#2FC0FF] stroke-[#2054ff] fill-[#2054ff]" xmlns="http://www.w3.org/2000/svg"><path d="M22.4,11.65a1.09,1.09,0,0,0,1.09,1.09H34.43V1.81a1.09,1.09,0,1,0-2.19,0V8.95a16.41,16.41,0,1,0,1.47,15.86,1.12,1.12,0,0,0-2.05-.9,14.18,14.18,0,1,1-1.05-13.36H23.5A1.09,1.09,0,0,0,22.4,11.65Z"></path></svg>
+      </div>
+      <span class="text-[#2054ff] sm:text-[10px] md:text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">Refresh</span>
+    </div>
+  </div>
+  <div>
+    <div class="flex flex-wrap gap-sm items-center" *ngIf="refreshFailed">
+      <!-- <label class="text-sm w-[220px] font-semibold dark:text-white"></label> -->
+      <div class="md:min-w-[220px] md:max-w-[500px] md:grow w-full grow ml-[18px]">
+        <div class="banner-danger w-full">
+          <!-- {{message}} -->
+            Unable to fetch issues details.
+        </div>
+      </div>
+    </div>
+
+    <div class="md:mt-[20px] lg:min-w-[420px]">
+      <div class="border-[2px] h-[240px] w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1" *ngIf="isLoading">
+        <div id="pause-grid-loader" class="flex items-center justify-center">
+          <div id="spinner-grid-loader"></div>
+        </div>
+      </div>
+      <div class="border-[2px] h-full w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1 flex flex-row flex-wrap sm:gap[6px]" *ngIf="!isLoading && bankerDetails">
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Name :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.firstName}} {{bankerDetails.lastName}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Bank Name :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.bankName}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Bank Employee ID :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.employeeId}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">LMC Banker ID :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.employeeId}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Zone :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.zone}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Branch :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.branch}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Designation :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.designation}}</span>
+        </div>
+
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Office Email ID :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.officialEmail}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Personal Mail ID:</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.email}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Personal Mobile No :</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.phoneNo}}</span>
+        </div>
+
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Assigned Loans:</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.assignedLoans}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Desposed Loans:</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.desposedLoans}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Inprogress Loans:</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.inprogressLoans}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Rejected Loans:</span>
+          <span class="text-[14px] font-[400] text-[#1B2B32] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{bankerDetails.rejectedLoans}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:mt-[24px] sm:mt-sm">
+      <app-server-side-grid
+        [config]="gridConfig"
+        [isLoading]="gridLoading"
+        (getFilters)="onGridAction($event)"
+        (getSortValue)="onGridAction($event)"
+        (getPreviousPage)="onGridAction($event)"
+        (getNextPage)="onGridAction($event)"
+        (getPageSize)="onGridAction($event)"
+        (onGridRefresh)="onGridAction($event)"
+      ></app-server-side-grid>
+    </div>
+  </div>
+</div>
+  

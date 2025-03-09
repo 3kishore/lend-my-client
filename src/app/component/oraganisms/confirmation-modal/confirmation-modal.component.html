@@ -1,0 +1,20 @@
+<div class="p-xl">
+  <div class="flex flex-col gap-md">
+    <ng-container
+      [ngTemplateOutlet]="data.contentTemplate? data.contentTemplate : defaultContentTemplate"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="data.actionTemplate? data.actionTemplate : defaultActionTemplate"
+    ></ng-container>
+  </div>
+</div>
+
+<ng-template #defaultContentTemplate>
+  <div class="alert alert-success h-[250px] w-[270px]">Are sure want to save the changes</div>
+</ng-template>
+<ng-template #defaultActionTemplate>
+  <div class="flex flex-wrap gap-md justify-end">
+    <app-button [button]="cancelBtnConfig" (buttonClicked)="onCancel()"></app-button>
+    <app-button [button]="confirmBtnConfig" (buttonClicked)="onConfirm()"></app-button>
+  </div>
+</ng-template>

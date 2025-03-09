@@ -14,38 +14,103 @@ export class ClientDetailsConfigService {
   constructor(
     private accountService: AccountService,
     private commonHelperService: CommonHelperService,
-    private loanService: LoanApplicationsService
+    private loanService: LoanApplicationsService,
   ) {}
 
-  initializeGidConfig() {
+  initializeGidConfig(bankerNameTemplate: TemplateRef<any>) {
     let gridConfig: IServerSideGrid = {
       columns: [
         {
           label: 'Bank',
-          field: 'bank',
+          field: 'bankName',
           hideFilter: false,
-          filterField: 'bank',
+          filterField: 'bankName',
           filterType: EGridFilterType.STRING
         },
         {
-          label: 'Amount Offered',
-          field: 'amountOffered',
+          label: 'Maximun Loan Amount',
+          field: 'maxLoanAmount',
           hideFilter: false,
           isSortable: false,
-          filterField: 'amountOffered',
+          filterField: 'maxLoanAmount',
           filterType: EGridFilterType.NUMBER,
           numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
           customClass: 'justify-end'
         },
         {
           label: 'Interest Rate',
-          field: 'interestRate',
+          field: 'rateOfInterest',
           hideFilter: false,
           isSortable: false,
-          filterField: 'interestRate',
+          filterField: 'rateOfInterest',
           filterType: EGridFilterType.NUMBER,
           numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
           customClass: 'justify-end'
+        },
+        {
+          label: 'Maximum Loan Tenure',
+          field: 'maxLoanTenure',
+          hideFilter: false,
+          isSortable: false,
+          filterField: 'maxLoanTenure',
+          filterType: EGridFilterType.NUMBER,
+          numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
+          customClass: 'justify-end'
+        },
+        {
+          label: 'EMI Per Month',
+          field: 'emiPerMonth',
+          hideFilter: false,
+          isSortable: false,
+          filterField: 'emiPerMonth',
+          filterType: EGridFilterType.NUMBER,
+          numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
+          customClass: 'justify-end'
+        },
+        {
+          label: 'Max FOIR',
+          field: 'maxFoir',
+          hideFilter: false,
+          isSortable: false,
+          filterField: 'maxFoir',
+          filterType: EGridFilterType.NUMBER,
+          numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
+          customClass: 'justify-end'
+        },
+        {
+          label: 'Processing FEE',
+          field: 'processingFee',
+          hideFilter: false,
+          isSortable: false,
+          filterField: 'processingFee',
+          filterType: EGridFilterType.NUMBER,
+          numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
+          customClass: 'justify-end'
+        },
+        {
+          label: 'Other Charges',
+          field: 'otherCharges',
+          hideFilter: false,
+          isSortable: false,
+          filterField: 'otherCharges',
+          filterType: EGridFilterType.NUMBER,
+          numericFilter: APP.NUMERIC_fILTER_OPTIONS[0],
+          customClass: 'justify-end'
+        },
+        {
+          label: 'Advantages',
+          field: 'advantage',
+          hideFilter: false,
+          isSortable: false,
+          filterField: 'advantage',
+          filterType: EGridFilterType.STRING
+        },
+        {
+          label: 'Status',
+          field: 'loanStatus',
+          hideFilter: false,
+          filterField: 'loanStatus',
+          filterType: EGridFilterType.STRING
         }
       ],
       data: [],
@@ -56,9 +121,7 @@ export class ClientDetailsConfigService {
       total: 0,
       pageNumber: 1,
       isFiltered: false,
-      // uniqueFieldOfData: 'orderId',
-      isSelectable: false,
-      // expandableRows: true
+      isSelectable: false
     }
     return gridConfig;
   }
@@ -77,8 +140,22 @@ export class ClientDetailsConfigService {
     return chartConfig;
   }
 
-  getCustomerDetails(data: any) {
-    return this.accountService.getCustomerDetails(data).pipe(
+  getOrderDetails(data: any) {
+    return this.accountService.getOrderDetails(data).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  assignBanker(data: any) {
+    return this.accountService.assignBanker(data).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  getAssignedBanker(data: any) {
+    return this.accountService.getAssignedBankers(data).pipe(
       map(resp => resp),
       catchError(err => err)
     )
