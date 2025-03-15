@@ -17,7 +17,7 @@ export class OrderDetailConfigService {
     private loanService: LoanApplicationsService,
   ) {}
   
-  initializeGidConfig(bankerNameTemplate: TemplateRef<any>) {
+  initializeGidConfig(bankerNameTemplate: TemplateRef<any>, actionOnProposalTemplate: TemplateRef<any>) {
     let gridConfig: IServerSideGrid = {
       columns: [
         {
@@ -119,6 +119,14 @@ export class OrderDetailConfigService {
           hideFilter: false,
           filterField: 'loanStatus',
           filterType: EGridFilterType.STRING
+        },
+        {
+          label: 'Action',
+          field: 'action',
+          hideFilter: true,
+          filterField: 'action',
+          filterType: EGridFilterType.STRING,
+          cellTemplate: actionOnProposalTemplate
         }
       ],
       data: [],
@@ -181,6 +189,20 @@ export class OrderDetailConfigService {
     return this.loanService.changeApplicationStatus(data).pipe(
       map(resp => resp),
       catchError((err) => err)
+    )
+  }
+
+  rejectBankerProposal(data: any) {
+    return this.accountService.rejectBankerProposal(data).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
+
+  acceptBankerProposal(data: any) {
+    return this.accountService.acceptBankerProposal(data).pipe(
+      map(resp => resp),
+      catchError(err => err)
     )
   }
 }

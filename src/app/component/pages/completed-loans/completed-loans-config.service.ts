@@ -75,8 +75,8 @@ export class CompletedLoansConfigService {
     return gridConfig;
   }
   
-  getCompletedLoan(gridActionData: IServerSideGridRefreshEvent, overAllSearch: any, params: any) {
-    let payload = this.commonHelperService.getGridPayload(gridActionData, overAllSearch, params);
+  getCompletedLoan(payload: any) {
+    // let payload = this.commonHelperService.getGridPayload(gridActionData, overAllSearch, params);
     return this.loanStatus.getCompletedLoan(payload).pipe(
       map(resp => resp),
       catchError((err) => err)

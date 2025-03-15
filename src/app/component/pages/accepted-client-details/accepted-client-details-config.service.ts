@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AccountService } from '../../../services/api/account.service';
-import { LoanApplicationsService } from '../../../services/api/loan-applications.service';
 import { catchError, map } from 'rxjs';
+import { LoanApplicationsService } from '../../../services/api/loan-applications.service';
+import { AccountService } from '../../../services/api/account.service';
 import { IButton } from '../../atoms/button/button.interface';
 import { EButtonType } from '../../atoms/button/button-type.enum';
 
 @Injectable()
-export class LeadDetailsConfigService {
+export class AcceptedClientDetailsConfigService {
 
   constructor(
     private loanService: LoanApplicationsService,
@@ -36,15 +36,15 @@ export class LeadDetailsConfigService {
     )
   }
 
-  updateLoanDetails(data: any) {
-    return this.accountService.updateLoanDetails(data).pipe(
+  updateDesposementStatus(data: any) {
+    return this.accountService.updateDesposementStatus(data).pipe(
       map(resp => resp),
       catchError(err => err)
     )
   }
 
-  rejectLoan(data: any) {
-    return this.accountService.rejectLoan(data).pipe(
+  updateLoanDetails(data: any) {
+    return this.accountService.updateLoanDetails(data).pipe(
       map(resp => resp),
       catchError(err => err)
     )

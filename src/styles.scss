@@ -267,6 +267,19 @@ input:focus-visible {
           @apply bg-red-dark;
       }
   }
+  &.success{
+    @apply bg-green text-white;
+    &:disabled {
+        @apply bg-neutral-6;
+
+        &:hover{
+            @apply  bg-neutral-6;
+        }
+            }
+    &:hover{
+        @apply bg-green-dark;
+    }
+  }
   &:disabled {
       @apply bg-neutral-6;
 

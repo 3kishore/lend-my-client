@@ -33,6 +33,14 @@ export const API = {
     return `${API.GET_BASE_URL()}user/get-assigned-bankers`
     // return 'https://jsonplaceholder.typicode.com/posts';
   },
+  REJECT_BANKER_PROPOSAL: () => {
+    return `${API.GET_BASE_URL()}user/reject-banker-proposal`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  ACCEPT_BANKER_PROPOSAL: () => {
+    return `${API.GET_BASE_URL()}user/accept-banker-proposal`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
   RESET_PASSWORD_REQUEST: () => {
     return `${API.GET_BASE_URL()}account/request-to-password-reset`
   },
@@ -84,15 +92,19 @@ export const API = {
     // return 'https://jsonplaceholder.typicode.com/posts';
   },
   GET_COMPLETED_LOANS: () => {
-    // return `${API.GET_BASE_URL()}user/get-completed-loans`
-    return 'https://jsonplaceholder.typicode.com/posts';
+    return `${API.GET_BASE_URL()}user/get-completed-loans`
+    // return 'https://jsonplaceholder.typicode.com/posts';
   },
   GET_REJECTED_LOANS: () => {
-    // return `${API.GET_BASE_URL()}user/get-rejected-loans`
-    return 'https://jsonplaceholder.typicode.com/posts';
+    return `${API.GET_BASE_URL()}user/get-rejected-loans`
+    // return 'https://jsonplaceholder.typicode.com/posts';
   },
   GET_LOAN_DETAILS: () => {
     return `${API.GET_BASE_URL()}user/get-loan-details`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
+  GET_ACCEPTED_LOANS: () => {
+    return `${API.GET_BASE_URL()}user/get-accepted-loans`
     // return 'https://jsonplaceholder.typicode.com/posts';
   },
   UPDATE_LOAN_STATUS: () => {
@@ -110,8 +122,14 @@ export const API = {
   GET_ORDER_DETAILS: () => {
     return `${API.GET_BASE_URL()}user/get-order-details`
   },
+  UPDATE_DESPOSEMENT_STATUS: () => {
+    return `${API.GET_BASE_URL()}user/update-desposement-status`
+  },
   UPDATE_LOAN_DETAILS: () => {
     return `${API.GET_BASE_URL()}user/update-loan-details`
+  },
+  REJECT_LOAN: () => {
+    return `${API.GET_BASE_URL()}user/reject-my-lead`
   },
   CHANGE_APPLICATIONS_STATUS: () => {
     return `${API.GET_BASE_URL()}posts`

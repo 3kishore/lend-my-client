@@ -4,7 +4,7 @@ import { APP } from '../../../utils/constants/APP.const';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../atoms/button/button.component';
 import { IButton } from '../../atoms/button/button.interface';
 import { ConfirmationModalComponent } from '../../oraganisms/confirmation-modal/confirmation-modal.component';
@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-lead-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, ConfirmationModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ButtonComponent, ConfirmationModalComponent],
   providers: [LeadDetailsConfigService],
   templateUrl: './lead-details.component.html',
   styleUrl: './lead-details.component.scss'
@@ -35,7 +35,9 @@ export class LeadDetailsComponent {
 
   updateLoanDetailsBtn: IButton;
 
-  lastestLoanDetails: {maxLoanAmount: string, rateOfInterest: any} = {maxLoanAmount: '', rateOfInterest: ''};
+  isLoanDetailsLoading = true;
+
+  lastestLoanDetails: any = {};
 
   readonly dialog = inject(MatDialog);
 
@@ -52,9 +54,25 @@ export class LeadDetailsComponent {
     isDisabled: false
   };
 
+  rejectBtnConfig: IButton = {
+    id: 'reject',
+    label: 'Reject',
+    type: EButtonType.PRIMARY,
+    customclass: 'danger'
+  }
+
+  proposalBtnConfig: IButton = {
+    id: 'send-proposal',
+    label: 'Send Proposal',
+    type: EButtonType.PRIMARY,
+    customclass: 'success'
+  }
+
   isValueChangeDetected = false;
 
   sessionObj: any;
+
+  loanRejectionReason = '';
 
   private _snackBar = inject(MatSnackBar);
 
@@ -106,11 +124,16 @@ export class LeadDetailsComponent {
   }
 
   getLoanDetails() {
+    this.isLoanDetailsLoading = true;
     this.component$.add(
       this.component$.add(
         this.config.getLaonDetails({requestId: this.queryParams.loanId, bankerId: this.sessionObj.userDetail.userId}).subscribe({
           next: (resp: any) => {
+            this.isLoanDetailsLoading = false;
             if(resp.status) {
+              // resp.content.loanStatus = 'details updated';
+              // resp.content.clientStatus = 'rejected';
+              this.lastestLoanDetails = resp.content;
               this.loanDetails.patchValue({
                 maxLoanAmount: resp.content.maxLoanAmount,
                 rateOfInterest: resp.content.rateOfInterest,
@@ -123,6 +146,8 @@ export class LeadDetailsComponent {
               })
               this.loanDetails.updateValueAndValidity();
             }
+          }, error: (err) => {
+            this.isLoanDetailsLoading = false;
           }
         })
       )
@@ -130,7 +155,7 @@ export class LeadDetailsComponent {
   }
 
   getOrderDetails() {
-    this.customerDetailsLoader = false;
+    this.customerDetailsLoader = true;
     this.component$.add(
       this.config.getOrderDetails({requestId: this.queryParams.loanId}).subscribe({
         next: (resp: any) => {
@@ -173,14 +198,42 @@ export class LeadDetailsComponent {
     })
   }
 
+  sendProposal() {
+    this.lastestLoanDetails.loanStatus = 'update loan detail';
+  }
+
+  rejectLoan() {
+    this.loanRejectionReason = '';
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {hasBackdrop: true, data: {contentTemplate: this.alertContentTemplate}});
+    dialogRef.afterClosed().subscribe({
+      next: (resp) => {
+        if(resp) {
+          const payload = {
+            loanId: this.queryParams.loanId,
+            bankerId: this.sessionObj.userDetail.userId,
+            reasonForRejection: !this.loanRejectionReason ? 'Banker rejects your loan' : this.loanRejectionReason
+          }
+          console.log(payload)
+          this.component$.add(
+            this.config.rejectLoan(payload).subscribe({
+              next: (resp) => {
+                if(resp.status) {
+                  this._snackBar.open('Status has been updated successfully.', '', {panelClass: ['success-snackbar'], duration: 6000});
+                } else {
+                  this._snackBar.open('Failed to updated the status.', '', {panelClass: ['danger-snackbar'], duration: 6000});
+                }
+              }, error: (err) => {
+                this._snackBar.open('Failed to updated the status.', '', {panelClass: ['danger-snackbar'], duration: 6000});
+              }
+            })
+          )
+        }
+      }
+    })
+  }
+
   closeDialog() {
     this.dialog.closeAll();
   }
   
 }
-
-['loanId', 'bankerId', 'maxLoanAmount', 'rateOfInterest', 'maxLoanTenure', 'emiPerMonth', 'maxFoir', 'processingFee',
-  'otherCharges', 'advantage']
-
-// {"maxLoanAmount":"0134","rateOfInterest":"45","maxLoanTenure":"55","emiPerMonth":"767567","maxFoir":"6757","processingFee":"6757",
-//   "otherCharges":"868768","advantage":"","loanId":"889325e3-795d-55da-b0a6-9b904ac4d00d","bankerId":"BK-1003660"}

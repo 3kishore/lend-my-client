@@ -87,37 +87,13 @@
   </div>
 </div>
 
-<ng-template #bankerNameTemplate let-data="data">
-  <a
-    class="sm:text-[9px] md:text-[13px] w-[100%] h-[100%] flex px-[12px] flex-col justify-center text-base-4 text-blue-4 cursor-pointer hover:bg-neutral-8 dark:hover:bg-[#4F6169] dark:text-[#2ec0ff]"
-    [routerLink]="['/bankers/' + data.bankerId]"
-  >{{data.bankerName}}</a>
-</ng-template>
-<!-- <div class="sm:mt-[20px] lg:mt-0 md:p-[20px] lg:min-w-[520px] rounded-[8px] card1 lg:w-[60%] flex flex-col gap-[8px]">
-  <div class="min-w-[500px] relative">
-    <div>
-      <div class="text-sm font-semibold pb-[16px] dark:text-white">Level 1:</div>
-      <div class="w-full flex pl-[12px]">
-        <div class="relative flex flex-col gap-md w-[52px]" [ngClass]="{'ml-[-3px]': i > 0}" *ngFor="let stage of levelOne; let i=index">
-          <div class="sm:text-[9px] lg:text-sm text-[#090d1b] font-semibold rotate-[-25deg] mb-[22px] dark:text-white ">{{stage.label}}</div>
-          <div class="flex relative">
-            <div class="absolute w-[8px] h-[8px] top-[-2px] rounded-full" [ngClass]="stage.isCompleted ? 'bg-green-dark' : 'bg-gray-300'"></div>
-            <div class="w-full rounded-l-full grow h-[4px]" [ngClass]="stage.isCompleted ? 'bg-green-2' : 'bg-[#d1d5db8c]'" *ngIf="(levelOne.length - 1) !== i"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="text-sm font-semibold pt-[12px] pb-[16px] dark:text-white">Level 2:</div>
-      <div class="w-full flex pl-[12px]">
-        <div class="relative flex flex-col gap-md w-[52px]" [ngClass]="{'ml-[-3px]': i > 0}" *ngFor="let stage of levelTwo; let i=index">
-          <div class="sm:text-[9px] lg:text-sm text-[#090d1b] font-semibold rotate-[-25deg] mb-[22px] dark:text-white">{{stage.label}}</div>
-          <div class="flex relative">
-            <div class="absolute w-[8px] h-[8px] top-[-2px] rounded-full" [ngClass]="stage.isCompleted ? 'bg-green-dark' : 'bg-gray-300'"></div>
-            <div class="w-full rounded-l-full grow h-[4px]" [ngClass]="stage.isCompleted ? 'bg-green-2' : 'bg-[#d1d5db8c]'" *ngIf="(levelTwo.length - 1) !== i"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+<ng-template #actionOnProposalTemplate let-data="data">
+  
+  <div class="flex gap-sm" *ngIf="data?.loanStatus?.toLowerCase() === 'details updated'">
+    <app-button [button]="rejectBtnConfig" (buttonClicked)="recjectProposal(data)"></app-button>
+    <app-button [button]="acceptBtnConfig" (buttonClicked)="acceptBankerProposal(data)"></app-button>
   </div>
-</div> -->
+  <div *ngIf="data?.loanStatus?.toLowerCase() !== 'details updated'">
+    {{data.loanStatus?.toLowerCase()}}
+  </div>
+</ng-template>

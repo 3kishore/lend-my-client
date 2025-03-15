@@ -53,16 +53,23 @@ export class LoanApplicationsService {
     );
   }
 
+  getAcceptedLoans(payload: any) {
+    return this.http.post(API.GET_ACCEPTED_LOANS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
   getCompletedLoan(payload: any) {
     return this.http.post(API.GET_COMPLETED_LOANS(), payload).pipe(
-      map(resp => MOCK_DATA.GET_MY_LEADS_LIST),
+      map(resp => resp),
       catchError(err => err)
     );
   }
 
   getRejectedLoan(payload: any) {
     return this.http.post(API.GET_REJECTED_LOANS(), payload).pipe(
-      map(resp => MOCK_DATA.GET_MY_LEADS_LIST),
+      map(resp => resp),
       catchError(err => err)
     );
   }

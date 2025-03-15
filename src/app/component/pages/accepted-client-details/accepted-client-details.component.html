@@ -4,7 +4,7 @@
     </div>
     <div class="flex flex-wrap justify-between sm:items-start md:items-center gap-[12px] sm:flex-col md:flex-row">
       <span class="text-[26px] w-fit leading-[26px] font-[500] text-[#090d1b] dark:text-white">
-        Order Detail
+        Accepetd Client Detail
       </span>
       <div class="h-[32px] py-[10px] px-[12px] bg-[#e8edfa] w-fit flex items-center justify-center rounded-[4px] mb-[14px] cursor-pointer gap-[8px] dark:bg-[#2D4048] dark:border-[1px] dark:border-solid dark:border-[#2FC0FF]" (click)="refresh()">
         <div class="w-[12px] h-[12px]">
@@ -14,6 +14,23 @@
       </div>
     </div>
     <div class="flex flex-col flex-wrap md:mt-[24px]">
+      
+      <app-button [button]="manageConfig" class="ml-[12px]" [matMenuTriggerFor]="menu"></app-button>
+      <mat-menu #menu="matMenu">
+        <ng-template matMenuContent>
+            <div class="flex flex-col gap-[8px] p-[14px] dark:bg-[#1B2B32]">
+              <div
+                class="flex flex-row gap-[4px] py-sm px-xs bg-slate-100 cursor-pointer text-sm hover:bg-slate-200 rounded justify-center"
+                *ngFor="let action of actionList"
+                (click)="updateDesposementStatus(action)"
+              >
+                {{action}}
+              </div>
+            </div>
+        </ng-template>
+      </mat-menu>
+
+
       <div class="md:mt-[20px] lg:min-w-[420px]">
         <div class="border-[2px] h-full w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1" *ngIf="customerDetailsLoader">
           <div id="pause-grid-loader" class="flex items-center justify-center">
@@ -56,54 +73,44 @@
           </div>
         </div>
       </div>
-      <div class="sm:mt-[20px] md:pt-md lg:mt-0 lg:min-w-[520px] rounded-[8px] card1 lg:w-[60%] flex flex-col gap-[8px]">
-        <div class="min-w-[500px] relative">
-          <div>
-            <!-- <div class="text-md font-semibold pb-[28px] dark:text-white">Level 1:</div> -->
-            <div class="w-full flex pt-[18px] pl-[24px]">
-              <div class="relative flex flex-col gap-[18px] grow" [ngClass]="{'ml-[-3px]': i > 0}" *ngFor="let stage of levelOne; let i=index">
-                <div class="text-sm text-[#090d1b] font-semibold rotate-[-25deg] mb-[22px] dark:text-white">{{stage.label}}</div>
-                <div class="flex relative">
-                  <div class="absolute w-[16px] h-[16px] top-[-2px] rounded-full" [ngClass]="stage.isCompleted ? 'bg-green-dark' : 'bg-gray-300'"></div>
-                  <div class="w-full rounded-l-full grow h-[12px]" [ngClass]="stage.isCompleted ? 'bg-green-2' : 'bg-[#d1d5db8c]'" *ngIf="(levelOne.length - 1) !== i"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+    </div>
+    <div class="mt-lg">
+      <h1 class="text-md font-bold">Update Loan Details:</h1>
+      <div class="border-[2px] w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1 flex flex-row flex-wrap sm:gap[6px] md:gap-sm" *ngIf="!customerDetailsLoader && loanDetails">
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Maximum Loan Amount Offered :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{loanDetails.maxLoanAmount}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Rate Of Interest :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{loanDetails.rateOfInterest}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Maximum Loan Tenure :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{loanDetails.maxLoanTenure}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">EMI per month :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{loanDetails.emiPerMonth}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Maximum FOIR :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{loanDetails.maxFoir}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Processing Fee :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{!loanDetails.processingFee}}</span>
+        </div>
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Other Charges :</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{loanDetails.otherCharges}}</span>
+        </div>
+
+        <div class="flex flex-wrap sm:flex-col w-[200px]">
+          <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Proposal to the client:</span>
+          <span class="text-[14px] font-[400] text-[#586064] dark:text-white sm:p-[8px] md:p-0 !pl-sm">{{!loanDetails.advantage ? 'NA' : loanDetails.advantage}}</span>
         </div>
       </div>
     </div>
-    <div class="my-[12px] flex justify-end">
-      <app-button [button]="assignUser" (buttonClicked)="assignBankExecutive()"></app-button>
-    </div>
-    <div>
-      <app-server-side-grid
-        [config]="gridConfig"
-        [isLoading]="gridLoading"
-        (getFilters)="onGridAction($event)"
-        (getSortValue)="onGridAction($event)"
-        (getPreviousPage)="onGridAction($event)"
-        (getNextPage)="onGridAction($event)"
-        (getPageSize)="onGridAction($event)"
-        (onGridRefresh)="onGridAction($event)"
-    ></app-server-side-grid>
-    </div>
-  </div>
+</div>
   
-<ng-template #bankerNameTemplate let-data="data">
-    <a
-      class="sm:text-[9px] md:text-[13px] w-[100%] h-[100%] flex px-[12px] flex-col justify-center text-base-4 text-blue-4 cursor-pointer hover:bg-neutral-8 dark:hover:bg-[#4F6169] dark:text-[#2ec0ff]"
-      [routerLink]="['/bankers/' + data.bankerId]"
-    >{{data.bankerName}}</a>
-</ng-template>
-
-<ng-template #actionOnProposalTemplate let-data="data">
-  
-  <div class="flex gap-sm" *ngIf="data?.loanStatus?.toLowerCase() === 'details updated'">
-    <app-button [button]="rejectBtnConfig" (buttonClicked)="recjectProposal(data)"></app-button>
-    <app-button [button]="acceptBtnConfig" (buttonClicked)="acceptBankerProposal(data)"></app-button>
-  </div>
-  <div *ngIf="data?.loanStatus?.toLowerCase() !== 'details updated'">
-    {{data.loanStatus?.toLowerCase()}}
-  </div>
-</ng-template>

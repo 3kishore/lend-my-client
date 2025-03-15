@@ -54,6 +54,14 @@ export class RejectedLoansConfigService {
           filterType: EGridFilterType.STRING
         },
         {
+          label: 'Reason For Rejection',
+          field: 'reasonForRejection',
+          hideFilter: true,
+          isSortable: true,
+          filterField: 'reasonForRejection',
+          filterType: EGridFilterType.STRING
+        },
+        {
           label: 'Date of assignment',
           field: 'date',
           hideFilter: true,
@@ -75,9 +83,9 @@ export class RejectedLoansConfigService {
     return gridConfig;
   }
   
-  getCompletedLoan(gridActionData: IServerSideGridRefreshEvent, overAllSearch: any, params: any) {
-    let payload = this.commonHelperService.getGridPayload(gridActionData, overAllSearch, params);
-    return this.loanStatus.getCompletedLoan(payload).pipe(
+  getRejectedLoan(payload: any) {
+    // let payload = this.commonHelperService.getGridPayload(gridActionData, overAllSearch, params);
+    return this.loanStatus.getRejectedLoan(payload).pipe(
       map(resp => resp),
       catchError((err) => err)
     )

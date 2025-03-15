@@ -1,45 +1,47 @@
-import { Component } from '@angular/core';
-import { RejectedLoansConfigService } from './rejected-loans-config.service';
-import { CommonModule } from '@angular/common';
-import { ServerSideGridComponent } from '../../oraganisms/server-side-grid/server-side-grid.component';
-import { APP } from '../../../utils/constants/APP.const';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { IServerSideGridRefreshEvent } from '../../oraganisms/server-side-grid/IServerSideGridRefreshEvent';
-import { Router } from '@angular/router';
-import { CompletedLoansConfigService } from '../completed-loans/completed-loans-config.service';
-import { CommonHelperService } from '../../../utils/helpers/common-helper.service';
+import { APP } from '../../../utils/constants/APP.const';
+import { AcceptedLoansConfigService } from './accepted-loans-config.service';
 import { IServerSideGrid } from '../../oraganisms/server-side-grid/IServerSideGrid';
 import { Subscription } from 'rxjs';
+import { Router, RouterModule } from '@angular/router';
+import { CommonHelperService } from '../../../utils/helpers/common-helper.service';
+import { ServerSideGridComponent } from '../../oraganisms/server-side-grid/server-side-grid.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-rejected-loans',
+  selector: 'app-accepted-loans',
   standalone: true,
-  imports: [CommonModule, ServerSideGridComponent],
-  providers: [RejectedLoansConfigService],
-  templateUrl: './rejected-loans.component.html',
-  styleUrl: './rejected-loans.component.scss'
+  imports: [CommonModule, ServerSideGridComponent, RouterModule],
+  providers: [AcceptedLoansConfigService],
+  templateUrl: './accepted-loans.component.html',
+  styleUrl: './accepted-loans.component.scss'
 })
-export class RejectedLoansComponent {
+export class AcceptedLoansComponent {
 
   gridConfig!: IServerSideGrid;
+
+  @ViewChild('requestIdTemplate', { static: true })
+  public requestIdTemplate: TemplateRef<any>;
 
   component$ = new Subscription();
 
   gridActionData: IServerSideGridRefreshEvent;
 
-  gridLoading: boolean = true;
+  gridLoading: boolean;
 
   sessionObj;
 
   constructor(
     private router: Router,
-    private configService: RejectedLoansConfigService,
+    private configService: AcceptedLoansConfigService,
     private commonService: CommonHelperService
   ) {
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
   }
 
   ngOnInit(): void {
-    this.gridConfig = this.configService.initializeGidConfig();
+    this.gridConfig = this.configService.initializeGidConfig(this.requestIdTemplate);
     this.gridActionData = {
       filters: [],
       sort: {
@@ -50,20 +52,23 @@ export class RejectedLoansComponent {
       pageNo: this.gridConfig.pageNumber
     }
     this.gridConfig.selectedPageSize = 10;
-    this.getCompletedLoan();
+    this.getAcceptedLoans();
   }
 
-  getCompletedLoan() {
-    this.gridLoading = true;
+  getAcceptedLoans() {
+    this.gridLoading = true
+    console.log(this.sessionObj, this.sessionObj.userId)
     const payload = {
       bankerId: this.sessionObj.userDetail.userId
     }
     this.component$.add(
-      this.configService.getRejectedLoan(payload).subscribe({
+      this.configService.getAcceptedLoans(payload).subscribe({
         next: (resp: any) =>  {
-          this.gridLoading = false;
           this.gridConfig.data = resp.content;
           this.gridConfig.total = resp.totalElement;
+          setTimeout(() => {
+            this.gridLoading = false;
+          }, 100);
         },
         error: (err) =>  {
           this.gridLoading = false
@@ -75,7 +80,7 @@ export class RejectedLoansComponent {
 
   onGridAction(event: IServerSideGridRefreshEvent) {
     this.gridActionData = event;
-    this.getCompletedLoan();
+    this.getAcceptedLoans();
   }
 
   backNavigate() {

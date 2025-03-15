@@ -54,8 +54,11 @@ export class CompletedLoansComponent {
 
   getCompletedLoan() {
     this.gridLoading = true
+    const payload = {
+      bankerId: this.sessionObj.userDetail.userId
+    }
     this.component$.add(
-      this.configService.getCompletedLoan(this.gridActionData, {}, {}).subscribe({
+      this.configService.getCompletedLoan(payload).subscribe({
         next: (resp: any) =>  {
           this.gridConfig.data = resp.content;
           this.gridConfig.total = resp.totalElement;

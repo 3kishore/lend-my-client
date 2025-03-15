@@ -15,7 +15,7 @@
   </div>
   <div class="flex flex-col flex-wrap md:mt-[24px]">
     <div class="md:mt-[20px] lg:min-w-[420px]">
-      <div class="border-[2px] h-full w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1" *ngIf="customerDetailsLoader">
+      <div class="border-[2px] h-[250px] w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1" *ngIf="customerDetailsLoader">
         <div id="pause-grid-loader" class="flex items-center justify-center">
           <div id="spinner-grid-loader"></div>
         </div>
@@ -57,7 +57,33 @@
       </div>
     </div>
   </div>
-  <div class="mt-lg">
+  <div class="border-[2px] mt-lg h-[250px] w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1" *ngIf="isLoanDetailsLoading">
+    <div id="pause-grid-loader" class="flex items-center justify-center">
+      <div id="spinner-grid-loader"></div>
+    </div>
+  </div>
+  <ng-container
+    [ngTemplateOutlet]="
+      lastestLoanDetails?.loanStatus?.toLowerCase() === 'details updated' && lastestLoanDetails?.clientStatus?.toLowerCase() === 'rejected' ?
+        clientRejectionTemplate : bankerAction">
+  </ng-container>
+  <div
+    class="flex flex-wrap gap-sm justify-end mt-lg"
+    *ngIf="!isLoanDetailsLoading && (!lastestLoanDetails?.loanStatus || lastestLoanDetails?.loanStatus?.toLowerCase() === 'pending')"
+  >
+    <app-button [button]="rejectBtnConfig" (buttonClicked)="rejectLoan()"></app-button>
+    <app-button [button]="proposalBtnConfig" (buttonClicked)="sendProposal()"></app-button>
+  </div>
+</div>
+
+<ng-template #clientRejectionTemplate>
+  <div class="badge-component warning w-full mt-lg min-h-8 rounded-md">
+    Client has rejected your offer. And they have accepeted some other offer.
+  </div>
+</ng-template>
+<ng-template #bankerAction>
+  <div class="mt-lg"
+    *ngIf="!isLoanDetailsLoading && (lastestLoanDetails?.loanStatus?.toLowerCase() === 'update loan detail' || lastestLoanDetails?.loanStatus?.toLowerCase() === 'details updated')">
     <h1 class="text-md font-bold">Update Loan Details:</h1>
     <div class="flex flex-col gap-sm" [formGroup]="loanDetails">
       <div class="flex gap-sm">
@@ -205,16 +231,19 @@
       <app-button [button]="updateLoanDetailsBtn" (buttonClicked)="updateLoanDetails()"></app-button>
     </div>
   </div>
-</div>
-
+</ng-template>
 <ng-template #alertContentTemplate>
   <div class="alert alert-danger flex flex-col gap-md h-[230px]">
-    <div class="text-md font-bold">Errors</div>
-    <div class="flex flex-col">
-      <div *ngIf="loanDetails.get('maxLoanAmount').hasError('required')">Amount is required</div>
-      <div *ngIf="loanDetails.get('maxLoanAmount').hasError('minlength')">Amount should be atleast 1000</div>
+    <div class="text-md font-bold">Are you sure want to reject this loan?</div>
+    <div class="w-full">
+      <div>
+        <label class="text-sm">Reason For Rejection (Optional): </label>
+        <textarea
+          class="theme-text-area"
+          [(ngModel)]="loanRejectionReason"
+        ></textarea>
+      </div>
     </div>
-    <div *ngIf="loanDetails.get('rateOfInterest').hasError('required')">Rate of interest is required</div>
   </div>
 </ng-template>
 <ng-template #alertActionTemplate>

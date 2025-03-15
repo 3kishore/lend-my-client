@@ -38,6 +38,20 @@ export class ClientDetailsComponent {
     isActive: true
   }
 
+  rejectBtnConfig: IButton = {
+    id: 'reject',
+    label: 'Reject',
+    type: EButtonType.PRIMARY,
+    customclass: 'danger h-[28px] py-[0] px-[8px]'
+  }
+
+  acceptBtnConfig: IButton = {
+    id: 'accept',
+    label: 'Accept',
+    type: EButtonType.PRIMARY,
+    customclass: 'success h-[28px] py-[0] px-[8px]'
+  }
+
   matDialogRef: MatDialogRef<ModalComponent>;
 
   component$ = new Subscription();
@@ -80,31 +94,12 @@ export class ClientDetailsComponent {
     }
   ]
 
-  // levelTwo = [
-  //   {
-  //     label: "Cibil Checked",
-  //     isCompleted: false
-  //   },
-  //   {
-  //     label: "Contacted Bank",
-  //     isCompleted: false
-  //   },
-  //   {
-  //     label: "Loan Sanctioned",
-  //     isCompleted: false
-  //   },
-  //   {
-  //     label: "Amount Deposited",
-  //     isCompleted: false
-  //   }
-  // ]
-
   readonly dialog = inject(MatDialog);
 
   private _snackBar = inject(MatSnackBar);
 
-  @ViewChild('bankerNameTemplate', { static: true })
-    public bankerNameTemplate: TemplateRef<any>;
+  @ViewChild('actionOnProposalTemplate', { static: true })
+    public actionOnProposalTemplate: TemplateRef<any>;
 
   sessionObj;
 
@@ -125,7 +120,7 @@ export class ClientDetailsComponent {
         console.log(this.queryParams)
       }
     })
-    this.gridConfig = this.configService.initializeGidConfig(this.bankerNameTemplate);
+    this.gridConfig = this.configService.initializeGidConfig(this.actionOnProposalTemplate);
     this.gridActionData = {
       filters: [],
       sort: {
@@ -213,5 +208,48 @@ export class ClientDetailsComponent {
 
   back() {
     this.router.navigate([APP.ROUTES.ORDER]);
+  }
+
+  recjectProposal(data) {
+    console.log(data)
+    const payload = {
+      loanId: data.loanId,
+      bankerId: data.bankerId,
+      reasonForRejection: 'Rejected by the client.'
+    }
+    console.log(payload)
+    this.component$.add(
+      this.configService.rejectBankerProposal(payload).subscribe({
+        next: (resp) => {
+          if(resp.status) {
+            this.getAssignedBanker();
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
+    )
+  }
+
+  acceptBankerProposal(data) {
+    console.log(data)
+    const payload = {
+      loanId: data.loanId,
+      bankerId: data.bankerId
+    }
+    console.log(payload)
+    this.component$.add(
+      this.configService.acceptBankerProposal(payload).subscribe({
+        next: (resp) => {
+          if(resp.status) {
+            this.getAssignedBanker();
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
+    )
   }
 }

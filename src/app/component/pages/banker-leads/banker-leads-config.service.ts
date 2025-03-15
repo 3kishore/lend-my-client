@@ -11,8 +11,7 @@ import { catchError, map } from 'rxjs';
 export class BankerLeadsConfigService {
 
   constructor(
-      private loanStatus: LoanApplicationsService,
-      private commonHelperService: CommonHelperService
+      private loanStatus: LoanApplicationsService
     ) {}
   
   initializeGidConfig(template: TemplateRef<any>) {

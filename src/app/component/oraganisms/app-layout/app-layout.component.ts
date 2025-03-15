@@ -88,6 +88,11 @@ export class AppLayoutComponent implements OnInit {
     this.router.navigate([APP.ROUTES.MY_LEADS]);
   }
 
+  routeToAcceptedLoans() {
+    this.selectedMenu = APP.ROUTES.ACCEPETD_LEADS;
+    this.router.navigate([APP.ROUTES.ACCEPETD_LEADS]);
+  }
+
   routeToMyCompletedLoans() {
     this.selectedMenu = APP.ROUTES.COMPLETED_LOANS;
     this.router.navigate([APP.ROUTES.COMPLETED_LOANS]);

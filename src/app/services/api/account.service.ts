@@ -47,8 +47,22 @@ export class AccountService {
     );
   }
 
+  updateDesposementStatus(payload: any): Observable<any> {
+    return this.http.post(API.UPDATE_DESPOSEMENT_STATUS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
   updateLoanDetails(payload: any): Observable<any> {
     return this.http.post(API.UPDATE_LOAN_DETAILS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  rejectLoan(payload: any): Observable<any> {
+    return this.http.post(API.REJECT_LOAN(), payload).pipe(
       map(resp => resp),
       catchError(err => err)
     );
@@ -63,6 +77,20 @@ export class AccountService {
 
   getAssignedBankers(payload: any): Observable<any> {
     return this.http.post(API.GET_ASSIGNED_BANKERS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  rejectBankerProposal(payload: any): Observable<any> {
+    return this.http.post(API.REJECT_BANKER_PROPOSAL(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  acceptBankerProposal(payload: any): Observable<any> {
+    return this.http.post(API.ACCEPT_BANKER_PROPOSAL(), payload).pipe(
       map(resp => resp),
       catchError(err => err)
     );

@@ -88,6 +88,16 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: APP.ROUTES.ACCEPETD_LEADS,
+        loadComponent: () => import('./component/pages/accepted-loans/accepted-loans.component').then(c => c.AcceptedLoansComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: `${APP.ROUTES.ACCEPETD_LEADS}${APP.ROUTES.LOAN_ID}`,
+        loadComponent: () => import('./component/pages/accepted-client-details/accepted-client-details.component').then(c => c.AcceptedClientDetailsComponent),
+        canActivate: [AuthGuard]
+      },
+      {
         path: `${APP.ROUTES.MY_LEADS}${APP.ROUTES.LOAN_ID}`,
         loadComponent: () => import('./component/pages/lead-details/lead-details.component').then(c => c.LeadDetailsComponent),
         canActivate: [AuthGuard]

@@ -21,6 +21,7 @@ export const APP = {
     BANKERS: 'bankers',
     BANKER_ID: '/:bankerId',
     MY_LEADS: 'my-leads',
+    ACCEPETD_LEADS: 'accepted-leads',
     COMPLETED_LOANS: 'completed-loans',
     REJECTED_LOANS: 'rejected-loans',
     LOAN_ID: '/:loanId'
