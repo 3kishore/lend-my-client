@@ -42,6 +42,19 @@
                   <div *ngIf="assignBanker.get('bankerId').hasError('required')">Banker Name is required.</div>
                 </div>
               </div>
+              <div>
+                <label class="text-sm">Document link: </label>
+                <input
+                  class="theme-input mt-xs"
+                  formControlName="documentLink"
+                  autocomplete="off" type="text"
+                  placeholder="Enter document link here"
+                />
+                <div class="pt-xs text-red-dark text-xs" *ngIf="assignBanker.get('documentLink').touched && assignBanker.get('documentLink').errors">
+                  <div *ngIf="assignBanker.get('documentLink').hasError('required')">Document link is required.</div>
+                  <div *ngIf="assignBanker.get('documentLink').hasError('minlength')">Document link is not valid.</div>
+                </div>
+              </div>
           </div>
         </form>
       </div>
@@ -50,7 +63,7 @@
       </div>
       <div class="flex gap-sm flex-wrap mt-md justify-end pb-sm">
         <button class="secondary" (click)="onCancel()">Cancel</button>
-        <button class="primary" [disabled]="!assignBanker.valid" (click)="assignUser()">Submit</button>
+        <button class="primary" [disabled]="assignBanker.valid ? null : true" (click)="assignUser()">Submit</button>
       </div>
     </div>
     <div class="bg-green-light font-semibold text-green-dark h-72 rounded-lg flex justify-center items-center" *ngIf="isAssignmentSuccess">

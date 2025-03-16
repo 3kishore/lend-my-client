@@ -16,11 +16,13 @@ import { AppDataService } from '../../../utils/storage/app-data.service';
 import { APP } from '../../../utils/constants/APP.const';
 import { CommonHelperService } from '../../../utils/helpers/common-helper.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationModalComponent } from '../../oraganisms/confirmation-modal/confirmation-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-client-details',
   standalone: true,
-  imports: [CommonModule, ServerSideGridComponent, ButtonComponent, MatMenuModule, MatDialogModule],
+  imports: [CommonModule, ServerSideGridComponent, FormsModule, ButtonComponent, MatMenuModule, MatDialogModule],
   providers: [ClientDetailsConfigService],
   templateUrl: './client-details.component.html',
   styleUrl: './client-details.component.scss'
@@ -101,7 +103,21 @@ export class ClientDetailsComponent {
   @ViewChild('actionOnProposalTemplate', { static: true })
     public actionOnProposalTemplate: TemplateRef<any>;
 
+    @ViewChild('alertAcceptContentTemplate', { static: true })
+    public alertAcceptContentTemplate: TemplateRef<any>;
+
+  @ViewChild('alertRejectContentTemplate', { static: true })
+    public alertRejectContentTemplate: TemplateRef<any>;
+
+  @ViewChild('alertAcceptActionTemplate', { static: true })
+    public alertAcceptActionTemplate: TemplateRef<any>;
+
+  @ViewChild('alertRejectActionTemplate', { static: true })
+    public alertRejectActionTemplate: TemplateRef<any>;
+
   sessionObj;
+
+  confirmationText = '';
 
   constructor(
     private router: Router,
@@ -207,11 +223,26 @@ export class ClientDetailsComponent {
   }
 
   back() {
-    this.router.navigate([APP.ROUTES.ORDER]);
+    this.router.navigate([APP.ROUTES.LOAN_APPLICATION_STATUS]);
+  }
+
+  openRejectProposalPopup(data) {
+    this.confirmationText = '';
+    this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        // hasBackdrop: true,
+        data: {
+          contentTemplate: this.alertRejectContentTemplate,
+          actionTemplate: this.alertRejectActionTemplate,
+          data: data
+        }
+      }
+    );
   }
 
   recjectProposal(data) {
-    console.log(data)
+    this.dialog.closeAll();
     const payload = {
       loanId: data.loanId,
       bankerId: data.bankerId,
@@ -233,7 +264,7 @@ export class ClientDetailsComponent {
   }
 
   acceptBankerProposal(data) {
-    console.log(data)
+    this.dialog.closeAll();
     const payload = {
       loanId: data.loanId,
       bankerId: data.bankerId
@@ -251,5 +282,19 @@ export class ClientDetailsComponent {
         }
       })
     )
+  }
+
+  openAcceptProposalPopup(data) {
+    this.confirmationText = '';
+    this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        data: {
+          contentTemplate: this.alertAcceptContentTemplate,
+          actionTemplate: this.alertAcceptActionTemplate,
+          data: data
+        }
+      }
+    );
   }
 }

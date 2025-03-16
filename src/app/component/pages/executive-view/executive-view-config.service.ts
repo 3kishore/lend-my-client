@@ -34,6 +34,13 @@ export class ExecutiveViewConfigService {
           filterType: EGridFilterType.STRING
         },
         {
+          label: 'Partner Name',
+          field: 'partnerName',
+          hideFilter: false,
+          filterField: 'partnerName',
+          filterType: EGridFilterType.STRING
+        },
+        {
           label: 'Partner Email',
           field: 'referenceEmail',
           hideFilter: false,

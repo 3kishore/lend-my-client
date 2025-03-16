@@ -58,8 +58,7 @@ export class LoginComponent {
     )
     this.loginForm.valueChanges.subscribe({
       next: (_) => {
-        console.log(this.loginForm.invalid)
-        this.loginButton.isDisabled = this.loginForm.invalid
+        this.loginButton.isDisabled = this.loginForm.invalid;
       }
     })
   }

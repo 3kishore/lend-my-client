@@ -131,8 +131,6 @@ export class LeadDetailsComponent {
           next: (resp: any) => {
             this.isLoanDetailsLoading = false;
             if(resp.status) {
-              // resp.content.loanStatus = 'details updated';
-              // resp.content.clientStatus = 'rejected';
               this.lastestLoanDetails = resp.content;
               this.loanDetails.patchValue({
                 maxLoanAmount: resp.content.maxLoanAmount,
@@ -211,7 +209,8 @@ export class LeadDetailsComponent {
           const payload = {
             loanId: this.queryParams.loanId,
             bankerId: this.sessionObj.userDetail.userId,
-            reasonForRejection: !this.loanRejectionReason ? 'Banker rejects your loan' : this.loanRejectionReason
+            reasonForRejection: !this.loanRejectionReason ? 'Banker rejects your loan' : this.loanRejectionReason,
+            isLoanAccepted: false
           }
           console.log(payload)
           this.component$.add(

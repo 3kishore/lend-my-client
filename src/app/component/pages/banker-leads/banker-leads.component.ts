@@ -55,8 +55,7 @@ export class BankerLeadsComponent {
   }
 
   getMyLeads() {
-    this.gridLoading = true
-    console.log(this.sessionObj, this.sessionObj.userId)
+    this.gridLoading = true;
     const payload = {
       bankerId: this.sessionObj.userDetail.userId
     }

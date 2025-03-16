@@ -46,6 +46,13 @@ export class LoanApplicationsService {
     );
   }
 
+  getBankerLeads(payload: any) {
+    return this.http.post(API.GET_BANKER_LEADS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
   getLoanDetails(payload: any) {
     return this.http.post(API.GET_LOAN_DETAILS(), payload).pipe(
       map(resp => resp),

@@ -91,6 +91,10 @@ export const API = {
     return `${API.GET_BASE_URL()}user/get-my-leads`
     // return 'https://jsonplaceholder.typicode.com/posts';
   },
+  GET_BANKER_LEADS: () => {
+    return `${API.GET_BASE_URL()}user/get-banker-leads`
+    // return 'https://jsonplaceholder.typicode.com/posts';
+  },
   GET_COMPLETED_LOANS: () => {
     return `${API.GET_BASE_URL()}user/get-completed-loans`
     // return 'https://jsonplaceholder.typicode.com/posts';

@@ -187,8 +187,8 @@ export class BankersDetailConfigService {
     )
   }
 
-  getMyLeads(payload: any) {
-    return this.applicationService.getMyLeads(payload).pipe(
+  getBankerLeads(payload: any) {
+    return this.applicationService.getBankerLeads(payload).pipe(
       map(resp => resp),
       catchError(err => err)
     )

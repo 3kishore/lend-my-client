@@ -48,7 +48,8 @@ export class AssignBankerModalComponent {
     this.assignBanker = this.fb.group({
       bank: ['', Validators.compose([Validators.required])],
       zone: ['', Validators.compose([Validators.required])],
-      bankerId: ['', Validators.compose([Validators.required])]
+      bankerId: ['', Validators.compose([Validators.required])],
+      documentLink: ['', Validators.compose([Validators.required, Validators.minLength(10)])]
     })
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
     this.getBankingPartnersAndPartners();

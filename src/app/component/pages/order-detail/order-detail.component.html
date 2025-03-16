@@ -100,10 +100,62 @@
 <ng-template #actionOnProposalTemplate let-data="data">
   
   <div class="flex gap-sm" *ngIf="data?.loanStatus?.toLowerCase() === 'details updated'">
-    <app-button [button]="rejectBtnConfig" (buttonClicked)="recjectProposal(data)"></app-button>
-    <app-button [button]="acceptBtnConfig" (buttonClicked)="acceptBankerProposal(data)"></app-button>
+    <app-button [button]="rejectBtnConfig" (buttonClicked)="openRejectProposalPopup(data)"></app-button>
+    <app-button [button]="acceptBtnConfig" (buttonClicked)="openAcceptProposalPopup(data)"></app-button>
   </div>
   <div *ngIf="data?.loanStatus?.toLowerCase() !== 'details updated'">
     {{data.loanStatus?.toLowerCase()}}
+  </div>
+</ng-template>
+
+<ng-template #alertAcceptContentTemplate let-data="data">
+  <div class="alert alert-warning flex flex-col gap-md h-[230px]">
+    <div class="w-full">
+      <div>
+        <label class="text-sm">Type "accept" in below input field.</label>
+        <input
+          class="theme-input mt-xs"
+          autocomplete="off" type="text"
+          [(ngModel)]="confirmationText"
+        />
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #alertAcceptActionTemplate let-data="data">
+  <div class="flex gap-sm flex-wrap justify-end">
+    <button class="tertiary" (click)="dialog.closeAll()">Cancel</button>
+    <button
+      class="primary"
+      [disabled]="confirmationText.toLowerCase() === 'accept' ? null : true"
+      (click)="acceptBankerProposal(data)"
+    >Confirm</button>
+  </div>
+</ng-template>
+
+<ng-template #alertRejectContentTemplate let-data="data">
+  <div class="alert alert-warning flex flex-col gap-md h-[230px]">
+    <div class="w-full">
+      <div>
+        <label class="text-sm">Type "reject" in below input field.</label>
+        <input
+          class="theme-input mt-xs"
+          autocomplete="off" type="text"
+          [(ngModel)]="confirmationText"
+        />
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #alertRejectActionTemplate let-data="data">
+  <div class="flex gap-sm flex-wrap justify-end">
+    <button class="tertiary" (click)="dialog.closeAll()">Cancel</button>
+    <button
+      class="primary"
+      [disabled]="confirmationText.toLowerCase() === 'reject' ? null : true"
+      (click)="recjectProposal(data)"
+    >Confirm</button>
   </div>
 </ng-template>

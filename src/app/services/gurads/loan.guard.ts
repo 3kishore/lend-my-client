@@ -3,22 +3,16 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } fr
 import { CommonHelperService } from "../../utils/helpers/common-helper.service";
 import { APP } from "../../utils/constants/APP.const";
 
-export const LoginGuard: CanActivateFn = (
+export const LoanGuard: CanActivateFn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
 ) => {
     const router = inject(Router);
     const sessionObj = inject(CommonHelperService).getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
-    if(!sessionObj || !sessionObj.token) {
+    if(sessionObj?.userDetail?.role?.toLocaleLowerCase() === 'sales-executive' || sessionObj?.userDetail?.role?.toLocaleLowerCase() === 'partner') {
         return true;
     } else {
-        if(sessionObj?.userDetail?.role?.toLocaleLowerCase() === 'banker') {
-            router.navigate([APP.ROUTES.MY_LEADS]);
-        } else if(sessionObj?.userDetail?.role?.toLocaleLowerCase() === 'sales-executive') {
-            router.navigate([APP.ROUTES.ORDER]);
-        } else {
-            router.navigate([APP.ROUTES.LOAN_APPLICATION_STATUS]);
-        }
+        router.navigate([APP.ROUTES.MY_LEADS])
         return false;
     }
 }

@@ -17,11 +17,13 @@ import { OrderDetailConfigService } from './order-detail-config.service';
 import { AssignBankerModalComponent } from '../../oraganisms/assign-banker-modal/assign-banker-modal.component';
 import { AppDataService } from '../../../utils/storage/app-data.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { ConfirmationModalComponent } from '../../oraganisms/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-order-detail',
   standalone: true,
-  imports: [CommonModule, ServerSideGridComponent, ButtonComponent, MatMenuModule, MatDialogModule, RouterModule, AssignBankerModalComponent],
+  imports: [CommonModule, ServerSideGridComponent, ButtonComponent, MatMenuModule, MatDialogModule, FormsModule, RouterModule, AssignBankerModalComponent],
   providers: [OrderDetailConfigService],
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.scss'
@@ -124,14 +126,28 @@ export class OrderDetailComponent {
   @ViewChild('actionOnProposalTemplate', { static: true })
     public actionOnProposalTemplate: TemplateRef<any>;
 
+  @ViewChild('alertAcceptContentTemplate', { static: true })
+    public alertAcceptContentTemplate: TemplateRef<any>;
+
+  @ViewChild('alertRejectContentTemplate', { static: true })
+    public alertRejectContentTemplate: TemplateRef<any>;
+
+  @ViewChild('alertAcceptActionTemplate', { static: true })
+    public alertAcceptActionTemplate: TemplateRef<any>;
+
+  @ViewChild('alertRejectActionTemplate', { static: true })
+    public alertRejectActionTemplate: TemplateRef<any>;
+
   sessionObj;
+
+  confirmationText = '';
 
   constructor(
     private router: Router,
     private configService: OrderDetailConfigService,
     private routSnap: ActivatedRoute,
     private commonService: CommonHelperService,
-    private dataService: AppDataService
+    private dataService: AppDataService,
   ) {
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
   }
@@ -220,6 +236,7 @@ export class OrderDetailComponent {
             bankerId: resp.bankerId,
             bankerName: resp.bankerName,
             bankName: resp.bank,
+            documentLink: resp.documentLink,
             clientName: `${this.customerDetails.firstName} ${this.customerDetails.lastName}`,
             requestedLoanAmount: this.customerDetails.loanAmount,
             loanType: this.customerDetails.loanType,
@@ -272,8 +289,23 @@ export class OrderDetailComponent {
     this.router.navigate([APP.ROUTES.ORDER]);
   }
 
+  openRejectProposalPopup(data) {
+    this.confirmationText = '';
+    this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        // hasBackdrop: true,
+        data: {
+          contentTemplate: this.alertRejectContentTemplate,
+          actionTemplate: this.alertRejectActionTemplate,
+          data: data
+        }
+      }
+    );
+  }
+
   recjectProposal(data) {
-    console.log(data)
+    this.dialog.closeAll()
     const payload = {
       loanId: data.loanId,
       bankerId: data.bankerId,
@@ -294,8 +326,21 @@ export class OrderDetailComponent {
     )
   }
 
+  openAcceptProposalPopup(data) {
+    this.confirmationText = '';
+    this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        data: {
+          contentTemplate: this.alertAcceptContentTemplate,
+          actionTemplate: this.alertAcceptActionTemplate,
+          data: data
+        }
+      }
+    );
+  }
   acceptBankerProposal(data) {
-    console.log(data)
+    this.dialog.closeAll()
     const payload = {
       loanId: data.loanId,
       bankerId: data.bankerId

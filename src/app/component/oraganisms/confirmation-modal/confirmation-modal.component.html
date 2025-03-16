@@ -2,9 +2,11 @@
   <div class="flex flex-col gap-md">
     <ng-container
       [ngTemplateOutlet]="data.contentTemplate? data.contentTemplate : defaultContentTemplate"
+      [ngTemplateOutletContext]="{data: data?.data ? data.data : ''}"
     ></ng-container>
     <ng-container
       [ngTemplateOutlet]="data.actionTemplate? data.actionTemplate : defaultActionTemplate"
+      [ngTemplateOutletContext]="{data: data?.data ? data.data : ''}"
     ></ng-container>
   </div>
 </div>

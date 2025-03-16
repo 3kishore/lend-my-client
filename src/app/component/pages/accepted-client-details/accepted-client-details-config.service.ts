@@ -49,4 +49,11 @@ export class AcceptedClientDetailsConfigService {
       catchError(err => err)
     )
   }
+
+  rejectLoan(data: any) {
+    return this.accountService.rejectLoan(data).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    )
+  }
 }

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AppHeaderComponent } from '../app-header/app-header.component';
 import { AppFooterComponent } from '../app-footer/app-footer.component';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationStart, Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatDividerModule } from '@angular/material/divider';
 import { APP } from '../../../utils/constants/APP.const';
@@ -24,7 +24,16 @@ export class AppLayoutComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private dataService: AppDataService,
     private commonService: CommonHelperService
-  ) {}
+  ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        let url = event.url;
+        if(url && url.split('/').length > 1) {
+          this.selectedMenu = this.getPathName(url.split('/')[1]);
+        }
+      }
+    });
+  }
 
   public isExpanded = true;
 
@@ -43,7 +52,7 @@ export class AppLayoutComponent implements OnInit {
   isPanelClickLocked = false;
 
   ngOnInit(): void {
-    this.selectedMenu = window.location.pathname.split('/')[1];
+    this.selectedMenu = this.getPathName(window.location.pathname.split('/')[1]);
     this.sessionObj = this.commonService.getSessionItem(APP.SESSION_ITEM_KEYS.SESSION, true);
     this.userRole = this.sessionObj.userDetail.role;
     this.customerName =  this.sessionObj.userDetail.firstName;
@@ -56,6 +65,15 @@ export class AppLayoutComponent implements OnInit {
         this.isExpanded = !((resp.screenType === APP.SCREENS_SIZE.SMALL) || (resp.screenSize < 750));
       }
     })
+  }
+
+  getPathName(pathName) {
+    if(pathName === APP.ROUTES.CLIENT_DETAIL) {
+      pathName = APP.ROUTES.LOAN_APPLICATION_STATUS;
+    } else if(pathName === APP.ROUTES.CREATE_NEW_SUPPORT_TICKET) {
+      pathName = APP.ROUTES.MY_SUPPORT_TICKETS;
+    }
+    return pathName;
   }
 
   routeToMyLoanStatus() {

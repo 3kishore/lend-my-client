@@ -81,7 +81,7 @@ export class BankersDetailComponent implements OnInit {
 
   getAssignedCustomerOfBanker() {
     this.gridLoading = true;
-    this.configService.getMyLeads(this.queryParam).subscribe({
+    this.configService.getBankerLeads(this.queryParam).subscribe({
       next: (resp: any) => {
         this.gridLoading = false;
         if(resp.status) {

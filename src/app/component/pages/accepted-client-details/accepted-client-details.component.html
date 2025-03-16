@@ -3,6 +3,7 @@
       <span class="text-[#2054ff] text-[14px] font-[500] leading-[24px] dark:text-[#2FC0FF]">< Back</span>
     </div>
     <div class="flex flex-wrap justify-between sm:items-start md:items-center gap-[12px] sm:flex-col md:flex-row">
+      
       <span class="text-[26px] w-fit leading-[26px] font-[500] text-[#090d1b] dark:text-white">
         Accepetd Client Detail
       </span>
@@ -14,7 +15,10 @@
       </div>
     </div>
     <div class="flex flex-col flex-wrap md:mt-[24px]">
-      
+      <div class="mb-4" *ngIf="!isLoanDetailsLoading && loanDetails?.documentLink">
+        <div>Click the below link to download client document details.</div>
+        <a class="text-blue-2 cursor-pointer" [href]="loanDetails.documentLink" target="_blank">Click here</a>
+      </div>
       <app-button [button]="manageConfig" class="ml-[12px]" [matMenuTriggerFor]="menu"></app-button>
       <mat-menu #menu="matMenu">
         <ng-template matMenuContent>
@@ -22,7 +26,7 @@
               <div
                 class="flex flex-row gap-[4px] py-sm px-xs bg-slate-100 cursor-pointer text-sm hover:bg-slate-200 rounded justify-center"
                 *ngFor="let action of actionList"
-                (click)="updateDesposementStatus(action)"
+                (click)="openActionPopup(action)"
               >
                 {{action}}
               </div>
@@ -113,4 +117,28 @@
       </div>
     </div>
 </div>
+
+<ng-template #alertPopupContentTemplate let-data="data">
+  <div class="alert alert-warning flex flex-col gap-md h-[230px]">
+    <div class="w-full">
+      <div class="text-md font-bold">
+        You status will be updated as {{data}}
+      </div>
+    </div>
+  </div>
+</ng-template>
   
+<ng-template #alertContentTemplate>
+  <div class="alert alert-danger flex flex-col gap-md h-[230px]">
+    <div class="text-md font-bold">Are you sure want to reject this loan?</div>
+    <div class="w-full">
+      <div>
+        <label class="text-sm">Reason For Rejection (Optional): </label>
+        <textarea
+          class="theme-text-area"
+          [(ngModel)]="loanRejectionReason"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</ng-template>

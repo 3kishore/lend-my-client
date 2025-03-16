@@ -20,6 +20,10 @@
           <div id="spinner-grid-loader"></div>
         </div>
       </div>
+      <div class="mb-4" *ngIf="!isLoanDetailsLoading && lastestLoanDetails?.documentLink">
+        <div>Click the below link to download client document details.</div>
+        <a class="text-blue-2 cursor-pointer" [href]="lastestLoanDetails.documentLink" target="_blank">Click here</a>
+      </div>
       <div class="border-[2px] w-full border-solid border-[#e8edfa] sm:p-[12px] lg:p-[30px] rounded-[8px] card1 flex flex-row flex-wrap sm:gap[6px] md:gap-sm" *ngIf="!customerDetailsLoader && customerDetails">
         <div class="flex flex-wrap sm:flex-col w-[200px]">
           <span class="text-[14px] text-[#090d1b] min-w-[110px] dark:text-white font-bold">Customer Name :</span>
