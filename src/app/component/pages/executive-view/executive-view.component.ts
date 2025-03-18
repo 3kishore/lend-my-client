@@ -16,11 +16,13 @@ import { AppDataService } from '../../../utils/storage/app-data.service';
 import { APP } from '../../../utils/constants/APP.const';
 import { CommonHelperService } from '../../../utils/helpers/common-helper.service';
 import { AddBankComponent } from '../../oraganisms/add-banks/add-banks.component';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ConfirmationModalComponent } from '../../oraganisms/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-executive-view',
   standalone: true,
-  imports: [CommonModule, ServerSideGridComponent, RouterModule, ButtonComponent, MatMenuModule, MatDialogModule, AddBankComponent],
+  imports: [CommonModule, ServerSideGridComponent, RouterModule, ButtonComponent, MatMenuModule, MatDialogModule, FormsModule, ReactiveFormsModule, AddBankComponent],
   providers: [ExecutiveViewConfigService],
   templateUrl: './executive-view.component.html',
   styleUrl: './executive-view.component.scss'
@@ -59,15 +61,36 @@ export class ExecutiveViewComponent {
 
   gridLoading: boolean;
 
+  loanRejectionReason = '';
+
   actionList = [
     'Application Viewed',
     'Executive Assigned',
     'Contacted Client',
     'Details Collected',
-    'Cibil Checked'
+    'Cibil Checked',
+    'Rejected',
+    'Completed'
   ]
 
+  finalAmount = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\d{5,10}$/) // Alphanumeric only
+  ]);
+
   sessionObj;
+
+  @ViewChild('alertPopupContentTemplate', {static: true})
+    alertPopupContentTemplate: TemplateRef<any>
+
+  @ViewChild('loanRejectionContentTemplate', { static: true })
+    public loanRejectionContentTemplate: TemplateRef<any>;
+
+  @ViewChild('alertSuccessContentTemplate', { static: true })
+    public alertSuccessContentTemplate: TemplateRef<any>
+
+  @ViewChild('alertSuccessActionTemplate', { static: true })
+    public alertSuccessActionTemplate: TemplateRef<any>
 
   constructor(
     private router: Router,
@@ -123,6 +146,8 @@ export class ExecutiveViewComponent {
       loanStatus: status,
       executiveId: this.sessionObj.userDetail.userId,
       executiveEmail: this.sessionObj.userDetail.email,
+      reasonForRejection: this.loanRejectionReason,
+      finalAmount: this.finalAmount.value
     }
     this.component$.add(
       this.configService.updateLoanStatus(payload).subscribe({
@@ -146,16 +171,81 @@ export class ExecutiveViewComponent {
   }
 
   readonly dialog = inject(MatDialog);
+
+  openActionPopup(status: string, loanDetails) {
+    this.finalAmount.reset();
+    this.loanRejectionReason = '';
+    status.toLocaleLowerCase() === 'rejected' ? this.openRejectionStatusPopup({ status, loanDetails })
+      : status.toLocaleLowerCase() === 'completed' ? this.openCompletedStatusPopup({ status, loanDetails }) : this.openStateChangePopup({ status, loanDetails });
+  }
   
-  updateBankDetails(userDetails: any) {
-    const dailogRef = this.dialog.open(AddBankComponent, {data: userDetails});
-    dailogRef.afterClosed().subscribe({
+  openStateChangePopup(data) {
+    const dialogRef = this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        // hasBackdrop: true,
+        data: {
+          contentTemplate: this.alertPopupContentTemplate,
+          data: data
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe({
       next: (resp) => {
+        console.log('resp', resp)
         if(resp) {
-          this.getAllLoanRequests();
+          this.updateLoanStatus(data.status, data.loanDetails);
         }
       }
     })
+  }
+
+  openRejectionStatusPopup(data) {
+    const dialogRef = this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        // hasBackdrop: true,
+        data: {
+          contentTemplate: this.loanRejectionContentTemplate,
+          data: data
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe({
+      next: (resp) => {
+        console.log('resp', resp)
+        if(resp) {
+          this.updateLoanStatus(data.status, data.loanDetails);
+        }
+      }
+    })
+  }
+
+  openCompletedStatusPopup(data) {
+    this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        // hasBackdrop: true,
+        data: {
+          contentTemplate: this.alertSuccessContentTemplate,
+          actionTemplate: this.alertSuccessActionTemplate,
+          data: data
+        }
+      }
+    );
+    // dialogRef.afterClosed().subscribe({
+    //   next: (resp) => {
+    //     console.log('resp', resp)
+    //     if(resp) {
+    //       this.updateLoanStatus(data.status, data.loanDetails);
+    //     }
+    //   }
+    // })
+  }
+
+  acceptCompletedLoan(data) {
+    this.dialog.closeAll();
+    this.updateLoanStatus(data.status, data.loanDetails);
   }
 
   backNavigate() {

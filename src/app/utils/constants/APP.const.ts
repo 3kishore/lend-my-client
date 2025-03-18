@@ -22,8 +22,12 @@ export const APP = {
     BANKER_ID: '/:bankerId',
     MY_LEADS: 'my-leads',
     ACCEPETD_LEADS: 'accepted-leads',
-    COMPLETED_LOANS: 'completed-loans',
-    REJECTED_LOANS: 'rejected-loans',
+    COMPLETED_LEADS: 'completed-leads',
+    REJECTED_LEADS: 'rejected-leads',
+    COMPLETED_ORDERS: 'completed-orders',
+    REJECTED_ORDERS: 'rejected-orders',
+    COMPLETED_APPLICATIONS: 'completed-applications',
+    REJECTED_APPLICATIONS: 'rejected-applications',
     LOAN_ID: '/:loanId'
   },
   NUMERIC_fILTER_OPTIONS: [

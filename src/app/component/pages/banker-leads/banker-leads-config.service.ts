@@ -91,13 +91,6 @@ export class BankerLeadsConfigService {
     )
   }
 
-  updateLoanStatus(payload) {
-    return this.loanStatus.updateLoanStatus(payload).pipe(
-      map(resp => resp),
-      catchError((err) => err)
-    )
-  }
-
   changeApplicationStatus(data: any) {
     return this.loanStatus.changeApplicationStatus(data).pipe(
       map(resp => resp),

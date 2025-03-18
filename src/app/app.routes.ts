@@ -28,6 +28,16 @@ export const routes: Routes = [
         canActivate: [AuthGuard, LoanGuard]
       },
       {
+        path: APP.ROUTES.COMPLETED_APPLICATIONS,
+        loadComponent: () => import('./component/pages/completed-applications/completed-applications.component').then(c => c.CompletedApplicationsComponent),
+        canActivate: [AuthGuard, LoanGuard]
+      },
+      {
+        path: APP.ROUTES.REJECTED_APPLICATIONS,
+        loadComponent: () => import('./component/pages/rejected-applications/rejected-applications.component').then(c => c.RejectedApplicationsComponent),
+        canActivate: [AuthGuard, LoanGuard]
+      },
+      {
         path: APP.ROUTES.APPLY_LOAN,
         loadComponent: () => import('./component/pages/apply-loan/apply-loan.component').then(c => c.ApplyLoanComponent),
         canActivate: [AuthGuard, LoanGuard]
@@ -45,6 +55,16 @@ export const routes: Routes = [
       {
         path: APP.ROUTES.ORDER,
         loadComponent: () => import('./component/pages/executive-view/executive-view.component').then(c => c.ExecutiveViewComponent),
+        canActivate: [AuthGuard, ExecutiveGuard]
+      },
+      {
+        path: APP.ROUTES.COMPLETED_ORDERS,
+        loadComponent: () => import('./component/pages/completed-orders/completed-orders.component').then(c => c.CompletedOrdersComponent),
+        canActivate: [AuthGuard, ExecutiveGuard]
+      },
+      {
+        path: APP.ROUTES.REJECTED_ORDERS,
+        loadComponent: () => import('./component/pages/rejected-orders/rejected-orders.component').then(c => c.RejectedOrdersComponent),
         canActivate: [AuthGuard, ExecutiveGuard]
       },
       {
@@ -78,12 +98,12 @@ export const routes: Routes = [
         canActivate: [AuthGuard, BankerGuard]
       },
       {
-        path: APP.ROUTES.COMPLETED_LOANS,
+        path: APP.ROUTES.COMPLETED_LEADS,
         loadComponent: () => import('./component/pages/completed-loans/completed-loans.component').then(c => c.CompletedLoansComponent),
         canActivate: [AuthGuard, BankerGuard]
       },
       {
-        path: APP.ROUTES.REJECTED_LOANS,
+        path: APP.ROUTES.REJECTED_LEADS,
         loadComponent: () => import('./component/pages/rejected-loans/rejected-loans.component').then(c => c.RejectedLoansComponent),
         canActivate: [AuthGuard, BankerGuard]
       },

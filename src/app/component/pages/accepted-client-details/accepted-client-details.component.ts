@@ -149,7 +149,10 @@ export class AcceptedClientDetailsComponent {
     const payload = {
       loanId: this.queryParams.loanId,
       bankerId: this.sessionObj.userDetail.userId,
-      desposementStatus: (status.toLocaleLowerCase() === 'loan disposed') ? 'completed' : status.toLocaleLowerCase()
+      email: this.customerDetails.email,
+      desposementStatus: (status.toLocaleLowerCase() === 'loan disposed') ? 'completed' : status.toLocaleLowerCase(),
+      referenceEmail: this.customerDetails.referenceEmail,
+      referenceId: this.customerDetails.referenceId
     }
     this.component$.add(
       this.config.updateDesposementStatus(payload).subscribe({

@@ -102,6 +102,34 @@ export class LoanApplicationsService {
     );
   }
 
+  getRejectedApplication(payload: any) {
+    return this.http.post(API.GET_REJECTED_APPLICATIONS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  getCompletedApplication(payload: any) {
+    return this.http.post(API.GET_COMPLETED_APPLICATIONS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  getCompletedOrders(payload: any) {
+    return this.http.post(API.GET_COMPLETED_ORDERS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
+  getRejectedOrders(payload: any) {
+    return this.http.post(API.GET_REJECTED_ORDERS(), payload).pipe(
+      map(resp => resp),
+      catchError(err => err)
+    );
+  }
+
   applyForLoan(payload: any) {
     return this.http.post(API.APPLY_FOR_LOAN(), payload).pipe(
       map(resp => resp),

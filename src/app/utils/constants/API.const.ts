@@ -138,6 +138,18 @@ export const API = {
   CHANGE_APPLICATIONS_STATUS: () => {
     return `${API.GET_BASE_URL()}posts`
   },
+  GET_REJECTED_APPLICATIONS: () => {
+    return `${API.GET_BASE_URL()}user/get-rejected-applications`
+  },
+  GET_COMPLETED_APPLICATIONS: () => {
+    return `${API.GET_BASE_URL()}user/get-completed-applications`
+  },
+  GET_REJECTED_ORDERS: () => {
+    return `${API.GET_BASE_URL()}user/get-rejected-orders`
+  },
+  GET_COMPLETED_ORDERS: () => {
+    return `${API.GET_BASE_URL()}user/get-completed-orders`
+  },
   APPLY_FOR_LOAN: () => {
     return `${API.GET_BASE_URL()}user/raise-loan-request`
   },

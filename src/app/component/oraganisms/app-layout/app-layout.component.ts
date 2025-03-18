@@ -81,6 +81,26 @@ export class AppLayoutComponent implements OnInit {
     this.router.navigate([APP.ROUTES.LOAN_APPLICATION_STATUS]);
   }
 
+  routeToCompletedApplication() {
+    this.selectedMenu = APP.ROUTES.COMPLETED_APPLICATIONS;
+    this.router.navigate([APP.ROUTES.COMPLETED_APPLICATIONS]);
+  }
+
+  routeToRejectedApplication() {
+    this.selectedMenu = APP.ROUTES.REJECTED_APPLICATIONS;
+    this.router.navigate([APP.ROUTES.REJECTED_APPLICATIONS]);
+  }
+
+  routeToCompletedOrders() {
+    this.selectedMenu = APP.ROUTES.COMPLETED_ORDERS;
+    this.router.navigate([APP.ROUTES.COMPLETED_ORDERS]);
+  }
+
+  routeToRejectedOrders() {
+    this.selectedMenu = APP.ROUTES.REJECTED_ORDERS;
+    this.router.navigate([APP.ROUTES.REJECTED_ORDERS]);
+  }
+
   routeToApplyLoan() {
     this.selectedMenu = APP.ROUTES.APPLY_LOAN;
     this.router.navigate([APP.ROUTES.APPLY_LOAN]);
@@ -112,13 +132,13 @@ export class AppLayoutComponent implements OnInit {
   }
 
   routeToMyCompletedLoans() {
-    this.selectedMenu = APP.ROUTES.COMPLETED_LOANS;
-    this.router.navigate([APP.ROUTES.COMPLETED_LOANS]);
+    this.selectedMenu = APP.ROUTES.COMPLETED_LEADS;
+    this.router.navigate([APP.ROUTES.COMPLETED_LEADS]);
   }
 
   routeToMyRejectedLoans() {
-    this.selectedMenu = APP.ROUTES.REJECTED_LOANS;
-    this.router.navigate([APP.ROUTES.REJECTED_LOANS]);
+    this.selectedMenu = APP.ROUTES.REJECTED_LEADS;
+    this.router.navigate([APP.ROUTES.REJECTED_LEADS]);
   }
 
   routeToExecutiveSupportTicket() {

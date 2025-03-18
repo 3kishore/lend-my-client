@@ -23,8 +23,9 @@
         <div class="flex flex-col gap-[8px] p-[14px] dark:bg-[#1B2B32]">
           <div
             class="flex flex-row gap-[4px] py-sm px-xs bg-slate-100 cursor-pointer text-sm hover:bg-slate-200 rounded justify-center"
+            [ngClass]="{'!bg-red !text-white hover:!bg-red-dark': action.toLowerCase() === 'rejected', '!bg-green text-white hover:!bg-green-dark': action.toLowerCase() === 'completed'}"
             *ngFor="let action of actionList"
-            (click)="updateLoanStatus(action, data)"
+            (click)="openActionPopup(action, data)"
           >
             {{action}}
           </div>
@@ -42,4 +43,64 @@
     class="sm:text-[9px] md:text-[13px] w-[100%] h-[100%] flex px-[12px] flex-col justify-center text-base-4 text-blue-4 cursor-pointer hover:bg-neutral-8 dark:hover:bg-[#4F6169] dark:text-[#2ec0ff]"
     [routerLink]="['/order/' + data.requestId + '/' + data.referenceId]"
   >{{data.requestId}}</a>
+</ng-template>
+
+
+<ng-template #alertPopupContentTemplate let-data="data">
+  <div class="alert alert-warning flex flex-col gap-md h-[230px]">
+    <div class="w-full">
+      <div class="text-md font-bold">
+        You status will be updated as {{data.status}}
+      </div>
+    </div>
+  </div>
+</ng-template>
+  
+<ng-template #loanRejectionContentTemplate>
+  <div class="alert alert-danger flex flex-col gap-md h-[230px]">
+    <div class="text-md font-bold">Are you sure want to reject this loan?</div>
+    <div class="w-full">
+      <div>
+        <label class="text-sm">Reason For Rejection (Optional): </label>
+        <textarea
+          class="theme-text-area"
+          [(ngModel)]="loanRejectionReason"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #alertSuccessContentTemplate let-data="data">
+  <div class="alert alert-warning flex flex-col gap-md h-[230px]">
+    <div class="w-full">
+      <div class="text-md font-bold">
+        You status will be updated as {{data.status}}
+        <div>
+          <label class="text-sm">Final Amount: </label>
+          <input
+            class="theme-input mt-xs"
+            autocomplete="off" type="text"
+            [formControl]="finalAmount"
+            placeholder="Enter the final amount"
+          />
+          <div class="pt-xs text-red-dark text-xs" *ngIf="finalAmount.invalid && finalAmount.touched">
+            <div *ngIf="finalAmount.hasError('required')">This field is required.</div>
+            <div *ngIf="finalAmount.hasError('pattern')">This field should range between 5 t0 10 digits length.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #alertSuccessActionTemplate let-data="data">
+  <div class="flex gap-sm flex-wrap justify-end">
+    <button class="tertiary" (click)="dialog.closeAll()">Cancel</button>
+    <button
+      class="primary"
+      [disabled]="finalAmount.valid  ? null : true"
+      (click)="acceptCompletedLoan(data)"
+    >Confirm</button>
+  </div>
 </ng-template>
