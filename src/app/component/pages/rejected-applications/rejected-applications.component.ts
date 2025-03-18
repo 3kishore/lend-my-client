@@ -39,7 +39,7 @@ export class RejectedApplicationsComponent {
   
   getRejectedApplication() {
     this.gridLoading = true;
-    this.configService.getRejectedApplication({userId: this.sessionObj.userDetail.userId}).subscribe({
+    this.configService.getRejectedApplication({referenceId: this.sessionObj.userDetail.userId, referenceEmail: this.sessionObj.userDetail.email}).subscribe({
       next: (resp: any) => {
         this.gridLoading = false;
         if(resp.status) {

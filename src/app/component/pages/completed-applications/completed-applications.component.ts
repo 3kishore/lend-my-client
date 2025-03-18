@@ -39,7 +39,8 @@ export class CompletedApplicationsComponent {
     
     getCompletedApplication() {
       this.gridLoading = true;
-      this.configService.getCompletedApplication({userId: this.sessionObj.userDetail.userId}).subscribe({
+      console.log(this.sessionObj)
+      this.configService.getCompletedApplication({referenceId: this.sessionObj.userDetail.userId, referenceEmail: this.sessionObj.userDetail.email}).subscribe({
         next: (resp: any) => {
           this.gridLoading = false;
           if(resp.status) {
