@@ -54,10 +54,10 @@ export class AcceptedLoansConfigService {
           },
           {
             label: 'Loan Status',
-            field: 'loanStatus',
+            field: 'desposementStatus',
             hideFilter: true,
             isSortable: true,
-            filterField: 'loanStatus',
+            filterField: 'desposementStatus',
             filterType: EGridFilterType.STRING
           }
         ],

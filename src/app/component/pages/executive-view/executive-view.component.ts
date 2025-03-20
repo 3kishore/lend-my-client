@@ -75,7 +75,7 @@ export class ExecutiveViewComponent {
 
   finalAmount = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^\d{5,10}$/) // Alphanumeric only
+    Validators.pattern(/^\d{5,10}$/)
   ]);
 
   sessionObj;

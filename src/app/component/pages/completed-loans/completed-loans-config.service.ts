@@ -40,8 +40,8 @@ export class CompletedLoansConfigService {
         },
         {
           label: 'Amount Offered',
-          field: 'amountOffered',
-          filterField: 'amountOffered',
+          field: 'finalAmount',
+          filterField: 'finalAmount',
           filterType: EGridFilterType.NUMBER,
           customClass: 'justify-end'
         },

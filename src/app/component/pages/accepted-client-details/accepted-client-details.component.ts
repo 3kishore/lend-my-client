@@ -1,5 +1,5 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { IButton } from '../../atoms/button/button.interface';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'app-accepted-client-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, FormsModule, MatMenuModule, ConfirmationModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, FormsModule, ReactiveFormsModule, MatMenuModule, ConfirmationModalComponent],
   providers: [AcceptedClientDetailsConfigService],
   templateUrl: './accepted-client-details.component.html',
   styleUrl: './accepted-client-details.component.scss'
@@ -79,6 +79,17 @@ export class AcceptedClientDetailsComponent {
 
   @ViewChild('alertContentTemplate', { static: true })
     public alertContentTemplate: TemplateRef<any>;
+
+  @ViewChild('alertSuccessContentTemplate', { static: true })
+    public alertSuccessContentTemplate: TemplateRef<any>
+
+  @ViewChild('alertSuccessActionTemplate', { static: true })
+    public alertSuccessActionTemplate: TemplateRef<any>
+
+  finalAmount = new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^\d{5,10}$/) // Alphanumeric only
+    ]);
 
   constructor(
     private router: Router,
@@ -152,7 +163,9 @@ export class AcceptedClientDetailsComponent {
       email: this.customerDetails.email,
       desposementStatus: (status.toLocaleLowerCase() === 'loan disposed') ? 'completed' : status.toLocaleLowerCase(),
       referenceEmail: this.customerDetails.referenceEmail,
-      referenceId: this.customerDetails.referenceId
+      referenceId: this.customerDetails.referenceId,
+      // reasonForRejection: this.loanRejectionReason,
+      finalAmount: this.finalAmount.value
     }
     this.component$.add(
       this.config.updateDesposementStatus(payload).subscribe({
@@ -170,7 +183,14 @@ export class AcceptedClientDetailsComponent {
   }
 
   openActionPopup(data: string) {
-    data.toLocaleLowerCase() === 'reject' ? this.rejectLoan() : this.openAcceptProposalPopup(data);
+    // data.toLocaleLowerCase() === 'reject' ? this.rejectLoan() : this.openAcceptProposalPopup(data);
+    if((data.toLocaleLowerCase() === 'loan disposed')) {
+      this.openLoanDisbursementPopup(data)
+    } else if(data.toLocaleLowerCase() === 'reject') {
+      this.rejectLoan()
+    } else {
+      this.openAcceptProposalPopup(data);
+    }
   }
 
   openAcceptProposalPopup(data) {
@@ -186,12 +206,39 @@ export class AcceptedClientDetailsComponent {
     );
     dialogRef.afterClosed().subscribe({
       next: (resp) => {
-        console.log('resp', resp)
         if(resp) {
           this.updateDesposementStatus(data);
         }
       }
     })
+  }
+
+  openLoanDisbursementPopup(data) {
+    this.dialog.open(
+      ConfirmationModalComponent,
+      {
+        // hasBackdrop: true,
+        data: {
+          contentTemplate: this.alertSuccessContentTemplate,
+          actionTemplate: this.alertSuccessActionTemplate,
+          data: data
+        }
+      }
+    );
+    // dialogRef.afterClosed().subscribe({
+    //   next: (resp) => {
+    //     console.log('resp', resp)
+    //     if(resp) {
+    //       this.updateDesposementStatus(data);
+    //     }
+    //   }
+    // })
+  }
+
+  disbursementPopup(data) {
+    this.dialog.closeAll();
+    console.log('disbursementPopup', data)
+    this.updateDesposementStatus(data);
   }
 
 
